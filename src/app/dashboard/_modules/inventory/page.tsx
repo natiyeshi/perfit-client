@@ -1,7 +1,7 @@
 import InventoryTable from "./_components/InventoryTable";
 
-const page = () => {
+const Page = () => {
   return <InventoryTable />;
 };
 
-export default page;
+export default Page;

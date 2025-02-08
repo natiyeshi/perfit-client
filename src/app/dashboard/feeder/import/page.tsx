@@ -1,6 +1,6 @@
 import ImportPage from "../../_modules/import/page";
-const page = () => {
+const Page = () => {
   return <ImportPage />;
 };
 
-export default page;
+export default Page;

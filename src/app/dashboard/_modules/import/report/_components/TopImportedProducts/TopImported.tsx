@@ -49,7 +49,7 @@ const TopImportedProducts = ({
 
   const getChartData = () => {
     const monthAgo = subMonths(new Date(), timeChoices[filter.time]);
-    let datas: Record<string, number> = {};
+    const datas: Record<string, number> = {};
 
     importsData.forEach((d) => {
       const createdAt = new Date(d.createdAt);
@@ -65,8 +65,8 @@ const TopImportedProducts = ({
       .sort(([, a], [, b]) => b - a)
       .map(([key, value]) => ({ name: key, value }));
 
-    let topFour = sortedData.slice(0, 4);
-    let othersValue = sortedData
+    const topFour = sortedData.slice(0, 4);
+    const othersValue = sortedData
       .slice(4)
       .reduce((sum, item) => sum + item.value, 0);
     if (othersValue > 0) {

@@ -1,9 +1,9 @@
 "use client";
 import { redirect } from "next/navigation";
 
-const page = () => {
+const Page = () => {
   // redirect("/dashboard/admin/");
   return <></>;
 };
 
-export default page;
+export default Page;

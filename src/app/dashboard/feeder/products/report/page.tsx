@@ -1,7 +1,7 @@
 import ReportPage from "../../../_modules/products/report/page";
 
-const page = () => {
+const Page = () => {
   return <ReportPage />;
 };
 
-export default page;
+export default Page;

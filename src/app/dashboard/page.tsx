@@ -1,6 +1,6 @@
 "use client";
-const page = () => {
+const Page = () => {
   return <>Dashboard</>;
 };
 
-export default page;
+export default Page;

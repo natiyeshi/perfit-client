@@ -1,7 +1,7 @@
 "use client";
 import Import from "../../../_modules/inventory/import/page";
-const page = () => {
+const Page = () => {
   return <Import />;
 };
 
-export default page;
+export default Page;

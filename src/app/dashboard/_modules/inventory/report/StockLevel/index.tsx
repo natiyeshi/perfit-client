@@ -51,7 +51,7 @@ const StockChart: React.FC<Props> = ({ stockData, query }) => {
 
   useEffect(() => {
     const monthAgo = subMonths(new Date(), timeChoices[filter.time]);
-    let dataMap: Record<string, number> = {};
+    const dataMap: Record<string, number> = {};
 
     stockData.forEach((item) => {
       const createdAt = new Date(item.createdAt);

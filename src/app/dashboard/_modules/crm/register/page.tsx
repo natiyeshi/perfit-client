@@ -25,7 +25,7 @@ import { ITransaction } from "@/types/ITransaction";
 import { IDBCustomer } from "@/types/ICustomer";
 import { createTransactionSchema } from "@/validators/transaction.validator";
 
-const page = () => {
+const Page = () => {
   const { isLoading, mutate } = useMutation(
     (data: any) =>
       axios.post("/transactions", {
@@ -237,4 +237,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

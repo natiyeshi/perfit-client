@@ -8,7 +8,7 @@ import StockLevel from "./StockLevel";
 import ExpiryProductsAnalysis from "./ExpirtyProductsAnalysis"
 import { IDBClientInventory } from "@/types/IInventory";
 
-const page = () => {
+const Page = () => {
   const [stockData, setStockData] = useState<IDBClientInventoryImport[]>(
     []
   );
@@ -17,7 +17,7 @@ const page = () => {
   );
   const query = useQuery("inventories", () => axios.get("/inventories?populate=true"), {
     onSuccess(data) {
-      let k: IDBClientInventoryImport[] = data.data.result || [];
+      const k: IDBClientInventoryImport[] = data.data.result || [];
       setStockData(k);
     },
     onError(err) {
@@ -27,7 +27,7 @@ const page = () => {
   });
   const query2 = useQuery("imports", () => axios.get("/imports?populate=true"), {
     onSuccess(data) {
-      let k: IDBClientInventoryImport[] = data.data.result || [];
+      const k: IDBClientInventoryImport[] = data.data.result || [];
       setInventoryHistoryData(k);
     },
     onError(err) {
@@ -52,4 +52,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

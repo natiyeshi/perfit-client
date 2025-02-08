@@ -1,6 +1,6 @@
 import ReportPage from "@/app/dashboard/_modules/inventory/report/page";
-const page = () => {
+const Page = () => {
   return <ReportPage />;
 };
 
-export default page;
+export default Page;

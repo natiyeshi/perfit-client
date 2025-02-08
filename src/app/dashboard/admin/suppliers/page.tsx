@@ -1,6 +1,6 @@
 import SupplierPage from "../../_modules/suppliers/page";
-const page = () => {
+const Page = () => {
   return <SupplierPage />;
 };
 
-export default page;
+export default Page;

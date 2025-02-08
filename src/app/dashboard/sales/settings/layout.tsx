@@ -1,6 +1,6 @@
 import InnerSideBar from "../../_components/InnerSideBar";
 
-export default async function Layout({ children }: { children: any }) {
+export default function Layout({ children }: { children: any }) {
   return (
     <>
       <InnerSideBar
@@ -9,7 +9,10 @@ export default async function Layout({ children }: { children: any }) {
           name: "Settings",
           links: [
             { name: "users", link: "/dashboard/admin/settings" },
-            { name: "change password", link: "/dashboard/admin/settings/changepassword" },
+            {
+              name: "change password",
+              link: "/dashboard/admin/settings/changepassword",
+            },
           ],
         }}
       />

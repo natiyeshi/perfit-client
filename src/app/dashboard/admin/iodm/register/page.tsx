@@ -19,7 +19,7 @@ import { IDBSupplier } from "@/types/ISupplier";
 import { useState } from "react";
 import { IDBProduct } from "@/types/IProduct";
 
-const page = () => {
+const Page = () => {
   const { isLoading, mutate } = useMutation(
     (data: any) =>
       axios.post("/IODMs", {
@@ -255,4 +255,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -1,8 +1,8 @@
 "use client";
 import ReportPage from "../../../_modules/import/report/page";
 
-const page = () => {
+const Page = () => {
   return <ReportPage />;
 };
 
-export default page;
+export default Page;

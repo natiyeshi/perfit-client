@@ -58,7 +58,7 @@ const LeastImportedProducts = ({
 
   const getChartData = () => {
     const monthAgo = subMonths(new Date(), timeChoices[filter.time]);
-    let datas: Record<string, number> = {};
+    const datas: Record<string, number> = {};
 
     importsData.forEach((d) => {
       const createdAt = new Date(d.createdAt);
@@ -74,7 +74,7 @@ const LeastImportedProducts = ({
       .sort(([, a], [, b]) => a - b)
       .map(([key, value]) => ({ name: key, value }));
 
-    let leastFour = sortedData.slice(0, 4);
+    const leastFour = sortedData.slice(0, 4);
 
     setChartData(leastFour);
   };

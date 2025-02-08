@@ -1,7 +1,7 @@
 "use client";
 import RegisterPage from "../../../_modules/inventory/register/page";
-const page = () => {
+const Page = () => {
   return <RegisterPage />;
 };
 
-export default page;
+export default Page;

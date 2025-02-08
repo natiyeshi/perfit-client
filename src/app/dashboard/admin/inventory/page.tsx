@@ -1,6 +1,6 @@
 import InventoryPage from "../../_modules/inventory/page";
-const page = () => {
+const Page = () => {
   return <InventoryPage />;
 };
 
-export default page;
+export default Page;

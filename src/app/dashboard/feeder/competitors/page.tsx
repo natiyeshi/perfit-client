@@ -1,6 +1,6 @@
 import CompetitorPage from "../../_modules/competitors/page";
-const page = () => {
+const Page = () => {
   return <CompetitorPage />;
 };
 
-export default page;
+export default Page;

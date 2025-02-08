@@ -1,7 +1,7 @@
 "use client";
 
 import PipelineTable from "./_components/pipelineTable";
-const page = () => {
+const Page = () => {
   return (
     <div className="overflow-y-auto w-full h-full flex-1   flex flex-col">
       <PipelineTable />
@@ -9,4 +9,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

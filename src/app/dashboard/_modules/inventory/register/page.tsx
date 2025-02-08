@@ -21,7 +21,7 @@ import { IDBProduct } from "@/types/IProduct";
 import { IDBSupplier } from "@/types/ISupplier";
 import { parseISO } from "date-fns";
 
-const page = () => {
+const Page = () => {
   const { isLoading, mutate } = useMutation(
     (data: any) => axios.post("/imports", data),
     {
@@ -36,7 +36,7 @@ const page = () => {
     }
   );
   const handleSubmit = (data: IInventoryImport) => {
-    let newData = { ...data };
+    const newData = { ...data };
     mutate({ ...newData, expiryDate: data.expiryDate });
   };
 
@@ -265,4 +265,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

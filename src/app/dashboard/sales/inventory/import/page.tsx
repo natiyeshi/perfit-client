@@ -1,6 +1,6 @@
 import InventoryImportTable from "../_components/InventoryImportTable";
 
-const page = () => {
+const Page = () => {
   return (
     <>
       <InventoryImportTable />
@@ -8,4 +8,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

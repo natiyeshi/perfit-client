@@ -11,7 +11,6 @@ export const useTransactionTable = () => {
   const [filters, setFilters] = useState<filterInf>({
     name: "",
   });
-  let toastId = "";
   const [imports, setImports] = useState<IDBClientTransaction[]>([]);
   const [importsData, setImportsData] = useState<IDBClientTransaction[]>([]);
 

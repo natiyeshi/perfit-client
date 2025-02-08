@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import ProductTable from "./_components/ProductTable";
-const page = () => {
+const Page = () => {
   return (
     <div className="overflow-y-auto w-full h-full flex-1  flex flex-col">
       <ProductTable />
@@ -9,4 +9,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

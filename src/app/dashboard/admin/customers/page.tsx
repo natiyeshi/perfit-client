@@ -1,6 +1,6 @@
 import CustomerPage from "../../_modules/customers/page";
-const page = () => {
+const Page = () => {
   return <CustomerPage />;
 };
 
-export default page;
+export default Page;

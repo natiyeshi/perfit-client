@@ -136,9 +136,9 @@ function UpdateInventoryImport({ initialValues }: { initialValues: IDBImport }) 
                           />
                         </SelectTrigger>
                         <SelectContent>
-                          {competitors.map((pr) => {
+                          {competitors.map((pr,ind) => {
                             return (
-                              <SelectItem value={pr.id}>{pr.name}</SelectItem>
+                              <SelectItem key={ind} value={pr.id}>{pr.name}</SelectItem>
                             );
                           })}
                         </SelectContent>
@@ -165,9 +165,9 @@ function UpdateInventoryImport({ initialValues }: { initialValues: IDBImport }) 
                           />
                         </SelectTrigger>
                         <SelectContent>
-                          {products.map((pr) => {
+                          {products.map((pr,ind) => {
                             return (
-                              <SelectItem value={pr.id}>{pr.name}</SelectItem>
+                              <SelectItem key={ind} value={pr.id}>{pr.name}</SelectItem>
                             );
                           })}
                         </SelectContent>
@@ -194,9 +194,9 @@ function UpdateInventoryImport({ initialValues }: { initialValues: IDBImport }) 
                           />
                         </SelectTrigger>
                         <SelectContent>
-                          {suppliers.map((pr) => {
+                          {suppliers.map((pr,ind) => {
                             return (
-                              <SelectItem value={pr.id}>{pr.manufacturerName}</SelectItem>
+                              <SelectItem key={ind} value={pr.id}>{pr.manufacturerName}</SelectItem>
                             );
                           })}
                         </SelectContent>

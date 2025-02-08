@@ -10,7 +10,7 @@ import TopSuppliers from "./_components/TopSuppliers";
 import TopCompetitorByQuantity from "./_components/TopCompetitorByQuantity";
 import TopCompetitorByTotalPrice from "./_components/TopCompetitorsByTotalPrice";
 
-const page = () => {
+const Page = () => {
   const [importsData, setImportsData] = useState<IDBPopulatedImport[]>([]);
   const query = useQuery(
     "competitor-imports",
@@ -57,4 +57,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

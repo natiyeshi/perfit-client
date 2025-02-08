@@ -9,7 +9,6 @@ export const useCompetitorTable = () => {
   const [filters, setFilters] = useState<filterInf>({
     name: "",
   });
-  let toastId = "";
   const [competitors, setCompetitors] = useState<IDBCompetitor[]>([]);
   const [competitorsData, setCompetitorsData] = useState<IDBCompetitor[]>([]);
 

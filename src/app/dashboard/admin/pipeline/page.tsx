@@ -1,6 +1,6 @@
 import PipelinePage from "../../_modules/pipeline/page";
-const page = () => {
+const Page = () => {
   return <PipelinePage />;
 };
 
-export default page;
+export default Page;

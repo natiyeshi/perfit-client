@@ -9,7 +9,6 @@ export const useCustomerTable = () => {
   const [filters, setFilters] = useState<filterInf>({
     name: "",
   });
-  let toastId = "";
   const [customers, setCustomers] = useState<IDBCustomer[]>([]);
   const [customersData, setCustomersData] = useState<IDBCustomer[]>([]);
 

@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import InventoryTable from "./_components/InventoryTable";
 
-const page = () => {
+const Page = () => {
   // redirect("/dashboard/admin/hr/employees");
   return (
     <>
@@ -10,4 +10,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -1,6 +1,6 @@
 import ProductPage from "../../_modules/products/page";
-const page = () => {
+const Page = () => {
   return <ProductPage />;
 };
 
-export default page;
+export default Page;

@@ -34,10 +34,10 @@ export const usePipelineTable = () => {
 
   const query = useQuery("pipelines", () => axios.get("/pipelines?populate=true"), {
     onSuccess(data) {
-      let k: IDBPopulatedPipeline[] = data.data.result || [];
+      const k: IDBPopulatedPipeline[] = data.data.result || [];
       const res: IDBClientPipeline[] = [];
       k.map((d) => {
-        let r: IDBClientPipeline = {
+        const r: IDBClientPipeline = {
           ...d,
           productName: d.product.name,
         };

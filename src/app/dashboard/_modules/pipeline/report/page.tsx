@@ -9,7 +9,7 @@ import { useQuery } from "react-query";
 import TopSuppliers from "./_components/TopSuppliers";
 import TopCompetitor from "./_components/TopCompetitor";
 
-const page = () => {
+const Page = () => {
   const [importsData, setImportsData] = useState<IDBPopulatedImport[]>([]);
   const query = useQuery(
     "competitor-imports",
@@ -44,4 +44,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

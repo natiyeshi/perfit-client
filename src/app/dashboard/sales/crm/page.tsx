@@ -1,6 +1,6 @@
 import CrmPage from "../../_modules/crm/page";
-const page = () => {
+const Page = () => {
   return <CrmPage />;
 };
 
-export default page;
+export default Page;

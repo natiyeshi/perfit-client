@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import TransactionTable from "./_components/TransactionTable";
-const page = () => {
+const Page = () => {
   return (
     <div className="overflow-y-auto w-full h-full flex-1   flex flex-col">
       <TransactionTable />
@@ -9,4 +9,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

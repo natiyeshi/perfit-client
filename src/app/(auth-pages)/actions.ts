@@ -9,7 +9,7 @@ export const signUpAction = async (formData: FormData) => {
     const password = formData.get("password")?.toString();
     const fullName = formData.get("fullName")?.toString();
     const origin = (await headers()).get("origin");
-    let redirectDetail = {
+    const redirectDetail = {
         name : "",
         message : "",
         path : "/sign-up",

@@ -16,7 +16,7 @@ const DashboardWrapper = ({
       <>{children}</>
     </main>
   ) : roleOptions.has(user.role) ? (
-    <div>You don't have permission to view this page.</div>
+    <div>You don&apos;t have permission to view this page.</div>
   ) : (
     <div>
       Invalid user role {role}

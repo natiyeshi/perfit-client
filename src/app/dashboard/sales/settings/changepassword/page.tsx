@@ -9,7 +9,7 @@ import { useMutation, useQuery } from "react-query";
 import axios from "@/lib/axios";
 import { changePasswordSchema } from "@/validators/change-password.validator";
 
-const page = () => {
+const Page = () => {
   const { isLoading, mutate } = useMutation(
     (data: any) =>
       axios.patch("/auth/change-password", {
@@ -103,10 +103,7 @@ const page = () => {
               </div>
             </div>
 
-            <Button
-              disabled={isLoading}
-              className="mx-auto mr-auto"
-            >
+            <Button disabled={isLoading} className="mx-auto mr-auto">
               Submit
             </Button>
           </Form>
@@ -116,4 +113,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

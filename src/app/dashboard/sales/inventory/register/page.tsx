@@ -21,7 +21,7 @@ import { IDBProduct } from "@/types/IProduct";
 import { IDBSupplier } from "@/types/ISupplier";
 import { parseISO } from "date-fns";
 
-const page = () => {
+const Page = () => {
   const { isLoading, mutate } = useMutation(
     (data: any) => axios.post("/imports", data),
     {
@@ -92,7 +92,9 @@ const page = () => {
                 >
                   <SelectTrigger className="w-full">
                     <SelectValue
-                      placeholder={` ${productQuery.isLoading ? "Loading..." : "Select"}`}
+                      placeholder={` ${
+                        productQuery.isLoading ? "Loading..." : "Select"
+                      }`}
                     />
                   </SelectTrigger>
                   <SelectContent>
@@ -118,7 +120,9 @@ const page = () => {
                 >
                   <SelectTrigger className="w-full">
                     <SelectValue
-                      placeholder={` ${supplierQuery.isLoading ? "Loading..." : "Select"}`}
+                      placeholder={` ${
+                        supplierQuery.isLoading ? "Loading..." : "Select"
+                      }`}
                     />
                   </SelectTrigger>
                   <SelectContent>
@@ -248,4 +252,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

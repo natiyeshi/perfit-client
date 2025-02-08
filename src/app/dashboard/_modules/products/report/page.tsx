@@ -1,5 +1,5 @@
-const page = () => {
+const Page = () => {
   return <div className="px-6 flex-1 overflow-auto"></div>;
 };
 
-export default page;
+export default Page;

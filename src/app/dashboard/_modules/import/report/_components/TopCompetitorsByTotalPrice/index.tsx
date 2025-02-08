@@ -56,7 +56,7 @@ const TopCompetitorsByTotalPrice = ({
 
   const getChartData = () => {
     const monthAgo = subMonths(new Date(), timeChoices[filter.time]);
-    let datas: Record<string, number> = {};
+    const datas: Record<string, number> = {};
 
     importsData.forEach((d) => {
       const createdAt = new Date(d.createdAt);
@@ -72,7 +72,7 @@ const TopCompetitorsByTotalPrice = ({
       .sort(([, a], [, b]) => b - a)
       .map(([key, value]) => ({ name: key, value }));
 
-    let topFour = sortedData.slice(0, 4);
+    const topFour = sortedData.slice(0, 4);
 
     setChartData(topFour);
   };

@@ -57,7 +57,7 @@ const ExpiryAnalsis: React.FC<Props> = ({ inventoryData, query }) => {
   console.log(chartData);
   useEffect(() => {
     const monthAgo = subMonths(new Date(), timeChoices[filter.time]);
-    let dataMap: Record<string, number> = {};
+    const dataMap: Record<string, number> = {};
     inventoryData.forEach((item) => {
       const remainingDays = getDayDifference(
         new Date(),

@@ -36,7 +36,7 @@ const fetchData = (
   });
 };
 
-const page = () => {
+const Page = () => {
   const { isLoading, mutate } = useMutation(
     (data: any) => axios.post("/pipelines", { ...data }),
     {
@@ -280,4 +280,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

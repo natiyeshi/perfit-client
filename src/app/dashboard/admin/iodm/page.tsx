@@ -1,7 +1,7 @@
 import IodmTable from "./_components/IodmTable";
 
-const page = () => {
+const Page = () => {
   return <IodmTable />;
 };
 
-export default page;
+export default Page;

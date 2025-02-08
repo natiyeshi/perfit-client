@@ -10,7 +10,6 @@ export const useInventoryTable = () => {
   const [filters, setFilters] = useState<filterInf>({
     name: "",
   });
-  let toastId = "";
   const [inventorys, setInventorys] = useState<IDBClientInventory[]>([]);
   const [inventorysData, setInventorysData] = useState<IDBClientInventory[]>([]);
 

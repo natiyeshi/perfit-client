@@ -22,7 +22,7 @@ import { IDBSupplier } from "@/types/ISupplier";
 import { IDBCompetitor } from "@/types/ICompetitor";
 import { parseISO } from "date-fns";
 
-const page = () => {
+const Page = () => {
   const { isLoading, mutate } = useMutation(
     (data: any) =>
       axios.post("/competitor-imports", {
@@ -292,4 +292,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

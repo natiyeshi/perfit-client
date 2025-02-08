@@ -1,6 +1,6 @@
 import InnerSideBar from "../../_components/InnerSideBar";
 
-export default async function Layout({ children }: { children: any }) {
+export default function Layout({ children }: { children: any }) {
   return (
     <>
       <InnerSideBar
