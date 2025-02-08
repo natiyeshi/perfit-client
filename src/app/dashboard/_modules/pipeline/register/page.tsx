@@ -21,22 +21,21 @@ import { IDBSupplier } from "@/types/ISupplier";
 import { IDBCompetitor } from "@/types/ICompetitor";
 import { IPipeline } from "@/types/IPipeline";
 
-const fetchData = (
-  endpoint: string,
-  setState: (data: any) => void,
-  errorMessage: string
-) => {
-  return useQuery(endpoint, () => axios.get(`/${endpoint}`), {
-    onSuccess(data) {
-      setState(data.data.result || []);
-    },
-    onError() {
-      toast.error(errorMessage);
-    },
-  });
-};
-
 const Page = () => {
+  const fetchData = (
+    endpoint: string,
+    setState: (data: any) => void,
+    errorMessage: string
+  ) => {
+    return useQuery(endpoint, () => axios.get(`/${endpoint}`), {
+      onSuccess(data) {
+        setState(data.data.result || []);
+      },
+      onError() {
+        toast.error(errorMessage);
+      },
+    });
+  };
   const { isLoading, mutate } = useMutation(
     (data: any) => axios.post("/pipelines", { ...data }),
     {

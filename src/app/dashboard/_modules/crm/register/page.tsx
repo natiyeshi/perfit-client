@@ -114,8 +114,8 @@ const Page = () => {
                     />
                   </SelectTrigger>
                   <SelectContent>
-                    {customers.map((pr) => {
-                      return <SelectItem value={pr.id}>{pr.organizationName}</SelectItem>;
+                    {customers.map((pr,key) => {
+                      return <SelectItem key={key} value={pr.id}>{pr.organizationName}</SelectItem>;
                     })}
                   </SelectContent>
                 </Select>
@@ -140,8 +140,8 @@ const Page = () => {
                     />
                   </SelectTrigger>
                   <SelectContent>
-                    {products.map((pr) => {
-                      return <SelectItem value={pr.id}>{pr.name}</SelectItem>;
+                    {products.map((pr,ind) => {
+                      return <SelectItem key={ind} value={pr.id}>{pr.name}</SelectItem>;
                     })}
                   </SelectContent>
                 </Select>
@@ -166,9 +166,9 @@ const Page = () => {
                     />
                   </SelectTrigger>
                   <SelectContent>
-                    {imports.map((pr) => {
+                    {imports.map((pr,key) => {
                       return (
-                        <SelectItem value={pr.id}>
+                        <SelectItem key={key} value={pr.id}>
                           {pr.id}
                         </SelectItem>
                       );

@@ -98,8 +98,8 @@ const Page = () => {
                     />
                   </SelectTrigger>
                   <SelectContent>
-                    {products.map((pr) => {
-                      return <SelectItem value={pr.id}>{pr.name}</SelectItem>;
+                    {products.map((pr,ind) => {
+                      return <SelectItem key={ind} value={pr.id}>{pr.name}</SelectItem>;
                     })}
                   </SelectContent>
                 </Select>

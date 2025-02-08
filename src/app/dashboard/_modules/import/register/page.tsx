@@ -113,8 +113,8 @@ const Page = () => {
                     />
                   </SelectTrigger>
                   <SelectContent>
-                    {competitors.map((pr) => {
-                      return <SelectItem value={pr.id}>{pr.name}</SelectItem>;
+                    {competitors.map((pr,ind) => {
+                      return <SelectItem key={ind} value={pr.id}>{pr.name}</SelectItem>;
                     })}
                   </SelectContent>
                 </Select>
