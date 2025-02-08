@@ -11,17 +11,10 @@ export default function Providers({ children }: any) {
     <>
       <NextTopLoader />
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <UserProvider>
-            <Toaster />
-            {children}
-          </UserProvider>
-        </ThemeProvider>
+        <UserProvider>
+          <Toaster />
+          {children}
+        </UserProvider>
       </QueryClientProvider>
     </>
   );
