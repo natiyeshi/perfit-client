@@ -1,3 +1,3 @@
-export default async function Index() {
+export default function Index() {
   return <>Index Page</>;
 }
