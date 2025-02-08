@@ -5,7 +5,7 @@ import Providers from "@/providers/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  metadataBase: "Perfit",
+  metadataBase: "Perfit Pharma",
   title: "Saas",
 };
 
