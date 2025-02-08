@@ -22,20 +22,14 @@ import { IDBCompetitor } from "@/types/ICompetitor";
 import { IPipeline } from "@/types/IPipeline";
 
 const Page = () => {
-  const fetchData = (
-    endpoint: string,
-    setState: (data: any) => void,
-    errorMessage: string
-  ) => {
-    return useQuery(endpoint, () => axios.get(`/${endpoint}`), {
-      onSuccess(data) {
-        setState(data.data.result || []);
-      },
-      onError() {
-        toast.error(errorMessage);
-      },
-    });
-  };
+  useQuery("products", () => axios.get(`/products`), {
+    onSuccess(data) {
+      setProducts(data.data.result || []);
+    },
+    onError() {
+      toast.error("Error while loading products!");
+    },
+  });
   const { isLoading, mutate } = useMutation(
     (data: any) => axios.post("/pipelines", { ...data }),
     {
@@ -51,8 +45,6 @@ const Page = () => {
   );
 
   const [products, setProducts] = useState<IDBProduct[]>([]);
-
-  fetchData("products", setProducts, "Error while loading products!");
 
   const handleSubmit = (data: IPipeline) => mutate(data);
   const initialValues: IPipeline = {
