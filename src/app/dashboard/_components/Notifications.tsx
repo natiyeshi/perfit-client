@@ -40,7 +40,7 @@ const Notifications = () => {
             (threeMonthsLater.getTime() - today.getTime()) /
               (1000 * 60 * 60 * 24)
           );
-          if (remainingDate == 70) return false;
+          if (remainingDate > 45) return false;
           d["remainingDate"] = remainingDate;
           return true;
         });
@@ -67,7 +67,7 @@ const Notifications = () => {
               "Loading..."
             ) : query.isSuccess ? (
               <div className="flex flex-col gap-5">
-                {pipelineData.map((data,ind) => (
+                {pipelineData.map((data, ind) => (
                   <PipelineNoti key={ind} data={data} />
                 ))}
               </div>
@@ -90,12 +90,32 @@ const Noti = () => {
   );
 };
 
-
-const PipelineNoti = ({ data } : { data : PipelineNotification}) => {
+const PipelineNoti = ({ data }: { data: PipelineNotification }) => {
   return (
-    <div className="w-full flex flex-col text-sm rounded border gap-1 p-2 text-gray-800">
-      <div className="font-semibold">{data.lcNumber}</div>
-      <div className="text-xs">{data.remainingDate}</div>
+    <div
+      className={`w-full flex flex-col text-sm rounded border gap-1 p-2 text-gray-800 ${
+        data.remainingDate > 45
+          ? "bg-green-200"
+          : data.remainingDate > 30
+          ? "bg-yellow-200"
+          : "bg-red-200"
+      }`}
+    >
+      <div className="font-semibold flex gap-2 flexcol flex-wrap">
+        <div className="text-gray-600 text-sm">LC Number:</div>
+        <div className="">{data.lcNumber}</div>
+      </div>
+      <div className="font-semibold flex gap-2 flexcol flex-wrap">
+        <div className="text-gray-600 text-sm">Proforma Invoice Number:</div>
+        <div className="">{data.proformaInvoiceNumber}</div>
+      </div>
+      <div className="font-semibold flex gap-2 flexcol flex-wrap">
+        <div className="text-gray-600 text-sm">Remaining Days:</div>
+        <div className="">{data.remainingDate}</div>
+      </div>
+      <div className="w-fit px-2 mt-3 rounded-lg bg-white py-[1px] text-sm">
+        pipeline
+      </div>
     </div>
   );
 };

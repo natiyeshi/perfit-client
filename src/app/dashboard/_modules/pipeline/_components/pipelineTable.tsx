@@ -29,7 +29,7 @@ const PipelineTable: React.FC = () => {
     },
     { name: "Lc Number", key: "lcNumber" },
     { name: "Proforma Invoice Number", key: "proformaInvoiceNumber" },
-    { name: "Opening Date", key: "lcOpeningDate" },
+    { name: "Lc Opening Date", key: "lcOpeningDate" },
     { name: "Quantity", key: "quantity" },
     { name: "Invoice", key: "invoice" },
     { name: "Port Arrival Date", key: "portArrivalDate" },

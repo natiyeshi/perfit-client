@@ -81,9 +81,9 @@ const MainSideBar = () => {
   const roles = new Set(["admin", "sales", "feeder"]);
   const role: any = roles.has(user.role) ? user.role : "any";
   return (
-    <div className="w-20 absolute  group pb-6 hover:w-[240px] duration-300 border-r bg-[#2B8890] text-white min-h-screen flex flex-col overflow-y-auto overflow-x-hidden ">
+    <div className="w-20 absolute  group pb-6 hover:w-[240px] duration-300 border-r bg-[#f8f8f8] min-h-screen flex flex-col overflow-y-auto overflow-x-hidden ">
       <div className="w-full h-12 min-h-12 max-h-12  flex">
-        <div className="m-auto text-center  capitalize font-semibold bg-white rounded-full p-1">
+        <div className="m-auto text-center  capitalize font-semibold  rounded-full p-1">
           <Image className="w-[25px]" src={logo} alt="Logo" />
         </div>
       </div>
@@ -109,7 +109,7 @@ const SideBarLink = ({ link }: { link: MainLinkInf }) => {
       >
         <div className="min-w-[60px] py-2 px-1  flex ">
           <Icon
-            className={`text-xl ${isActive ? "text-background" : "text-background"}  mx-auto`}
+            className={`text-xl ${isActive ? "text-background" : "text-gray-900"}  mx-auto`}
           />
         </div>
         <div className="group-hover:flex hidden group-hover:min-w-fit  group-hover:flex-nowrap group-hover:overflow-hidden whitespace-nowrap text-clip">

@@ -68,17 +68,17 @@ const CustomeTable = <T extends { id: string }>({
     <>
       <table className="min-w-full border-b shadow-lg">
         <thead>
-          <tr className="text-left bg-secondary text-white sticky top-0 z-20">
-            <th className="px-4 py-2 whitespace-nowrap border-b sticky left-0 bg-secondary">
+          <tr className="text-left bg-gray-800 text-white sticky top-0 z-20">
+            <th className="px-4 py-2 whitespace-nowrap border-b sticky left-0 bg-gray-800">
               -
             </th>
-            <th className="px-4 py-2 whitespace-nowrap border-b sticky left-0 bg-secondary">
+            <th className="px-4 py-2 whitespace-nowrap border-b sticky left-0 bg-gray-800">
               No
             </th>
             {headers.map((value) => (
               <th
                 key={String(value.key)}
-                className="px-4 py-2 whitespace-nowrap border-b cursor-pointer hover:bg-secondary/50"
+                className="px-4 py-2 whitespace-nowrap border-b cursor-pointer hover:bg-gray-200/50"
                 onClick={() => handleSort(value.key)}
               >
                 {value.name} {sortColumn === value.key ? (sortOrder === "asc" ? "▲" : "▼") : ""}
@@ -91,10 +91,10 @@ const CustomeTable = <T extends { id: string }>({
             <></>
           ) : query.data ? (
             sortedResult.map((item: T, index: number) => (
-              <tr key={index} className="group hover:bg-secondary/20 duration-200">
-                <td className="border-b group-hover:bg-secondary/20 whitespace-nowrap duration-200 sticky left-0 bg-background">
+              <tr key={index} className="group hover:bg-gray-200/20 duration-200">
+                <td className="border-b group-hover:bg-gray-200/20 whitespace-nowrap duration-200 sticky left-0 bg-background">
                   <Popover>
-                    <PopoverTrigger className="px-4 py-2 hover:bg-secondary">
+                    <PopoverTrigger className="px-4 py-2 hover:bg-gray-200">
                       <CgOptions className="text-lg" />
                     </PopoverTrigger>
                     <PopoverContent className="shadow">
