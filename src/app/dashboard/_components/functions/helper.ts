@@ -5,3 +5,9 @@ export const handleLogout = () => {
     if (typeof location !== "undefined") location.href = "/sign-in";
 };
 
+
+
+export const reload = () => {
+    if (typeof location !== "undefined") location.reload();
+};
+

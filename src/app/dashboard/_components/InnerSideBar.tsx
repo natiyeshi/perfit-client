@@ -13,15 +13,9 @@ import {
 } from "@/components/ui/popover";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+
 import { handleLogout } from "@/lib/helper";
+import Notifications from "./Notifications";
 
 interface LinkInf {
   name: string;
@@ -105,33 +99,5 @@ const Profile = () => {
   );
 };
 
-const Notifications = () => {
-  return (
-    <Sheet>
-      <SheetTrigger>
-        <div className="bg-foreground w-8 h-8 rounded-full text-background font-black  flex ">
-          <IoNotifications className="m-auto" />
-        </div>
-      </SheetTrigger>
-      <SheetContent>
-        <SheetHeader>
-          <SheetTitle>Notifications</SheetTitle>
-          <SheetDescription className="mt-4 flex flex-col gap-2">
-            <Noti />
-          </SheetDescription>
-        </SheetHeader>
-      </SheetContent>
-    </Sheet>
-  );
-};
-
-const Noti = () => {
-  return (
-    <div className="w-full flex flex-col text-sm rounded border gap-1 p-2 text-gray-800">
-      <div className="font-semibold">Welcome</div>
-      <div className="text-xs">Welcome To out Platform</div>
-    </div>
-  );
-};
 
 export default InnerSideBar;

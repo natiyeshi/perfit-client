@@ -8,12 +8,9 @@ export interface IIodm {
     currentSellingPrice: number; // Must be a positive number
     productMovement: "HIGH" | "LOW" | "MEDIUM"; // Enum with specific values
     transportCost: number; // Must be a non-negative number
-    grossWeight: number; // Must be a positive number
-    cbm: number; // Must be a positive number
     freightCost: number; // Must be a non-negative number
     dutyTax: number; // Must be a non-negative number
     bsc: number; // Must be a non-negative number
-    shipmentAmount: number; // Must be a non-negative number
     insuranceCharge: number; // Must be a non-negative number
     loadingUnloading: number; // Must be a non-negative number
     exchangeRate: number; // Must be a positive number

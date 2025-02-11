@@ -49,9 +49,11 @@ const Page = () => {
   const handleSubmit = (data: IPipeline) => mutate(data);
   const initialValues: IPipeline = {
     productId: "",
+    proformaInvoiceNumber: "",
+    lcNumber: "",
     quantity: 0,
     invoice: 0,
-    openingDate: "",
+    lcOpeningDate: "",
     shippingMethod: "AIR",
     portExpectedArrivalDate: "",
     warehouseExpectedArrivalDate: "",
@@ -112,6 +114,44 @@ const Page = () => {
                 />
               </div>
 
+              {/* lcNumber */}
+              <div className="flex flex-col space-y-2 w-full">
+                <Label htmlFor="lcNumber">Lc Number</Label>
+                <Field
+                  name="lcNumber"
+                  as={Input}
+                  id="lcNumber"
+                  type="string"
+                  placeholder="Enter Quantity"
+                  className="w-full"
+                />
+                <ErrorMessage
+                  name="lcNumber"
+                  component="p"
+                  className="text-sm text-red-500"
+                />
+              </div>
+
+              {/* proformaInvoiceNumber */}
+              <div className="flex flex-col space-y-2 w-full">
+                <Label htmlFor="proformaInvoiceNumber">
+                  Proforma Invoice Number
+                </Label>
+                <Field
+                  name="proformaInvoiceNumber"
+                  as={Input}
+                  id="proformaInvoiceNumber"
+                  type="string"
+                  placeholder="Enter Quantity"
+                  className="w-full"
+                />
+                <ErrorMessage
+                  name="proformaInvoiceNumber"
+                  component="p"
+                  className="text-sm text-red-500"
+                />
+              </div>
+
               {/* invoice */}
               <div className="flex flex-col space-y-2 w-full">
                 <Label htmlFor="invoice">Invoice</Label>
@@ -130,19 +170,19 @@ const Page = () => {
                 />
               </div>
 
-              {/* openingDate */}
+              {/* lcOpeningDate */}
               <div className="flex flex-col space-y-2 w-full">
-                <Label htmlFor="openingDate">Opening Date</Label>
+                <Label htmlFor="lcOpeningDate">Lc Opening Date</Label>
                 <Field
-                  name="openingDate"
+                  name="lcOpeningDate"
                   as={Input}
-                  id="openingDate"
+                  id="lcOpeningDate"
                   type="date"
                   placeholder="Enter Quantity"
                   className="w-full"
                 />
                 <ErrorMessage
-                  name="openingDate"
+                  name="lcOpeningDate"
                   component="p"
                   className="text-sm text-red-500"
                 />

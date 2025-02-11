@@ -2,8 +2,11 @@ import { IDBProduct } from "./IProduct";
 
 export interface IPipeline {
     quantity: number;
+    isArrived? : boolean;
     invoice: number;
-    openingDate: string;
+    lcOpeningDate: string;
+    lcNumber: string;
+    proformaInvoiceNumber: string;
     shippingMethod: "AIR" | "SEA";
     portExpectedArrivalDate: string;
     warehouseExpectedArrivalDate: string;

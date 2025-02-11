@@ -7,14 +7,23 @@ export const createPipelineSchema = yup.object({
     .integer("Quantity must be an integer.")
     .positive("Quantity must be greater than zero.")
     .required("Quantity is required."),
-
+  lcNumber: yup
+    .string()
+    .typeError("Lc Number must be a string.")
+    .min(1, "Lc Number is required.")
+    .required("Lc Number is required."),
+  proformaInvoiceNumber: yup
+    .string()
+    .typeError("Proforma Invoice Number must be a string.")
+    .min(1, "Proforma Invoice Number is required.")
+    .required("Proforma Invoice Number is required."),
   invoice: yup
     .number()
     .typeError("Invoice must be a number.")
     .positive("Invoice must be a positive number.")
     .required("Invoice is required."),
 
-  openingDate: yup
+  lcOpeningDate: yup
     .date()
     .typeError("Opening date must be a valid date.")
     .required("Opening date is required."),
