@@ -44,7 +44,7 @@ const adminLinks: MainLinkInf[] = [
     link: "/dashboard/admin/pipeline",
   },
   {
-    name: "IODM",
+    name: "Decision Matrix",
     Icon: PiMatrixLogoFill,
     link: "/dashboard/admin/iodm",
   },

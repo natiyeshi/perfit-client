@@ -9,9 +9,7 @@ import {
 import { FaFilter } from "react-icons/fa";
 export interface filterInf {
   name: string;
-  gender?: "Male" | "Female" | null;
-  age?: number | null;
-  status?: "Inactive" | "Active" | null;
+  isArrived?: boolean | null;
 }
 
 const FilterCard = ({
@@ -40,59 +38,27 @@ const FilterCard = ({
             </p>
           </div>
           <div className="flex flex-col gap-2">
-            <div>Gender</div>
+            <div>Is Arrived</div>
             <div className="flex gap-2">
               <Button
                 className="py-1"
-                variant={filter.gender != "Male" ? "outline" : "default"}
+                variant={filter.isArrived == false ? "default" : "outline"}
                 onClick={() => setGender("Male")}
               >
-                Male
+                Arrived
               </Button>
               <Button
-                variant={filter.gender != "Female" ? "outline" : "default"}
+                variant={filter.isArrived ? "default" : "outline"}
                 onClick={() => setGender("Female")}
               >
-                Femal
+                On The Way
               </Button>
-              {filter.gender != null && (
-                <Button variant={"destructive"} onClick={() => setGender(null)}>
-                  Clear
-                </Button>
-              )}
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <div>Status</div>
-              <div className="flex gap-2">
-                <Button
-                  className="py-1"
-                  variant={filter.status != "Active" ? "outline" : "default"}
-                  onClick={() =>
-                    setFilters((f: any) => ({ ...f, status: "Active" }))
-                  }
-                >
-                  Active
-                </Button>
-                <Button
-                  variant={filter.status != "Inactive" ? "outline" : "default"}
-                  onClick={() =>
-                    setFilters((f: any) => ({ ...f, status: "Inactive" }))
-                  }
-                >
-                  Inactive
-                </Button>
-                {filter.status != null && (
-                  <Button
-                    variant={"destructive"}
-                    onClick={() =>
-                      setFilters((f: any) => ({ ...f, status: null }))
-                    }
-                  >
-                    Clear
-                  </Button>
-                )}
-              </div>
+              <Button
+                variant={filter.isArrived == null ? "default" : "outline"}
+                onClick={() => setGender("Female")}
+              >
+                Both
+              </Button>
             </div>
           </div>
         </div>

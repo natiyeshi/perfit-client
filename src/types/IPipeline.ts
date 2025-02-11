@@ -26,5 +26,6 @@ export interface IPipeline {
   
   export interface IDBClientPipeline extends IDBPopulatedPipeline {
     productName?: string;
+    isArrivedString?: string;
   }
   

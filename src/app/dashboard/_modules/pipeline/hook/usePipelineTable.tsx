@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 export const usePipelineTable = () => {
   const [filters, setFilters] = useState<filterInf>({
     name: "",
+    isArrived: false,
   });
   const [pipeline, setPipelines] = useState<IDBClientPipeline[]>([]);
   const [pipelineData, setPipelineData] = useState<IDBClientPipeline[]>([]);
@@ -21,17 +22,15 @@ export const usePipelineTable = () => {
     return (
       filters.name.length === 0 ||
       (data.productName &&
-        data.productName.toLowerCase().includes(filters.name))
+        data.productName.toLowerCase().includes(filters.name)) ||
+      (data.lcNumber && data.lcNumber.toLowerCase().includes(filters.name)) ||
+      (data.proformaInvoiceNumber &&
+        data.proformaInvoiceNumber.toLowerCase().includes(filters.name))
     );
   };
 
   const statusFilter = (data: IDBClientPipeline) => {
-    return (
-      filters.status == null ||
-      data.productName?.toLowerCase() === filters.status.toLowerCase() ||
-      data.lcNumber.toLowerCase() == filters.status.toLowerCase() ||
-      data.proformaInvoiceNumber.toLowerCase() == filters.status.toLowerCase()
-    );
+    return filters.isArrived == null || data.isArrived == filters.isArrived;
   };
 
   const query = useQuery(
@@ -45,6 +44,7 @@ export const usePipelineTable = () => {
           const r: IDBClientPipeline = {
             ...d,
             productName: d.product.name,
+            isArrivedString: d.isArrived ? "Arrived" : "On the way",
           };
           res.push(r);
         });

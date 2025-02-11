@@ -72,7 +72,7 @@ const Notifications = () => {
                 ))}
               </div>
             ) : (
-              "aa"
+              ""
             )}
           </SheetDescription>
         </SheetHeader>

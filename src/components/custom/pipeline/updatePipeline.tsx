@@ -43,7 +43,10 @@ function UpdateImport({ initialValues }: { initialValues: IDBClientPipeline }) {
 
   const { isLoading, isError, error, mutate } = useMutation(
     (data: Partial<IDBPipeline>) =>
-      axios.patch(`/pipelines/${initialValues.id}`, data),
+      axios.patch(`/pipelines/${initialValues.id}`, {
+        ...data,
+        isArrived: (data as any).isArrived == "false" ? false : true,
+      }),
     {
       onSuccess: () => {
         toast.success("Pipeline successfully updated!");
@@ -163,19 +166,19 @@ function UpdateImport({ initialValues }: { initialValues: IDBClientPipeline }) {
                       />
                     </div>
 
-                    {/* openingDate */}
+                    {/* lcOpeningDate */}
                     <div className="flex flex-col space-y-2 w-full">
-                      <Label htmlFor="openingDate">Opening Date</Label>
+                      <Label htmlFor="lcOpeningDate">Opening Date</Label>
                       <Field
-                        name="openingDate"
+                        name="lcOpeningDate"
                         as={Input}
-                        id="openingDate"
+                        id="lcOpeningDate"
                         type="date"
                         className="w-full"
-                        value={formatDate(values["openingDate"])}
+                        value={formatDate(values["lcOpeningDate"])}
                       />
                       <ErrorMessage
-                        name="openingDate"
+                        name="lcOpeningDate"
                         component="p"
                         className="text-sm text-red-500"
                       />
@@ -262,8 +265,11 @@ function UpdateImport({ initialValues }: { initialValues: IDBClientPipeline }) {
                     </div>
 
                     <div className="flex flex-col space-y-2 w-full">
-                      <Label>shippingMethod</Label>
+                      <Label>
+                        shippingMethod {initialValues.shippingMethod}
+                      </Label>
                       <Select
+                        value={initialValues.shippingMethod}
                         onValueChange={(value: string) =>
                           setFieldValue("shippingMethod", value)
                         }
@@ -286,10 +292,28 @@ function UpdateImport({ initialValues }: { initialValues: IDBClientPipeline }) {
                       />
                     </div>
 
-                    {/* <div className="flex gap-2 w-fit px-6 py-2 border rounded items-center justify-center">
-                          <Label>Total Price:</Label>
-                          <div>{values.quantity * values.unitPrice} Birr</div>
-                        </div> */}
+                    <div className="flex flex-col space-y-2 w-full">
+                      <Label>Is Arrived</Label>
+                      <div
+                        role="group"
+                        aria-labelledby="isArrived"
+                        className="flex gap-5 my-auto py-2"
+                      >
+                        <label className="flex items-center space-x-2">
+                          <Field type="radio" name="isArrived" value="true" />
+                          <span>Yes</span>
+                        </label>
+                        <label className="flex items-center space-x-2">
+                          <Field type="radio" name="isArrived" value="false" />
+                          <span>No</span>
+                        </label>
+                      </div>
+                      <ErrorMessage
+                        name="isArrived"
+                        component="p"
+                        className="text-sm text-red-500"
+                      />
+                    </div>
                   </div>
 
                   <Button

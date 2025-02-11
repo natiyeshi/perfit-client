@@ -29,6 +29,7 @@ const PipelineTable: React.FC = () => {
     },
     { name: "Lc Number", key: "lcNumber" },
     { name: "Proforma Invoice Number", key: "proformaInvoiceNumber" },
+    { name: "Is Arrived", key: "isArrivedString" },
     { name: "Lc Opening Date", key: "lcOpeningDate" },
     { name: "Quantity", key: "quantity" },
     { name: "Invoice", key: "invoice" },
@@ -66,7 +67,7 @@ const PipelineTable: React.FC = () => {
             <IoMdRefresh className="text-xl" />
           </Button>
           {/* <Addimport /> */}
-          {/* <FilterCard setFilters={setFilters} filter={filters} /> */}
+          <FilterCard setFilters={setFilters} filter={filters} />
         </div>
       </div>
       <div className="py-2 px-2 flex flex-wrap gap-3">
