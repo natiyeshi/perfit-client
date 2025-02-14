@@ -19,21 +19,30 @@ export const useCustomerTable = () => {
   const nameFilter = (data: IDBCustomer) => {
     return (
       filters.name.length === 0 ||
-      data.organizationName.toLowerCase().includes(filters.name)
+      data.organizationName.toLowerCase().includes(filters.name) ||
+      data.city.toLowerCase().includes(filters.name)
     );
   };
 
   const statusFilter = (data: IDBCustomer) => {
     return (
-      filters.status == null ||
-      data.organizationName.toLowerCase() === filters.status.toLowerCase()
+      filters.category == null ||
+      filters.category.length == 0 ||
+      filters.category?.some(
+        (category: string) =>
+          data.catagory?.toLowerCase() === category.toLowerCase()
+      )
     );
   };
 
   const query = useQuery("customers", () => axios.get("/customers"), {
     onSuccess(data) {
-      setCustomers(data.data.result);
-      setCustomersData(data.data.result);
+      const cust = data.data.result.map((customer: IDBCustomer) => ({
+        ...customer,
+        catagory: "C",
+      }));
+      setCustomers(cust);
+      setCustomersData(cust);
     },
     onError(err) {
       console.log(err, "EEEEEEEEEEEEEEEEEE ");

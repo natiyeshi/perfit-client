@@ -19,7 +19,12 @@ const CompetitorMenu = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <div role="button" className="flex gap-2 items-center px-2 rounded">
+        <div
+          role="button"
+          className={`flex gap-2 items-center px-2 rounded ${
+            isActive && "text-primary"
+          }`}
+        >
           <IoPersonSharp className="text-xl" />
           <div>Competitors</div>
         </div>

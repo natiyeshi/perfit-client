@@ -21,6 +21,7 @@ export const useProductTable = () => {
     return (
       filters.name.length === 0 ||
       (data.brand && data.brand.toLowerCase().includes(filters.name)) ||
+      (data.unit && data.unit.toLowerCase().includes(filters.name)) ||
       data.name.toLowerCase().includes(filters.name)
     );
   };

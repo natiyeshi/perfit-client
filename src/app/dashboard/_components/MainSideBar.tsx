@@ -105,7 +105,7 @@ const SideBarLink = ({ link }: { link: MainLinkInf }) => {
   return (
     <Link href={link.link} className=" ">
       <div
-        className={`flex gap-1  items-center  py-1  rounded ${isActive ? "bg-primary text-white" : "hover:bg-primary"} `}
+        className={`flex gap-1  items-center  py-1  rounded ${isActive ? "bg-primary text-white" : "hover:bg-primary/20 duration-100"} `}
       >
         <div className="min-w-[60px] py-2 px-1  flex ">
           <Icon
@@ -133,11 +133,11 @@ const SettingSideBarLink = () => {
   return (
     <Link href={link.link} className="w-fit mt-auto px-2 pt-2">
       <div
-        className={`flex gap-1  items-center  py-1 hover:bg-primary rounded  ${isActive ? "bg-primary text-white" : "hover:bg-secondary/50"} `}
+        className={`flex gap-1  items-center  py-1 hover:bg-primary rounded  ${isActive ? "bg-primary text-white" : "hover:bg-primary/20"} `}
       >
         <div className="min-w-[60px] py-2 px-1  flex ">
           <Icon
-            className={`text-xl  ${isActive ? "text-background" : "text-background"} mx-auto`}
+            className={`text-xl  ${isActive ? "text-background" : "text-gray-900"} mx-auto`}
           />
         </div>
       </div>

@@ -78,7 +78,7 @@ const CustomeTable = <T extends { id: string }>({
             {headers.map((value) => (
               <th
                 key={String(value.key)}
-                className="px-4 py-2 whitespace-nowrap border-b cursor-pointer hover:bg-gray-200/50 capitalize"
+                className="px-4 py-2 whitespace-nowrap border-b cursor-pointer hover:bg-gray-700/50 capitalize"
                 onClick={() => handleSort(value.key)}
               >
                 {value.name} {sortColumn === value.key ? (sortOrder === "asc" ? "▲" : "▼") : ""}

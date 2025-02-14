@@ -13,7 +13,6 @@ export default function Layout({ children }: { children: any }) {
           links: [
             { name: "data", link: `/dashboard/${user.role}/competitors` },
             { name: "Report", link: `/dashboard/${user.role}/competitors/report` },
-            { name: "Report", link: `/dashboard/${user.role}/competitors/report` },
           ],
         }}
       />

@@ -43,7 +43,7 @@ const CustomerTable: React.FC = () => {
             <IoMdRefresh className="text-xl" />
           </Button>
           <Addcustomer />
-          {/* <FilterCard setFilters={setFilters} filter={filters} /> */}
+          <FilterCard setFilters={setFilters} filter={filters} />
         </div>
       </div>
       <div className="py-2 px-2 flex flex-wrap gap-3">

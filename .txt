@@ -59,6 +59,7 @@ TODO
     Batch number
     Expiry date + Manufacture Date
     PAUSE: Choose sales person
+
 - Sells
     Weekly Report
     Weekly plan
@@ -101,3 +102,12 @@ Weakly plan
 - Number of New Customers to Add
 
 Weakly Report
+
+
+---------------------------------
+
+todo 
+    - Analysis on all
+    - check update for all
+    - /dashboard
+    - 

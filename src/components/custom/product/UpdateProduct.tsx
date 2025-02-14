@@ -70,7 +70,7 @@ function UpdateProduct({ initialValues }: { initialValues: IDBProduct }) {
             >
               {({ isSubmitting }) => (
                 <Form className="space-y-6">
-                  <div className="grid grid-cols-2 gap-4 w-full">
+                  <div className="grid grid-cols-1 gap-4 w-full">
                     {/* Product Name */}
                     <div className="flex flex-col space-y-2 w-full">
                       <Label htmlFor="name">Product Name</Label>
@@ -106,22 +106,7 @@ function UpdateProduct({ initialValues }: { initialValues: IDBProduct }) {
                       />
                     </div>
 
-                    {/*batch */}
-                    <div className="flex flex-col space-y-2 w-full">
-                      <Label htmlFor="batch">Batch</Label>
-                      <Field
-                        name="batch"
-                        as={Input}
-                        id="batch"
-                        placeholder="batch number"
-                        className="w-full"
-                      />
-                      <ErrorMessage
-                        name="batch"
-                        component="batch"
-                        className="text-sm text-red-500"
-                      />
-                    </div>
+                   
 
                     {/* Brand */}
                     <div className="flex flex-col space-y-2 w-full">

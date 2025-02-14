@@ -129,22 +129,6 @@ function UpdateCustomer({ initialValues }: { initialValues: IDBCustomer }) {
                       />
                     </div>
 
-                    {/* Catagory */}
-                    <div className="flex flex-col space-y-2 w-full">
-                      <Label htmlFor="catagory">Catagory</Label>
-                      <Field
-                        name="catagory"
-                        as={Input}
-                        id="catagory"
-                        placeholder="Enter Catagory"
-                        className="w-full"
-                      />
-                      <ErrorMessage
-                        name="catagory"
-                        component="p"
-                        className="text-sm text-red-500"
-                      />
-                    </div>
                   </div>
 
                   <Button

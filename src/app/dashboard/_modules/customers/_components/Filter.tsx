@@ -7,11 +7,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { FaFilter } from "react-icons/fa";
+import { useState } from "react";
+
 export interface filterInf {
   name: string;
-  gender?: "Male" | "Female" | null;
-  age?: number | null;
-  status?: "Inactive" | "Active" | null;
+  category?: ("A" | "B" | "C")[] | null;
 }
 
 const FilterCard = ({
@@ -21,9 +21,23 @@ const FilterCard = ({
   setFilters: Function;
   filter: filterInf;
 }) => {
-  const setGender = (value: string | null) => {
-    setFilters((da: any) => ({ ...da, gender: value }));
+  
+  const [selectedCategories, setSelectedCategories] = useState<
+    ("A" | "B" | "C")[]
+  >(filter.category || []);
+
+  const handleCategoryChange = (category: "A" | "B" | "C") => {
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category]
+    );
   };
+
+  const applyFilters = () => {
+    setFilters((prev: any) => ({ ...prev, category: selectedCategories }));
+  };
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -40,60 +54,28 @@ const FilterCard = ({
             </p>
           </div>
           <div className="flex flex-col gap-2">
-            <div>Gender</div>
+            <div>Category</div>
             <div className="flex gap-2">
-              <Button
-                className="py-1"
-                variant={filter.gender != "Male" ? "outline" : "default"}
-                onClick={() => setGender("Male")}
-              >
-                Male
-              </Button>
-              <Button
-                variant={filter.gender != "Female" ? "outline" : "default"}
-                onClick={() => setGender("Female")}
-              >
-                Femal
-              </Button>
-              {filter.gender != null && (
-                <Button variant={"destructive"} onClick={() => setGender(null)}>
-                  Clear
-                </Button>
-              )}
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <div>Status</div>
-              <div className="flex gap-2">
-                <Button
-                  className="py-1"
-                  variant={filter.status != "Active" ? "outline" : "default"}
-                  onClick={() =>
-                    setFilters((f: any) => ({ ...f, status: "Active" }))
-                  }
-                >
-                  Active
-                </Button>
-                <Button
-                  variant={filter.status != "Inactive" ? "outline" : "default"}
-                  onClick={() =>
-                    setFilters((f: any) => ({ ...f, status: "Inactive" }))
-                  }
-                >
-                  Inactive
-                </Button>
-                {filter.status != null && (
-                  <Button
-                    variant={"destructive"}
-                    onClick={() =>
-                      setFilters((f: any) => ({ ...f, status: null }))
+              {["A", "B", "C"].map((category) => (
+                <label key={category} className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={
+                      selectedCategories
+                        ? selectedCategories.includes(
+                            category as "A" | "B" | "C"
+                          )
+                        : false
                     }
-                  >
-                    Clear
-                  </Button>
-                )}
-              </div>
+                    onChange={() =>
+                      handleCategoryChange(category as "A" | "B" | "C")
+                    }
+                  />
+                  {category}
+                </label>
+              ))}
             </div>
+            <Button onClick={applyFilters}>Apply</Button>
           </div>
         </div>
       </PopoverContent>
