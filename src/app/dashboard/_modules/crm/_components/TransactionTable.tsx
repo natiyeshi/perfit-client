@@ -27,6 +27,9 @@ const TransactionTable: React.FC = () => {
     },
     { name: "Quantity", key: "quantity" },
     { name: "unitPrice", key: "unitPrice" },
+    { name: "sales", key: "salesPersonName" },
+    { name: "Sell Type", key: "withCreditName" },
+    { name: "Progress", key: "isFinalizedName" },
   ];
 
   return (
@@ -52,24 +55,40 @@ const TransactionTable: React.FC = () => {
             <IoMdRefresh className="text-xl" />
           </Button>
           {/* <Addimport /> */}
-          {/* <FilterCard setFilters={setFilters} filter={filters} /> */}
+          <FilterCard setFilters={setFilters} filter={filters} />
         </div>
       </div>
       <div className="py-2 px-2 flex flex-wrap gap-3">
-        {Object.entries(filters).map(
-          ([key, value]) =>
-            value && (
-              <div
-                key={key}
-                className="flex bg-green-600 text-white items-center w-fit gap-1 py-1 px-2 rounded-lg"
-              >
-                <div>{value}</div>
-                <IoCloseSharp
-                  onClick={() => filter(key, key === "name" ? "" : null)}
-                  className="text-lg hover:bg-gray-200/20 rounded-full cursor-pointer"
-                />
-              </div>
-            )
+        {filters.isFinalized != null && (
+          <div className="flex bg-green-600 text-white items-center w-fit gap-1 py-1 px-2 rounded-lg">
+            <div className="capitalizes">
+              {filters.isFinalized ? "Finalized" : "On Progress"}
+            </div>
+            <IoCloseSharp
+              onClick={() => filter("isFinalized", null)}
+              className="text-lg hover:bg-gray-200/20 rounded-full cursor-pointer"
+            />
+          </div>
+        )}
+        {filters.withCredit != null && (
+          <div className="flex bg-green-600 text-white items-center w-fit gap-1 py-1 px-2 rounded-lg">
+            <div className="capitalizes">
+              {filters.withCredit ? "With Credit" : "Without Credit"}
+            </div>
+            <IoCloseSharp
+              onClick={() => filter("withCredit", null)}
+              className="text-lg hover:bg-gray-200/20 rounded-full cursor-pointer"
+            />
+          </div>
+        )}
+        {filters.name.length > 0 && (
+          <div className="flex bg-green-600 text-white items-center w-fit gap-1 py-1 px-2 rounded-lg">
+            <div className="capitalizes">{filters.name}</div>
+            <IoCloseSharp
+              onClick={() => filter("name", "")}
+              className="text-lg hover:bg-gray-200/20 rounded-full cursor-pointer"
+            />
+          </div>
         )}
       </div>
       <div className="overflow-scroll flex-1">

@@ -8,17 +8,28 @@ export interface ITransaction {
   quantity: number;
   productId: string;
   customerId: string;
-  importId: string;
+  withCredit: boolean;
 }
 
 export interface IDBTransaction extends ITransaction {
   id : string;
+  salesPersonId : string;
+  isFinalized : boolean;
+
 }
 
 export interface IDBPopulatedTransaction extends IDBTransaction {
   product : IDBProduct;
   customer : IDBCustomer;
   import : IDBSupplier;
+  salesPerson : {
+    userId : string, 
+    user : {
+      fullName : string,
+      email : string,
+      role : string,
+    }
+  };
 }
 
 
@@ -26,4 +37,7 @@ export interface IDBClientTransaction extends IDBPopulatedTransaction {
   productName? : string;
   customerName? : string;
   totalPrice? : number,
+  salesPersonName : string;
+  withCreditName : string;
+  isFinalizedName : string; 
 }

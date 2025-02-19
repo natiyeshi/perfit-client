@@ -46,6 +46,7 @@ function AddCustomer() {
 
   const initialValues: ICustomer = {
     organizationName: "",
+    tinNumber: "",
     phoneNumber: "",
     city: "",
   };
@@ -132,23 +133,22 @@ function AddCustomer() {
                       />
                     </div>
 
-                    {/* Catagory */}
-                    {/* 
+                    {/* tinNumber */}
                     <div className="flex flex-col space-y-2 w-full">
-                      <Label htmlFor="catagory">Catagory</Label>
+                      <Label htmlFor="tinNumber">Tin Number</Label>
                       <Field
-                        name="catagory"
+                        name="tinNumber"
                         as={Input}
-                        id="catagory"
-                        placeholder="Enter Catagory"
+                        id="tinNumber"
+                        placeholder="Enter tinNumber"
                         className="w-full"
                       />
                       <ErrorMessage
-                        name="catagory"
+                        name="tinNumber"
                         component="p"
                         className="text-sm text-red-500"
                       />
-                    </div> */}
+                    </div>
                   </div>
 
                   <Button

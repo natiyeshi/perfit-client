@@ -1,15 +1,31 @@
+Remaining
+    - Sells
+        Weekly Report
+        Weekly plan
+        Monthly target
+        Credit / Cash
+            Date , flag for credit
 
-Backend
-    Simple Todo
-        - customer Tin number
-        - Pipeline
+    - Customer (3 month) ++
+        A  > 2M
+        B 1M < 2M 
+        C <1M
 
-    Main Todo 
-        - First in First Out
-        - Batch number
-        - sells
-        
-Frontend
+    Direct Competitor
+        Without checkbox
+    
+    Dashboard
+
+-------------
+Todo 
+
+    - finalize sells
+    
+    - Weekly sales
+    - creadit 
+
+--------- 
+finalized
     - Iodm
     - Pipeline
     - Inventory (expiry Date)
@@ -17,60 +33,38 @@ Frontend
     - Analysis
     - Customer Data (tin number)
 
-Pipeline ++
-    3 Month deadline period 
-    45 / 30 / 15 / 7 Days Remaining Notification
-    Status
-        Shipment on/off
-        
-    Proforma Invoice number (unique) 
-    Lc number (letter of credit) (unique)
-    Opening Date => Lc Opening Date
+    Pipeline ++
+        3 Month deadline period 
+        45 / 30 / 15 / 7 Days Remaining Notification
+        Status
+            Shipment on/off
+            
+        Proforma Invoice number (unique) 
+        Lc number (letter of credit) (unique)
+        Opening Date => Lc Opening Date
 
 
-Inventory expiry way ++
-    Color schema
-        > 18 month
-        18 - 12 yellow
-        < 12 red
+        Inventory expiry way ++
+            Color schema
+                > 18 month
+                18 - 12 yellow
+                < 12 red
 
 
-Iodm ++
-    Add quantity
-    Shipment mode
-    Serverless
-    
-    Multiple product(freight cost)
-    Remove shipment amount,cbm,gross weight
+        Iodm ++
+            Add quantity
+            Shipment mode
+            Serverless
+            
+            Multiple product(freight cost)
+            Remove shipment amount,cbm,gross weight
 
-   Multiple product
-    - product,expiry/manu date,purchase price
-   common
-    - supplier, freight cost + taxes
+        Multiple product
+            - product,expiry/manu date,purchase price
+        common
+            - supplier, freight cost + taxes
 
 
-Direct Competitor
-    Without checkbox
-
--------------------------------------------------------
-TODO 
-- Sells
-    First In First out
-    Batch number
-    Expiry date + Manufacture Date
-    PAUSE: Choose sales person
-
-- Sells
-    Weekly Report
-    Weekly plan
-    Monthly target
-    Credit / Cash
-        Date , flag for credit
-
-- Customer (3 month) ++
-    A  > 2M
-    B 1M < 2M 
-    C <1M
 
 
 
@@ -86,7 +80,8 @@ TODO
     Tin number
 	
 
-
+--------------------------
+Dump
 
 Weekly Report
 - Weekly target sales
@@ -97,11 +92,21 @@ Weekly Report
 
 Weakly plan
 - target sells in birr
-- Number of contacted Customers
+- Number of Customers to contacted 
 - Number of Customers to Visit
 - Number of New Customers to Add
+- Number of transaction
+- dateFrom
+- dateTo
 
 Weakly Report
+- Actual of Customers to contacted 
+- Actual of Customers to Visited
+- Actual of New Customers to Added
+- Actual of transactions
+
+
+
 
 
 ---------------------------------

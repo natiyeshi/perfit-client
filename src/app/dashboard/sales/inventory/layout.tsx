@@ -1,20 +1,5 @@
-import InnerSideBar from "../../_components/InnerSideBar";
+import InventoryLayout from "../../_modules/inventory/layout";
 
 export default function Layout({ children }: { children: any }) {
-  return (
-    <>
-      <InnerSideBar
-        children={children}
-        data={{
-          name: "Inventory",
-          links: [
-            { name: "data", link: "/dashboard/sales/inventory" },
-            { name: "imports", link: "/dashboard/sales/inventory/import" },
-            { name: "register", link: "/dashboard/sales/inventory/register" },
-            { name: "Report", link: "/dashboard/sales/inventory/report" },
-          ],
-        }}
-      />
-    </>
-  );
+  return <InventoryLayout children={children} />;
 }

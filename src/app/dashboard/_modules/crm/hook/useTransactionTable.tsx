@@ -5,7 +5,10 @@ import axios from "@/lib/axios";
 import { filterInf } from "../_components/Filter";
 import { IDBClientImport, IDBPopulatedImport } from "@/types/IImport";
 import toast, { Toaster } from "react-hot-toast";
-import { IDBClientTransaction, IDBPopulatedTransaction } from "@/types/ITransaction";
+import {
+  IDBClientTransaction,
+  IDBPopulatedTransaction,
+} from "@/types/ITransaction";
 
 export const useTransactionTable = () => {
   const [filters, setFilters] = useState<filterInf>({
@@ -28,7 +31,10 @@ export const useTransactionTable = () => {
   };
 
   const statusFilter = (data: IDBClientTransaction) => {
-    return filters.status == null;
+    return (
+      (filters.withCredit == null || data.withCredit === filters.withCredit) &&
+      (filters.isFinalized == null || data.isFinalized === filters.isFinalized)
+    );
   };
 
   const query = useQuery(
@@ -43,8 +49,11 @@ export const useTransactionTable = () => {
             ...d,
             customerName: d.customer.organizationName,
             productName: d.product.name,
-            unitPrice : d.unitPrice,
-            quantity : d.quantity,
+            unitPrice: d.unitPrice,
+            quantity: d.quantity,
+            salesPersonName: d.salesPerson.user.fullName,
+            withCreditName: d.withCredit ? "With Credit" : "Without Credit",
+            isFinalizedName: d.isFinalized ? "Finalized" : "On Progress",
           };
           res.push(r);
         });

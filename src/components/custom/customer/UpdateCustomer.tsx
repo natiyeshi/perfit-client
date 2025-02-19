@@ -112,6 +112,23 @@ function UpdateCustomer({ initialValues }: { initialValues: IDBCustomer }) {
                       />
                     </div>
 
+                    {/* tinNumber */}
+                    <div className="flex flex-col space-y-2 w-full">
+                      <Label htmlFor="tinNumber">Tin Number</Label>
+                      <Field
+                        name="tinNumber"
+                        as={Input}
+                        id="tinNumber"
+                        placeholder="Enter tinNumber"
+                        className="w-full"
+                      />
+                      <ErrorMessage
+                        name="tinNumber"
+                        component="p"
+                        className="text-sm text-red-500"
+                      />
+                    </div>
+
                     {/* City */}
                     <div className="flex flex-col space-y-2 w-full">
                       <Label htmlFor="city">City</Label>

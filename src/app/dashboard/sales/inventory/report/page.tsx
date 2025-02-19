@@ -1,7 +1,6 @@
-import { redirect } from "next/navigation";
-
+import ReportPage from "@/app/dashboard/_modules/inventory/report/page";
 const Page = () => {
-  return <></>;
+  return <ReportPage />;
 };
 
 export default Page;

@@ -1,13 +1,6 @@
-import { redirect } from "next/navigation";
-import InventoryTable from "./_components/InventoryTable";
-
+import InventoryPage from "../../_modules/inventory/page";
 const Page = () => {
-  // redirect("/dashboard/admin/hr/employees");
-  return (
-    <>
-      <InventoryTable />
-    </>
-  );
+  return <InventoryPage />;
 };
 
 export default Page;

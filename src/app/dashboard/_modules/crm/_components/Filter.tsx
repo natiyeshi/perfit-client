@@ -9,9 +9,8 @@ import {
 import { FaFilter } from "react-icons/fa";
 export interface filterInf {
   name: string;
-  gender?: "Male" | "Female" | null;
-  age?: number | null;
-  status?: "Inactive" | "Active" | null;
+  withCredit?: boolean | null;
+  isFinalized?: boolean | null;
 }
 
 const FilterCard = ({
@@ -21,9 +20,14 @@ const FilterCard = ({
   setFilters: Function;
   filter: filterInf;
 }) => {
-  const setGender = (value: string | null) => {
-    setFilters((da: any) => ({ ...da, gender: value }));
+  const setWithCredit = (value: boolean | null) => {
+    setFilters((da: any) => ({ ...da, withCredit: value }));
   };
+
+  const setIsFinalized = (value: boolean | null) => {
+    setFilters((da: any) => ({ ...da, isFinalized: value }));
+  };
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -40,59 +44,51 @@ const FilterCard = ({
             </p>
           </div>
           <div className="flex flex-col gap-2">
-            <div>Gender</div>
+            <div>Credit</div>
             <div className="flex gap-2">
               <Button
                 className="py-1"
-                variant={filter.gender != "Male" ? "outline" : "default"}
-                onClick={() => setGender("Male")}
+                variant={filter.withCredit !== true ? "outline" : "default"}
+                onClick={() => setWithCredit(true)}
               >
-                Male
+                With Credit
               </Button>
               <Button
-                variant={filter.gender != "Female" ? "outline" : "default"}
-                onClick={() => setGender("Female")}
+                variant={filter.withCredit !== false ? "outline" : "default"}
+                onClick={() => setWithCredit(false)}
               >
-                Femal
+                Without Credit
               </Button>
-              {filter.gender != null && (
-                <Button variant={"destructive"} onClick={() => setGender(null)}>
-                  Clear
-                </Button>
-              )}
+              <Button
+                variant={filter.withCredit !== null ? "outline" : "default"}
+                onClick={() => setWithCredit(null)}
+              >
+                All
+              </Button>
             </div>
-
-            <div className="flex flex-col gap-2">
-              <div>Status</div>
-              <div className="flex gap-2">
-                <Button
-                  className="py-1"
-                  variant={filter.status != "Active" ? "outline" : "default"}
-                  onClick={() =>
-                    setFilters((f: any) => ({ ...f, status: "Active" }))
-                  }
-                >
-                  Active
-                </Button>
-                <Button
-                  variant={filter.status != "Inactive" ? "outline" : "default"}
-                  onClick={() =>
-                    setFilters((f: any) => ({ ...f, status: "Inactive" }))
-                  }
-                >
-                  Inactive
-                </Button>
-                {filter.status != null && (
-                  <Button
-                    variant={"destructive"}
-                    onClick={() =>
-                      setFilters((f: any) => ({ ...f, status: null }))
-                    }
-                  >
-                    Clear
-                  </Button>
-                )}
-              </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <div>Finalized</div>
+            <div className="flex gap-2">
+              <Button
+                className="py-1"
+                variant={filter.isFinalized !== true ? "outline" : "default"}
+                onClick={() => setIsFinalized(true)}
+              >
+                Finalized
+              </Button>
+              <Button
+                variant={filter.isFinalized !== false ? "outline" : "default"}
+                onClick={() => setIsFinalized(false)}
+              >
+                Not Finalized
+              </Button>
+              <Button
+                variant={filter.isFinalized !== null ? "outline" : "default"}
+                onClick={() => setIsFinalized(null)}
+              >
+                All
+              </Button>
             </div>
           </div>
         </div>

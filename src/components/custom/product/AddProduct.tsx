@@ -29,7 +29,7 @@ function AddProduct() {
   const [err, setErr] = useState<any>(null);
   const [open, setOpen] = useState(false); // State for dialog open/close
   const { isLoading, isError, error, mutate, isSuccess } = useMutation(
-    (data: IProduct) => axios.post("/products", data),
+    (data: IProduct) => axios.post("/products", [data]),
     {
       onSuccess: (res) => {
         toast.success("Product Sucessfully Added!");

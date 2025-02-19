@@ -42,20 +42,20 @@ const Page = () => {
       },
     }
   );
-  const handleSubmit = (data : ITransaction) => {
+  const handleSubmit = (data: ITransaction) => {
     mutate({ ...data });
   };
 
   const [products, setProducts] = useState<IDBProduct[]>([]);
   const [imports, setImports] = useState<IDBImport[]>([]);
   const [customers, setCustomers] = useState<IDBCustomer[]>([]);
- 
+
   const initialValues = {
     productId: "",
     customerId: "",
-    importId: "",
     quantity: 0,
     unitPrice: 0,
+    withCredit: false,
   };
   const productQuery = useQuery("products", () => axios.get("/products"), {
     onSuccess(data) {
@@ -66,18 +66,14 @@ const Page = () => {
     },
   });
 
-  const customerQuery = useQuery(
-    "customers",
-    () => axios.get("/customers"),
-    {
-      onSuccess(data) {
-        setCustomers(data.data.result || []);
-      },
-      onError(err) {
-        toast.error("Error while loading customers!");
-      },
-    }
-  );
+  const customerQuery = useQuery("customers", () => axios.get("/customers"), {
+    onSuccess(data) {
+      setCustomers(data.data.result || []);
+    },
+    onError(err) {
+      toast.error("Error while loading customers!");
+    },
+  });
 
   const importQuery = useQuery("imports", () => axios.get("/suppliers"), {
     onSuccess(data) {
@@ -110,12 +106,18 @@ const Page = () => {
                 >
                   <SelectTrigger className="w-full">
                     <SelectValue
-                      placeholder={` ${customerQuery.isLoading ? "Loading..." : "Select"}`}
+                      placeholder={` ${
+                        customerQuery.isLoading ? "Loading..." : "Select"
+                      }`}
                     />
                   </SelectTrigger>
                   <SelectContent>
-                    {customers.map((pr,key) => {
-                      return <SelectItem key={key} value={pr.id}>{pr.organizationName}</SelectItem>;
+                    {customers.map((pr, key) => {
+                      return (
+                        <SelectItem key={key} value={pr.id}>
+                          {pr.organizationName}
+                        </SelectItem>
+                      );
                     })}
                   </SelectContent>
                 </Select>
@@ -136,47 +138,23 @@ const Page = () => {
                 >
                   <SelectTrigger className="w-full">
                     <SelectValue
-                      placeholder={` ${productQuery.isLoading ? "Loading..." : "Select"}`}
+                      placeholder={` ${
+                        productQuery.isLoading ? "Loading..." : "Select"
+                      }`}
                     />
                   </SelectTrigger>
                   <SelectContent>
-                    {products.map((pr,ind) => {
-                      return <SelectItem key={ind} value={pr.id}>{pr.name}</SelectItem>;
-                    })}
-                  </SelectContent>
-                </Select>
-                <ErrorMessage
-                  name="productId"
-                  component="p"
-                  className="text-sm text-red-500"
-                />
-              </div>
-              {/* import Name */}
-              <div className="flex flex-col space-y-2 w-full">
-                <Label htmlFor="importId">import Name</Label>
-                <Select
-                  disabled={importQuery.isLoading}
-                  onValueChange={(value: string) =>
-                    setFieldValue("importId", value)
-                  }
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue
-                      placeholder={` ${importQuery.isLoading ? "Loading..." : "Select"}`}
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {imports.map((pr,key) => {
+                    {products.map((pr, ind) => {
                       return (
-                        <SelectItem key={key} value={pr.id}>
-                          {pr.id}
+                        <SelectItem key={ind} value={pr.id}>
+                          {pr.name}
                         </SelectItem>
                       );
                     })}
                   </SelectContent>
                 </Select>
                 <ErrorMessage
-                  name="supplierId"
+                  name="productId"
                   component="p"
                   className="text-sm text-red-500"
                 />
@@ -218,6 +196,33 @@ const Page = () => {
                 />
               </div>
 
+              {/* With Credit */}
+              <div className="flex flex-col space-y-2 w-full ">
+                <div className="flex h-fit w-32 gap-5 ">
+                  <Label htmlFor="withCredit" className=" min-w-20 my-auto capitalize">
+                    With Credit
+                  </Label>
+                  <Field name="withCredit my-auto  ">
+                    {({ field }: any) => (
+                      <Input
+                        {...field}
+                        id="withCredit"
+                        type="checkbox"
+                        checked={values.withCredit}
+                        className=" w-6 h-6 rounded-full"
+                        onClick={() => {
+                          setFieldValue("withCredit", !values.withCredit);
+                        }}
+                      />
+                    )}
+                  </Field>
+                </div>
+                <ErrorMessage
+                  name="withCredit"
+                  component="p"
+                  className="text-sm text-red-500"
+                />
+              </div>
             </div>
 
             <Button

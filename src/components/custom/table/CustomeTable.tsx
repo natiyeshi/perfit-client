@@ -68,11 +68,11 @@ const CustomeTable = <T extends { id: string }>({
     <>
       <table className="min-w-full border-b shadow-lg">
         <thead>
-          <tr className="text-left bg-gray-800 text-white sticky top-0 z-20">
-            <th className="px-4 py-2 whitespace-nowrap border-b sticky left-0 bg-gray-800">
+          <tr className="text-left bg-gray-900 text-white sticky top-0 z-20">
+            <th className="px-4 py-2 whitespace-nowrap border-b sticky left-0 bg-gray-900">
               -
             </th>
-            <th className="px-4 py-2 whitespace-nowrap border-b sticky left-0 bg-gray-800">
+            <th className="px-4 py-2 whitespace-nowrap border-b sticky left-0 bg-gray-900">
               No
             </th>
             {headers.map((value) => (

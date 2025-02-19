@@ -1,11 +1,7 @@
-import InventoryImportTable from "../_components/InventoryImportTable";
-
+"use client";
+import Import from "../../../_modules/inventory/import/page";
 const Page = () => {
-  return (
-    <>
-      <InventoryImportTable />
-    </>
-  );
+  return <Import />;
 };
 
 export default Page;
