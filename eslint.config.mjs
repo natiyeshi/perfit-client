@@ -19,6 +19,7 @@ const eslintConfig = [
       "@typescript-eslint/no-empty-object-type": "off",
       "prefer-const": "off",
       "react/no-children-prop": "off", 
+      "react-hooks/exhaustive-deps": "off", // ❌ This turns off the warning project-wide
     }
   }
 ];

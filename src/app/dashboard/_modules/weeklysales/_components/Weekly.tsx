@@ -106,7 +106,7 @@ const Weekly = () => {
           </div>
         ) : query.isSuccess ? (
           <div className="w-fit mx-auto flex justify-center items-center flex-col gap-5">
-            <div>Hey, You didn't set weekly plan.</div>
+            <div>Hey, You didn&apos;t set weekly plan.</div>
             <AddWeeklyPlan />
           </div>
         ) : (

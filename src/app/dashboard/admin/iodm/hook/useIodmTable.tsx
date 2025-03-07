@@ -10,7 +10,6 @@ export const useIodmTable = () => {
   const [filters, setFilters] = useState<filterInf>({
     name: "",
   });
-  let toastId = "";
   const [imports, setImports] = useState<IDBClientIIodm[]>([]);
   const [importsData, setImportsData] = useState<IDBClientIIodm[]>([]);
 
@@ -57,6 +56,14 @@ export const useIodmTable = () => {
   const reload = async () => {
     query.refetch();
   };
+
+  // useEffect(() => {
+  //   setImports(() => {
+  //     return importsData.filter(
+  //       (data) => nameFilter(data) && statusFilter(data)
+  //     );
+  //   });
+  // }, [filters, importsData]);
 
   useEffect(() => {
     setImports(() => {
