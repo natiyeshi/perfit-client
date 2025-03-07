@@ -118,14 +118,15 @@ const SideBarLink = ({ link }: { link: MainLinkInf }) => {
   const Icon = link.Icon;
   const pathname = usePathname();
   const isActive =
-    link.exact == true ||
-    pathname.includes(link.mainLink ? link.mainLink : link.link);
+    link.exact == true
+      ? pathname == link.link.slice(0, link.link.length - 1)
+      : pathname.includes(link.mainLink ? link.mainLink : link.link);
 
   return (
     <Link href={link.link} className=" ">
       <div
         className={`flex gap-1  items-center  py-1  rounded ${
-          link.exact || isActive
+          isActive
             ? "bg-primary text-white"
             : "hover:bg-primary/20 duration-100"
         } `}
