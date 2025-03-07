@@ -39,8 +39,8 @@ export const useSupplierTable = () => {
   };
 
   const query = useQuery(
-    "suppliers?populate=true",
-    () => axios.get("/suppliers"),
+    "suppliers",
+    () => axios.get("/suppliers?populate=true"),
     {
       onSuccess(data) {
         let k: IDBPopulatedSupplier[] = data.data.result || [];

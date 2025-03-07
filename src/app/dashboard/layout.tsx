@@ -27,7 +27,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         handleLogout();
       }
     },
-    staleTime: 1000 * 60 * 10 * 2, // 20 minutes
+    staleTime: 1000 * 60 * 10 * 2 * 2, // 40 minutes
   });
 
   useEffect(() => {

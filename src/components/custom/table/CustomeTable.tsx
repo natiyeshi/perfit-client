@@ -66,19 +66,19 @@ const CustomeTable = <T extends { id: string }>({
 
   return (
     <>
-      <table className="min-w-full border-b shadow-lg">
+      <table className="min-w-full border-b ">
         <thead>
-          <tr className="text-left bg-gray-900 text-white sticky top-0 z-20">
-            <th className="px-4 py-2 whitespace-nowrap border-b sticky left-0 bg-gray-900">
+          <tr className="text-left border-t text-black  sticky top-0 z-20">
+            <th className="px-4 py-2 whitespace-nowrap border-b sticky left-0 text-black">
               -
             </th>
-            <th className="px-4 py-2 whitespace-nowrap border-b sticky left-0 bg-gray-900">
+            <th className="px-4 py-2   whitespace-nowrap border-b sticky left-0 text-black">
               No
             </th>
             {headers.map((value) => (
               <th
                 key={String(value.key)}
-                className="px-4 py-2 whitespace-nowrap border-b cursor-pointer hover:bg-gray-700/50 capitalize"
+                className="px-4 py-2 whitespace-nowrap border-b cursor-pointer  capitalize"
                 onClick={() => handleSort(value.key)}
               >
                 {value.name} {sortColumn === value.key ? (sortOrder === "asc" ? "▲" : "▼") : ""}

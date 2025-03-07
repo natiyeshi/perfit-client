@@ -1,5 +1,31 @@
 Remaining
-    - Sells
+   
+    Report
+        - product 
+        - supplier
+        - Customer
+        - Competitor
+    expiry
+    naming
+    Pipeline update
+    some ui for decision matrix
+
+
+-------------
+Todo 
+    - weekly sales Report
+    - dashboard
+
+--------- 
+finalized
+
+    - finalize sells
+    - creadit 
+
+    - update
+    - Weekly sales
+    - sales
+ - Sells
         Weekly Report
         Weekly plan
         Monthly target
@@ -13,19 +39,6 @@ Remaining
 
     Direct Competitor
         Without checkbox
-    
-    Dashboard
-
--------------
-Todo 
-
-    - finalize sells
-    
-    - Weekly sales
-    - creadit 
-
---------- 
-finalized
     - Iodm
     - Pipeline
     - Inventory (expiry Date)

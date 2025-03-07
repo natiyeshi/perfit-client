@@ -5,21 +5,29 @@ import { FaPeopleArrows } from "react-icons/fa";
 import { LuImport } from "react-icons/lu";
 import { MdOutlineInventory2 } from "react-icons/md";
 import { usePathname } from "next/navigation";
-import { FaPersonCircleCheck } from "react-icons/fa6";
+import { FaPersonCircleCheck, FaCalendarWeek } from "react-icons/fa6";
 import { PiMatrixLogoFill } from "react-icons/pi";
 import { CiSettings } from "react-icons/ci";
 import logo from "@/../public/assets/logo/icon.svg";
 import { roleInf, useUser } from "@/context/userContext";
 import { SiJfrogpipelines } from "react-icons/si";
-
+import { LayoutDashboard } from "lucide-react";
 interface MainLinkInf {
   name: string;
   Icon: any;
   link: string;
   mainLink?: string;
+  exact?: boolean;
 }
 
 const adminLinks: MainLinkInf[] = [
+  {
+    name: "Dashboard",
+    Icon: LayoutDashboard,
+    link: "/dashboard/admin/",
+    mainLink: "/dashboard/admin/",
+    exact: true,
+  },
   {
     name: "Import Data",
     Icon: LuImport,
@@ -48,6 +56,11 @@ const adminLinks: MainLinkInf[] = [
     Icon: PiMatrixLogoFill,
     link: "/dashboard/admin/iodm",
   },
+  {
+    name: "Weekly Sales",
+    Icon: FaCalendarWeek, // Placeholder icon, replace with appropriate icon
+    link: "/dashboard/admin/weeklysales",
+  },
 ];
 const sellsLinks: MainLinkInf[] = [
   {
@@ -55,11 +68,15 @@ const sellsLinks: MainLinkInf[] = [
     Icon: MdOutlineInventory2,
     link: "/dashboard/sales/inventory",
   },
-
   {
     name: "CRM",
     Icon: FaPersonCircleCheck,
     link: "/dashboard/sales/crm",
+  },
+  {
+    name: "Weekly Sales",
+    Icon: FaCalendarWeek, // Placeholder icon, replace with appropriate icon
+    link: "/dashboard/sales/weeklysales",
   },
 ];
 const aggregatorLinks: MainLinkInf[] = [
@@ -81,7 +98,7 @@ const MainSideBar = () => {
   const roles = new Set(["admin", "sales", "feeder"]);
   const role: any = roles.has(user.role) ? user.role : "any";
   return (
-    <div className="w-20 absolute  group pb-6 hover:w-[240px] duration-300 border-r bg-[#f8f8f8] min-h-screen flex flex-col overflow-y-auto overflow-x-hidden ">
+    <div className="w-20  absolute  group pb-6 hover:w-[240px] duration-300 border-r bg-[#f8f8f8] min-h-screen flex flex-col overflow-y-auto overflow-x-hidden z-50">
       <div className="w-full h-12 min-h-12 max-h-12  flex">
         <div className="m-auto text-center  capitalize font-semibold  rounded-full p-1">
           <Image className="w-[25px]" src={logo} alt="Logo" />
@@ -100,16 +117,24 @@ const MainSideBar = () => {
 const SideBarLink = ({ link }: { link: MainLinkInf }) => {
   const Icon = link.Icon;
   const pathname = usePathname();
-  const isActive = pathname.includes(link.mainLink ? link.mainLink : link.link);
+  const isActive =
+    link.exact == true ||
+    pathname.includes(link.mainLink ? link.mainLink : link.link);
 
   return (
     <Link href={link.link} className=" ">
       <div
-        className={`flex gap-1  items-center  py-1  rounded ${isActive ? "bg-primary text-white" : "hover:bg-primary/20 duration-100"} `}
+        className={`flex gap-1  items-center  py-1  rounded ${
+          link.exact || isActive
+            ? "bg-primary text-white"
+            : "hover:bg-primary/20 duration-100"
+        } `}
       >
         <div className="min-w-[60px] py-2 px-1  flex ">
           <Icon
-            className={`text-xl ${isActive ? "text-background" : "text-gray-900"}  mx-auto`}
+            className={`text-xl ${
+              isActive ? "text-background" : "text-gray-900"
+            }  mx-auto`}
           />
         </div>
         <div className="group-hover:flex hidden group-hover:min-w-fit  group-hover:flex-nowrap group-hover:overflow-hidden whitespace-nowrap text-clip">
@@ -133,11 +158,15 @@ const SettingSideBarLink = () => {
   return (
     <Link href={link.link} className="w-fit mt-auto px-2 pt-2">
       <div
-        className={`flex gap-1  items-center  py-1 hover:bg-primary rounded  ${isActive ? "bg-primary text-white" : "hover:bg-primary/20"} `}
+        className={`flex gap-1  items-center  py-1 hover:bg-primary rounded  ${
+          isActive ? "bg-primary text-white" : "hover:bg-primary/20"
+        } `}
       >
         <div className="min-w-[60px] py-2 px-1  flex ">
           <Icon
-            className={`text-xl  ${isActive ? "text-background" : "text-gray-900"} mx-auto`}
+            className={`text-xl  ${
+              isActive ? "text-background" : "text-gray-900"
+            } mx-auto`}
           />
         </div>
       </div>

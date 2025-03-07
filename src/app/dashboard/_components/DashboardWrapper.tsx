@@ -51,6 +51,8 @@ const DashboardWrapper = ({
       <Image src={logo} className="w-[100px] animate-bounce" alt="Logo" />
       <div className="max-w-xl text-center text-red-500 font-semibold">
         Invalid User.
+        <br />
+        <span className="text-xs">{user.role ?? "no role " + role}</span>
       </div>
       <div className="text-sm max-w-sm text-center text-gray-600 mt-2">
         If this issue continues, please reload the page or log out and log in
