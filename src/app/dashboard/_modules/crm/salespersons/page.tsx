@@ -9,6 +9,7 @@ import axios from "@/lib/axios";
 import toast from "react-hot-toast";
 import SalesGraph from "../_components/SalesGraph";
 import TransactionGraph from "../_components/TransactionGraph";
+import TransactionPieChart from "../../reports/TransactionGraph";
 
 interface SalesPerson {
   userId: string;
@@ -77,14 +78,14 @@ const Page = () => {
       },
     }
   );
- 
+
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-2">Sales Persons</h1>
       <div className="mb-6 text-gray-500">
         Sales details are provided below.
       </div>
-      <div className="flex gap-10 flex-wrap">
+      <div className="flex gap-10 mb-8 flex-wrap">
         {salesPersonsQuery.isLoading
           ? "Loading..."
           : salesPersonsQuery.isSuccess
@@ -98,13 +99,16 @@ const Page = () => {
             )
           : "..."}
       </div>
+      <div className="mb-8">
+
+      <TransactionPieChart />
+      </div>
 
       {salesPersonsQuery.data?.data?.result && (
         <div>
           <SalesGraph data={salesPersonsQuery.data?.data?.result} />
         </div>
       )}
-     
     </div>
   );
 };
