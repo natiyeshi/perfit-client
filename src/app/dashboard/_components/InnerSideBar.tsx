@@ -5,7 +5,7 @@ import CustomLink from "@/components/custom/CustomLink";
 import ProductMenu from "@/components/custom/product/ProductMenu";
 import SupplierMenu from "@/components/custom/supplier/SupplierMenu";
 import Cookies from "js-cookie";
-import { IoNotifications } from "react-icons/io5";
+import { IoNotifications, IoSettingsOutline } from "react-icons/io5";
 import {
   Popover,
   PopoverContent,
@@ -16,7 +16,9 @@ import { Button } from "@/components/ui/button";
 import { roleInf, useUser } from "@/context/userContext";
 import { handleLogout } from "@/lib/helper";
 import Notifications from "./Notifications";
-
+import { FaUserCheck } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa";
+import { IoMdLogOut } from "react-icons/io";
 interface LinkInf {
   name: string;
   link: string;
@@ -86,19 +88,31 @@ const Profile = () => {
   const { user } = useUser();
   return (
     <Popover>
-      <PopoverTrigger className="my-auto me-4">
-        <div className="bg-foreground w-8 h-8 rounded-full text-background font-black  flex ">
-          <div className="m-auto capitalize">{user.fullName[0]}</div>
+      <PopoverTrigger className="my-auto flex gap-2">
+        <div className="flex flex-col ">
+          <div className="capitalize text-primary font-bold">
+            {user.fullName}
+          </div>
+          <div className="ms-auto text-xs capitalize">{user.role}</div>
         </div>
+        <div className="my-auto border rounded-full p-2">
+          <FaRegUser className="text-xl " />
+        </div>
+        {/* <div className="bg-foreground w-8 h-8 rounded-full text-background font-black  flex "></div> */}
       </PopoverTrigger>
       <PopoverContent className="shadow shadow-gray-500 w-32 me-4">
-        <div className="flex flex-col ">
-          <div>{user.fullName}</div>
-          <Button className="w-fit" variant="link">
+        <div className="flex flex-col gap-2 ">
+          <Button className="w-full flex gap-1 border-none" variant={"outline"}>
+            <IoSettingsOutline className="text-lg" />
             <Link href="/dashboard/admin/settings">Settings</Link>
           </Button>
-          <Button onClick={handleLogout} className="w-fit" variant="link">
-            Logout
+          <Button
+            onClick={handleLogout}
+            className="w-full flex gap-1 border-none "
+            variant={"outline"}
+          >
+            <IoMdLogOut />
+            <span>Logout</span>
           </Button>
         </div>
       </PopoverContent>

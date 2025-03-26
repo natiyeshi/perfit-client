@@ -16,7 +16,7 @@ import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { IDBClientPipeline, IDBPopulatedPipeline } from "@/types/IPipeline";
 import toast, { Toaster } from "react-hot-toast";
-
+import { IoNotificationsOutline } from "react-icons/io5";
 interface PipelineNotification extends IDBPopulatedPipeline {
   remainingDate: number;
 }
@@ -55,8 +55,8 @@ const Notifications = () => {
   return (
     <Sheet>
       <SheetTrigger>
-        <div className="bg-foreground w-8 h-8 rounded-full text-background font-black  flex ">
-          <IoNotifications className="m-auto" />
+        <div className=" me-4   rounded-full  font-black  flex ">
+          <IoNotificationsOutline className="m-auto text-xl" />
         </div>
       </SheetTrigger>
       <SheetContent>

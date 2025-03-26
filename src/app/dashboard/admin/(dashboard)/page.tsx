@@ -8,6 +8,9 @@ import TransactionsLineChart from "../../_modules/reports/TransactionLineChart";
 const Page = () => {
   return (
     <div className="ps-[100px] pe-12 gap-10 grid grid-cols-3 mt-4">
+      <div className="col-span-3 mt-4 mb-1">
+        <h1 className="text-3xl font-bold">Dashboard</h1>
+      </div>
       <TransactionsPieChart />
       <InventoryLevelChart />
       <TopCompetitorsByQuantity />
