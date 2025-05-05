@@ -19,11 +19,11 @@ export const useIodmTable = () => {
 
   const nameFilter = (data: IDBClientIIodm) => {
     return (
-      filters.name.length === 0 ||
-      (data.productName &&
-        data.productName.toLowerCase().includes(filters.name)) ||
-      (data.supplierName &&
-        data.supplierName.toLowerCase().includes(filters.name))
+      filters.name.length === 0
+      // (data.productName &&
+      //   data.productName.toLowerCase().includes(filters.name)) ||
+      // (data.supplierName &&
+      //   data.supplierName.toLowerCase().includes(filters.name))
     );
   };
 
@@ -36,11 +36,10 @@ export const useIodmTable = () => {
       let k: IDBPopulatedIODM[] = data.data.result || [];
       const res: IDBClientIIodm[] = [];
       k.map((d) => {
-        let r: IDBClientIIodm = {
+        let r: IDBPopulatedIODM = {
           ...d,
-          productName: d.product.name,
           supplierName: d.supplier.manufacturerName,
-          totalPrice: 0,
+          productsName: "Detail",
         };
         res.push(r);
       });

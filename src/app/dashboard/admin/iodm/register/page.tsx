@@ -15,12 +15,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useRouter } from "next/navigation";
 import { useMutation, useQuery } from "react-query";
 import axios from "@/lib/axios";
 import { IIodm } from "@/types/IIodm";
 import { IDBSupplier } from "@/types/ISupplier";
 import { useState } from "react";
 import { IDBProduct } from "@/types/IProduct";
+import { FaArrowLeft } from "react-icons/fa";
+import { ShowTable } from "./showTable";
 
 interface Single {
   product: IDBProduct | null;
@@ -31,7 +34,7 @@ interface Single {
   currentSellingPrice: number;
   productMovement: "MEDIUM" | "FAST" | "SLOW" | null;
 }
-interface Iintical {
+export interface Iintical {
   products: Single[];
   curr?: Single | null;
   freightCost: number;
@@ -45,23 +48,6 @@ interface Iintical {
 }
 
 const Page = () => {
-  const { isLoading, mutate } = useMutation(
-    (data: any) =>
-      axios.post("/IODMs", {
-        ...data,
-      }),
-    {
-      onSuccess() {
-        toast.success("Data Successfully Registered!");
-      },
-      onError(err) {
-        toast.error(
-          (err as any).response.data.message ?? "Something goes wrong!"
-        );
-      },
-    }
-  );
-
   const [products, setProducts] = useState<IDBProduct[]>([]);
   const [suppliers, setSuppliers] = useState<IDBSupplier[]>([]);
 
@@ -94,7 +80,7 @@ const Page = () => {
 
   const [finalized, setFinalized] = useState(false);
 
-  const handleSubmit = (data: any) => mutate(data);
+  // const handleSubmit = (data: any) => mutate(data);
 
   const initialValues: Iintical = {
     products: [],
@@ -147,7 +133,7 @@ const Page = () => {
       <Formik
         initialValues={initialValues}
         // validationSchema={createIODMSchema}
-        onSubmit={handleSubmit}
+        onSubmit={() => {}}
       >
         {({ setFieldValue, values, handleChange }) =>
           finalized ? (
@@ -298,7 +284,7 @@ const Page = () => {
                       key={ind}
                       className="grid grid-cols-6 gap-2  py-2 px-4 items-center place-content-center place-items-center"
                     >
-                      <div>Num</div>
+                      <div>{ind + 1}</div>
                       <div>{value.product?.name}</div>
                       <div>{value.expiryDate}</div>
                       <div>{value.manufactureDate}</div>
@@ -310,6 +296,8 @@ const Page = () => {
                             values.products.filter((d, i) => i != ind)
                           );
                         }}
+                        className="text-red-500 cursor-pointer"
+                        title="Delete Product"
                       >
                         Delete
                       </div>
@@ -349,7 +337,9 @@ const Page = () => {
                 </div>
 
                 <div className="flex flex-col space-y-2 w-full">
-                  <Label htmlFor="miscellaneousTax">Miscellaneous Tax</Label>
+                  <Label htmlFor="miscellaneousTax">
+                    Miscellaneous Tax (%)
+                  </Label>
                   <Field
                     name="miscellaneousTax"
                     as={Input}
@@ -359,7 +349,7 @@ const Page = () => {
                 </div>
 
                 <div className="flex flex-col space-y-2 w-full">
-                  <Label htmlFor="dutyTax">Duty Tax</Label>
+                  <Label htmlFor="dutyTax">Duty Tax (%)</Label>
                   <Field
                     name="dutyTax"
                     as={Input}
@@ -389,7 +379,7 @@ const Page = () => {
                 </div>
 
                 <div className="flex flex-col space-y-2 w-full">
-                  <Label htmlFor="bsc">BSC</Label>
+                  <Label htmlFor="bsc">BSC (%)</Label>
                   <Field
                     name="bsc"
                     as={Input}
@@ -399,7 +389,29 @@ const Page = () => {
                 </div>
 
                 <div className="flex flex-col space-y-2 w-full">
-                  <Label htmlFor="insuranceCharge">Insurance Charge</Label>
+                  <Label htmlFor="freightCost">Freight Cost (%)</Label>
+                  <Field
+                    name="freightCost"
+                    as={Input}
+                    type="number"
+                    className="w-full"
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-2 w-full">
+                  <Label htmlFor="miscellaneousTax">
+                    Miscellaneous Tax (%)
+                  </Label>
+                  <Field
+                    name="miscellaneousTax"
+                    as={Input}
+                    type="number"
+                    className="w-full"
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-2 w-full">
+                  <Label htmlFor="insuranceCharge">Insurance Charge (%)</Label>
                   <Field
                     name="insuranceCharge"
                     as={Input}
@@ -447,10 +459,55 @@ const ShowCalc = ({
     0
   );
   const totalNetProfit = expectedSellingPrice - totalLandingPrice;
-  const totalProfitMargin = (expectedSellingPrice / totalLandingPrice) * 100;
+  const totalProfitMargin =
+    ((expectedSellingPrice - totalLandingPrice) / totalLandingPrice) * 100;
+  const router = useRouter();
+
+  const { isLoading, mutate } = useMutation(
+    (data: any) =>
+      axios.post("/IODMs", {
+        bsc: values.bsc,
+        dutyTax: values.dutyTax,
+        supplierId: values.supplier?.id,
+        loadingUnloading: values.loadingUnloading,
+        exchangeRate: values.exchangeRate,
+        insuranceCharge: values.insuranceCharge,
+        miscellaneousTax: values.miscellaneousTax,
+        freightCost: values.freightCost,
+        IODMProducts: values.products.map((product) => ({
+          productId: product.product?.id,
+          purchasePriceUsd: product.purchasePriceUsd,
+          currentSellingPrice: product.currentSellingPrice,
+          productMovement: product.productMovement,
+          expiryDate: product.expiryDate,
+          manufactureDate: product.manufactureDate,
+          quantity: product.quantity,
+        })),
+      }),
+    {
+      onSuccess() {
+        toast.success("Data Successfully Registered!");
+        router.replace("/dashboard/admin/iodm/");
+      },
+      onError(err) {
+        toast.error(
+          (err as any).response.data.message ?? "Something goes wrong!"
+        );
+      },
+    }
+  );
+
+  console.log(values);
+
   return (
     <div className="flex flex-col">
-      <Button onClick={() => setFinalized(false)}>Go Back</Button>
+      <Button
+        onClick={() => setFinalized(false)}
+        className="w-fit px-6 py-1 mb-4 border text-black border-primary bg-primary-500/10  rounded hover:bg-primary/40 transition flex items-center gap-2"
+      >
+        <FaArrowLeft />
+        Go Back to Edit
+      </Button>
       {values.products.length > 0 && <ShowTable values={values} />}
       <div className="flex border w-2/3 px-12 py-1 rounded bg-gray-100 gap-3 mt-4 items-center text-lg">
         <div className=" font-semibold">Total Landing Price</div>
@@ -472,39 +529,17 @@ const ShowCalc = ({
         <div className=" font-semibold">Total Profit Margin</div>
         <div>{parseFloat(totalProfitMargin.toFixed(2)).toLocaleString()}%</div>
       </div>
+      <Button
+        disabled={isLoading}
+        onClick={() => mutate(values)}
+        className={`w-fit mt-8 ${isLoading && "bg-primary/30"}`}
+      >
+        Submit
+      </Button>
     </div>
   );
 };
 
-const ShowTable = ({ values }: { values: Iintical }) => {
-  return (
-    <div>
-      <div className="w-full flex flex-col">
-        <div className="grid grid-cols-7 border gap-2 bg-secondary text-white py-2 px-4 items-center place-content-center place-items-center">
-          <div>Product Name</div>
-          <div>Quantity</div>
-          <div>Expiry Date</div>
-          <div>Manufacture Date</div>
-          <div>Purchase Price</div>
-          <div>Selling Price</div>
-          <div>Total Price (USD)</div>
-        </div>
-        {values.products.map((value, ind) => (
-          <div
-            key={ind}
-            className="grid grid-cols-7 border gap-2  py-2 px-4 items-center place-content-center place-items-center"
-          >
-            <div>{value.product?.name}</div>
-            <div>{value.quantity}</div>
-            <div>{value.expiryDate}</div>
-            <div>{value.manufactureDate}</div>
-            <div>{value.purchasePriceUsd}</div>
-            <div>{value.currentSellingPrice}</div>
-            <div>{value.purchasePriceUsd * value.quantity}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
 export default Page;
+
+

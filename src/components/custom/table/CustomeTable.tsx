@@ -2,15 +2,22 @@
 import { useState } from "react";
 import { JSXElementConstructor, Key } from "react";
 import Loading from "../loading";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { CgOptions } from "react-icons/cg";
 import NothingFound from "@/components/custom/NothingFound";
 import ShowSchema from "./ShowSchema";
+import Link from "next/link";
 
 export interface Header<T> {
   name: string;
   key: keyof T;
   showDetail?: keyof T;
+  isLink?: boolean;
+  link?: string;
 }
 
 interface CustomeTableProps<T extends { id: string }> {
@@ -24,6 +31,7 @@ interface CustomeTableProps<T extends { id: string }> {
   result: T[];
   DeleteItem?: JSXElementConstructor<{ id?: string }> | any;
   UpdateItem?: JSXElementConstructor<{ initialValues?: T }> | any;
+  link?: string;
 }
 
 const CustomeTable = <T extends { id: string }>({
@@ -32,6 +40,7 @@ const CustomeTable = <T extends { id: string }>({
   result,
   DeleteItem,
   UpdateItem,
+  link,
 }: CustomeTableProps<T>) => {
   const [sortColumn, setSortColumn] = useState<keyof T | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
@@ -54,7 +63,9 @@ const CustomeTable = <T extends { id: string }>({
     const valueB = b[sortColumn];
 
     if (typeof valueA === "string" && typeof valueB === "string") {
-      return sortOrder === "asc" ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+      return sortOrder === "asc"
+        ? valueA.localeCompare(valueB)
+        : valueB.localeCompare(valueA);
     }
 
     if (typeof valueA === "number" && typeof valueB === "number") {
@@ -81,9 +92,19 @@ const CustomeTable = <T extends { id: string }>({
                 className="px-4 py-2 whitespace-nowrap border-b cursor-pointer  capitalize"
                 onClick={() => handleSort(value.key)}
               >
-                {value.name} {sortColumn === value.key ? (sortOrder === "asc" ? "▲" : "▼") : ""}
+                {value.name}{" "}
+                {sortColumn === value.key
+                  ? sortOrder === "asc"
+                    ? "▲"
+                    : "▼"
+                  : ""}
               </th>
             ))}
+            {link && (
+              <th className="px-4 py-2 whitespace-nowrap border-b capitalize">
+                Link
+              </th>
+            )}
           </tr>
         </thead>
         <tbody>
@@ -91,7 +112,10 @@ const CustomeTable = <T extends { id: string }>({
             <></>
           ) : query.data ? (
             sortedResult.map((item: T, index: number) => (
-              <tr key={index} className="group hover:bg-gray-200/20 duration-200">
+              <tr
+                key={index}
+                className="group hover:bg-gray-200/20 duration-200"
+              >
                 <td className="border-b group-hover:bg-gray-200/20 whitespace-nowrap duration-200 sticky left-0 bg-background">
                   <Popover>
                     <PopoverTrigger className="px-4 py-2 hover:bg-gray-200">
@@ -100,31 +124,62 @@ const CustomeTable = <T extends { id: string }>({
                     <PopoverContent className="shadow">
                       <div>Options</div>
                       <div className="flex flex-col gap-1">
-                        {DeleteItem && <DeleteItem id={String(item.id!) ?? "-"} />}
+                        {DeleteItem && (
+                          <DeleteItem id={String(item.id!) ?? "-"} />
+                        )}
                         {UpdateItem && <UpdateItem initialValues={item} />}
                       </div>
                     </PopoverContent>
                   </Popover>
                 </td>
-                <td className="border-b whitespace-nowrap px-4 py-2">{index + 1}</td>
+                <td className="border-b whitespace-nowrap px-4 py-2">
+                  {index + 1}
+                </td>
                 {headers.map((header) => (
                   <td
                     className="border-b whitespace-nowrap duration-200 px-4 py-2 capitalize"
                     key={String(header.key)}
                   >
                     {header.showDetail ? (
-                      <ShowSchema type={header.showDetail} data={item[header.showDetail]} text={item[header.key]} />
+                      <ShowSchema
+                        type={header.showDetail}
+                        data={item[header.showDetail]}
+                        text={item[header.key]}
+                      />
+                    ) : header.isLink ? (
+                      <Link
+                        href={`${
+                          header.link
+                            ? header.link
+                            : `/dashboard/admin/iodm/${item.id}`
+                        }`}
+                        className="text-blue-500 hover:underline"
+                      >
+                        {item[header.key] as unknown as string}
+                      </Link>
                     ) : (
                       (() => {
                         const value = item[header.key] as unknown as string;
                         return typeof value === "string" &&
-                          /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(value)
+                          /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(
+                            value
+                          )
                           ? formatDate(value)
                           : String(value) ?? "-";
                       })()
                     )}
                   </td>
                 ))}
+                {link && (
+                  <td className="border-b whitespace-nowrap px-4 py-2">
+                    <Link
+                      href={`${link}/${item.id}`}
+                      className="text-blue-500 hover:underline"
+                    >
+                      🔗
+                    </Link>
+                  </td>
+                )}
               </tr>
             ))
           ) : (
@@ -149,7 +204,7 @@ const CustomeTable = <T extends { id: string }>({
   );
 };
 
-const formatDate = (dateString: string): string => {
+export const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
   if (isNaN(date.getTime())) return dateString;
 

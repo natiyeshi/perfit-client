@@ -18,16 +18,37 @@ const IodmTable: React.FC = () => {
     name: string;
     key: keyof IDBClientIIodm;
     showDetail?: keyof IDBClientIIodm;
+    isLink?: boolean;
+    link?: string;
   }[] = [
     {
-      name: "Product Name",
-      key: "productName",
-      showDetail: "product",
+      name: "BSC",
+      key: "bsc",
+    },
+    {
+      name: "Duty Tax",
+      key: "dutyTax",
     },
     {
       name: "Supplier Name",
       key: "supplierName",
-      showDetail: "supplier",
+    },
+    {
+      name: "Loading/Unloading",
+      key: "loadingUnloading",
+    },
+    {
+      name: "Exchange Rate",
+      key: "exchangeRate",
+    },
+    {
+      name: "Insurance Charge",
+      key: "insuranceCharge",
+    },
+    {
+      name: "Detail",
+      key: "productsName",
+      isLink: true,
     },
   ];
 
