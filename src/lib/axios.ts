@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const localApi = "http://localhost:4040/api/v1/"
-const mainApi = "http://159.69.214.45/"
+const mainApi = "https://159.69.214.45/"
 
 const instance = axios.create({
   baseURL: mainApi,
