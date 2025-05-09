@@ -9,6 +9,17 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import axios from "@/lib/axios";
 import { FaFilter } from "react-icons/fa";
 import { IoNotifications } from "react-icons/io5";
@@ -17,6 +28,8 @@ import { useQuery } from "react-query";
 import { IDBClientPipeline, IDBPopulatedPipeline } from "@/types/IPipeline";
 import toast, { Toaster } from "react-hot-toast";
 import { IoNotificationsOutline } from "react-icons/io5";
+import { format } from "date-fns";
+
 interface PipelineNotification extends IDBPopulatedPipeline {
   remainingDate: number;
 }
@@ -31,6 +44,7 @@ const Notifications = () => {
         const k: PipelineNotification[] = data.data.result || [];
         // k.filter(d => d.lcOpeningDate)
         const filteredData = k.filter((d) => {
+          if(d.isArrived) return false;
           const lcOpeningDate = new Date(d.lcOpeningDate);
           const threeMonthsLater = new Date(
             lcOpeningDate.setMonth(lcOpeningDate.getMonth() + 3)
@@ -40,10 +54,12 @@ const Notifications = () => {
             (threeMonthsLater.getTime() - today.getTime()) /
               (1000 * 60 * 60 * 24)
           );
+          console.log(d.product.name, "product name");
+          console.log(remainingDate, "remaining date");
           if (remainingDate > 45) return false;
           d["remainingDate"] = remainingDate;
           return true;
-        });
+        }).sort((a, b) => a.remainingDate - b.remainingDate);
         setPipelineData(filteredData);
       },
       onError(err) {
@@ -55,8 +71,13 @@ const Notifications = () => {
   return (
     <Sheet>
       <SheetTrigger>
-        <div className=" me-4   rounded-full  font-black  flex ">
-          <IoNotificationsOutline className="m-auto text-xl" />
+        <div className="relative me-4 rounded-full font-black flex">
+          <IoNotificationsOutline className="m-auto text-2xl" />
+          {pipelineData.length > 0 && (
+            <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+              {pipelineData.length}
+            </div>
+          )}
         </div>
       </SheetTrigger>
       <SheetContent>
@@ -91,32 +112,102 @@ const Noti = () => {
 };
 
 const PipelineNoti = ({ data }: { data: PipelineNotification }) => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div
-      className={`w-full flex flex-col text-sm rounded border gap-1 p-2 text-gray-800 ${
-        data.remainingDate > 45
-          ? "bg-green-200"
-          : data.remainingDate > 30
-          ? "bg-yellow-200"
-          : "bg-red-200"
-      }`}
-    >
-      <div className="font-semibold flex gap-2 flexcol flex-wrap">
-        <div className="text-gray-600 text-sm">LC Number:</div>
-        <div className="">{data.lcNumber}</div>
+    <>
+      <div
+        className={`w-full flex flex-col text-sm rounded-lg border gap-2 p-3 text-gray-800 ${
+          data.remainingDate > 45
+            ? "bg-green-50 border-green-200"
+            : data.remainingDate > 30
+            ? "bg-yellow-50 border-yellow-200"
+            : "bg-red-50 border-red-200"
+        }`}
+      >
+        <div className="flex justify-between items-start">
+          <div className="space-y-1">
+            <div className="font-medium text-base">{data.product.name}</div>
+            <div className="text-sm text-gray-600">LC: {data.lcNumber}</div>
+            <div className="text-sm text-gray-600">PI: {data.proformaInvoiceNumber}</div>
+          </div>
+          <div className="text-right">
+            <div className={`text-sm font-medium ${
+              data.remainingDate > 45
+                ? "text-green-600"
+                : data.remainingDate > 30
+                ? "text-yellow-600"
+                : "text-red-600"
+            }`}>
+              {data.remainingDate} days remaining
+            </div>
+          </div>
+        </div>
+        <AlertDialog open={open} onOpenChange={setOpen}>
+          <AlertDialogTrigger asChild>
+            <Button variant="outline" size="sm" className="w-full mt-2">
+              View Details
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent className="max-h-[90vh] overflow-y-auto">
+            <AlertDialogHeader>
+              <AlertDialogTitle>Pipeline Details</AlertDialogTitle>
+              <AlertDialogDescription className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <div className="text-sm font-medium text-gray-500">Product</div>
+                    <div className="text-sm">{data.product.name}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium text-gray-500">Brand</div>
+                    <div className="text-sm">{data.product.brand}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium text-gray-500">LC Number</div>
+                    <div className="text-sm">{data.lcNumber}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium text-gray-500">Proforma Invoice</div>
+                    <div className="text-sm">{data.proformaInvoiceNumber}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium text-gray-500">Quantity</div>
+                    <div className="text-sm">{data.quantity} {data.product.unit}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium text-gray-500">Shipping Method</div>
+                    <div className="text-sm">{data.shippingMethod}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium text-gray-500">LC Opening Date</div>
+                    <div className="text-sm">{format(new Date(data.lcOpeningDate), 'PPP')}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium text-gray-500">Port Expected Arrival</div>
+                    <div className="text-sm">{format(new Date(data.portExpectedArrivalDate), 'PPP')}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium text-gray-500">Port Arrival</div>
+                    <div className="text-sm">{data.portArrivalDate ? format(new Date(data.portArrivalDate), 'PPP') : 'Not arrived'}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium text-gray-500">Warehouse Expected Arrival</div>
+                    <div className="text-sm">{format(new Date(data.warehouseExpectedArrivalDate), 'PPP')}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium text-gray-500">Warehouse Arrival</div>
+                    <div className="text-sm">{data.warehouseArrivalDate ? format(new Date(data.warehouseArrivalDate), 'PPP') : 'Not arrived'}</div>
+                  </div>
+                </div>
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Close</AlertDialogCancel>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
-      <div className="font-semibold flex gap-2 flexcol flex-wrap">
-        <div className="text-gray-600 text-sm">Proforma Invoice Number:</div>
-        <div className="">{data.proformaInvoiceNumber}</div>
-      </div>
-      <div className="font-semibold flex gap-2 flexcol flex-wrap">
-        <div className="text-gray-600 text-sm">Remaining Days:</div>
-        <div className="">{data.remainingDate}</div>
-      </div>
-      <div className="w-fit px-2 mt-3 rounded-lg bg-white py-[1px] text-sm">
-        pipeline
-      </div>
-    </div>
+    </>
   );
 };
 

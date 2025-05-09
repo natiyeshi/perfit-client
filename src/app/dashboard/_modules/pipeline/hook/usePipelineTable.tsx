@@ -9,7 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 export const usePipelineTable = () => {
   const [filters, setFilters] = useState<filterInf>({
     name: "",
-    isArrived: false,
+    isArrived: "arrived",
   });
   const [pipeline, setPipelines] = useState<IDBClientPipeline[]>([]);
   const [pipelineData, setPipelineData] = useState<IDBClientPipeline[]>([]);
@@ -30,7 +30,10 @@ export const usePipelineTable = () => {
   };
 
   const statusFilter = (data: IDBClientPipeline) => {
-    return filters.isArrived == null || data.isArrived == filters.isArrived;
+    return (
+      filters.isArrived == null ||
+      data.isArrived === (filters.isArrived === "arrived")
+    );
   };
 
   const query = useQuery(

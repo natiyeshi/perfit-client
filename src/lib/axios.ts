@@ -5,7 +5,7 @@ const localApi = "http://localhost:4040/api/v1/"
 const mainApi = "https://159.69.214.45/api/v1/"
 
 const instance = axios.create({
-  baseURL: mainApi,
+  baseURL: localApi,
 });
 
 

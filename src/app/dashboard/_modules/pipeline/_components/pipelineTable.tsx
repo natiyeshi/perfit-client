@@ -78,10 +78,10 @@ const PipelineTable: React.FC = () => {
                 key={key}
                 className="flex bg-green-600 text-white items-center w-fit gap-1 py-1 px-2 rounded-lg"
               >
-                <div>{value}</div>
+                <div className="capitalize">{value}</div>
                 <IoCloseSharp
                   onClick={() => filter(key, key === "name" ? "" : null)}
-                  className="text-lg hover:bg-gray-200/20 rounded-full cursor-pointer"
+                  className="text-lg  hover:bg-gray-200/20 rounded-full cursor-pointer"
                 />
               </div>
             )

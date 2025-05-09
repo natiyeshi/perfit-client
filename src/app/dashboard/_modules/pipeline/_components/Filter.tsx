@@ -9,7 +9,7 @@ import {
 import { FaFilter } from "react-icons/fa";
 export interface filterInf {
   name: string;
-  isArrived?: boolean | null;
+  isArrived?: string | null;
 }
 
 const FilterCard = ({
@@ -19,8 +19,8 @@ const FilterCard = ({
   setFilters: Function;
   filter: filterInf;
 }) => {
-  const setGender = (value: string | null) => {
-    setFilters((da: any) => ({ ...da, gender: value }));
+  const setArrived = (value: string | null) => {
+    setFilters((da: any) => ({ ...da, isArrived: value }));
   };
   return (
     <Popover>
@@ -42,20 +42,20 @@ const FilterCard = ({
             <div className="flex gap-2">
               <Button
                 className="py-1"
-                variant={filter.isArrived == false ? "default" : "outline"}
-                onClick={() => setGender("Male")}
+                variant={filter.isArrived == "arrived" ? "default" : "outline"}
+                onClick={() => setArrived("arrived")}
               >
                 Arrived
               </Button>
               <Button
-                variant={filter.isArrived ? "default" : "outline"}
-                onClick={() => setGender("Female")}
+                variant={filter.isArrived == "not arrived" ? "default" : "outline"}
+                onClick={() => setArrived("not arrived")}
               >
                 On The Way
               </Button>
               <Button
                 variant={filter.isArrived == null ? "default" : "outline"}
-                onClick={() => setGender("Female")}
+                onClick={() => setArrived(null)}
               >
                 Both
               </Button>

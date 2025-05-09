@@ -25,6 +25,11 @@ import { ITransaction } from "@/types/ITransaction";
 import { IDBCustomer } from "@/types/ICustomer";
 import { createTransactionSchema } from "@/validators/transaction.validator";
 
+interface InventoryProduct {
+  product: IDBProduct;
+  quantity: number;
+}
+
 const Page = () => {
   const { isLoading, mutate } = useMutation(
     (data: any) =>
@@ -46,7 +51,7 @@ const Page = () => {
     mutate({ ...data });
   };
 
-  const [products, setProducts] = useState<IDBProduct[]>([]);
+  const [products, setProducts] = useState<InventoryProduct[]>([]);
   const [imports, setImports] = useState<IDBImport[]>([]);
   const [customers, setCustomers] = useState<IDBCustomer[]>([]);
 
@@ -57,7 +62,7 @@ const Page = () => {
     unitPrice: 0,
     withCredit: false,
   };
-  const productQuery = useQuery("products", () => axios.get("/products"), {
+  const productQuery = useQuery("products-inv", () => axios.get("/inventories/available"), {
     onSuccess(data) {
       setProducts(data.data.result || []);
     },
@@ -146,8 +151,9 @@ const Page = () => {
                   <SelectContent>
                     {products.map((pr, ind) => {
                       return (
-                        <SelectItem key={ind} value={pr.id}>
-                          {pr.name}
+                        <SelectItem className="capitalize flex gap-2" key={ind} value={pr.product.id}>
+                          <span className="">{pr.product.name}</span>
+                          <span className="text-xs text-gray-500">({pr.quantity})</span>
                         </SelectItem>
                       );
                     })}
