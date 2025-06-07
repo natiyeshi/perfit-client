@@ -58,7 +58,10 @@ const Page = () => {
   };
   const productQuery = useQuery("products", () => axios.get("/products"), {
     onSuccess(data) {
-      setProducts(data.data.result || []);
+      const sortedProducts = (data.data.result || []).sort((a: IDBProduct, b: IDBProduct) =>
+        a.name.localeCompare(b.name)
+      );
+      setProducts(sortedProducts);
     },
     onError(err) {
       toast.error("Error while loading products!");
@@ -70,7 +73,10 @@ const Page = () => {
     () => axios.get("/competitors"),
     {
       onSuccess(data) {
-        setCompetitors(data.data.result || []);
+         const sortedCompetitors = (data.data.result || []).sort((a: IDBCompetitor, b: IDBCompetitor) =>
+        a.name?.localeCompare(b.name ?? "") 
+      );
+      setCompetitors(sortedCompetitors);
       },
       onError(err) {
         toast.error("Error while loading competitors!");
@@ -80,9 +86,13 @@ const Page = () => {
 
   const supplierQuery = useQuery("suppliers", () => axios.get("/suppliers"), {
     onSuccess(data) {
-      setSuppliers(data.data.result || []);
+      const sortedSuppliers = (data.data.result || []).sort((a: IDBSupplier, b: IDBSupplier) =>
+        a.manufacturerName.localeCompare(b.manufacturerName)
+      );
+      setSuppliers(sortedSuppliers);
     },
     onError(err) {
+     
       toast.error("Error while loading suppliers!");
     },
   });

@@ -19,11 +19,13 @@ import {
 } from "@/components/ui/table";
 import React from "react";
 import Reports from "../../_modules/reports/Reports";
+import T from "./t";
 
 const Page = () => {
   const [currentTab, setCurrentTab] = useState("All");
 
   const data = [
+    
     {
       title: "Sales",
       divs: [
@@ -36,7 +38,7 @@ const Page = () => {
     },
     {
       title: "Inventory",
-      divs: [<InventoryLevelChart key={3} />],
+      divs: [<InventoryLevelChart key={3} />,<T />],
     },
     {
       title: "Competitors",
