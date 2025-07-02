@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 export const useImportTable = () => {
   const [filters, setFilters] = useState<filterInf>({
     name: "",
+    date: null,
   });
   const [imports, setImports] = useState<IDBClientImport[]>([]);
   const [importsData, setImportsData] = useState<IDBClientImport[]>([]);
@@ -29,10 +30,18 @@ export const useImportTable = () => {
     );
   };
 
-  const statusFilter = (data: IDBClientImport) => {
+  const dateFilter = (data: IDBClientImport) => {
     return (
-      filters.status == null ||
-      data.modeOfShipment?.toLowerCase() === filters.status.toLowerCase()
+      filters.date == null || 
+      filters.date == "all" || 
+      (filters.date == "last month" &&
+        new Date(data.createdAt) >= new Date(new Date().setMonth(new Date().getMonth() - 1))) ||
+      (filters.date == "last 3 months" &&
+        new Date(data.createdAt) >= new Date(new Date().setMonth(new Date().getMonth() - 3))) ||
+      (filters.date == "last 6 months" &&
+        new Date(data.createdAt) >= new Date(new Date().setMonth(new Date().getMonth() - 6))) ||
+      (filters.date == "this 12 months" &&
+        new Date(data.createdAt) >= new Date(new Date().setMonth(new Date().getMonth() - 12)))
     );
   };
 
@@ -72,7 +81,7 @@ export const useImportTable = () => {
   useEffect(() => {
     setImports(() => {
       return importsData.filter(
-        (data) => nameFilter(data) && statusFilter(data)
+        (data) => nameFilter(data) && dateFilter(data)
       );
     });
   }, [filters, importsData]);

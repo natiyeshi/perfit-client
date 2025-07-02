@@ -61,8 +61,8 @@ const Page = () => {
     quantity: 0,
     unitPrice: 0,
     modeOfShipment: "",
-    expiryDate: "",
-    manufacturerDate: "",
+    expiryDate: "2025-09-27T00:00:00.000Z",
+    manufacturerDate: "2025-09-27T00:00:00.000Z",
   };
 
   const productQuery = useQuery("products", () => axios.get("/products"), {
@@ -252,56 +252,26 @@ const Page = () => {
                     className="text-sm text-red-500"
                   />
                 </div>
-
-                {/* Order Date */}
-                <div className="flex flex-col space-y-2 w-full">
-                  <Label htmlFor="expiryDate">Expiry Date</Label>
-                  <Field
-                    name="expiryDate"
-                    as={Input}
-                    id="expiryDate"
-                    type="date"
-                    className="w-full"
-                  />
-                  <ErrorMessage
-                    name="expiryDate"
-                    component="p"
-                    className="text-sm text-red-500"
-                  />
-                </div>
-
-                {/* manufacturerDate Date */}
-                <div className="flex flex-col space-y-2 w-full">
-                  <Label htmlFor="manufacturerDate">Manufacturing Date</Label>
-                  <Field
-                    name="manufacturerDate"
-                    as={Input}
-                    id="manufacturerDate"
-                    type="date"
-                    className="w-full"
-                  />
-                  <ErrorMessage
-                    name="manufacturerDate"
-                    component="manufacturerDate"
-                    className="text-sm text-red-500"
-                  />
-                </div>
-              
-
                 {/* Mode of Shipment */}
                 <div className="flex flex-col space-y-2 w-full">
                   <Label htmlFor="modeOfShipment">Mode of Shipment</Label>
-                  <Field
-                    name="modeOfShipment"
-                    as={Input}
-                    id="modeOfShipment"
-                    placeholder="Enter Mode of Shipment"
-                    className="w-full"
-                  />
+                  <Select
+                  name="modeOfShipment"
+                  value={values.modeOfShipment}
+                  onValueChange={(value: string) => setFieldValue("modeOfShipment", value)}
+                  >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select Mode of Shipment" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="sea">Sea</SelectItem>
+                    <SelectItem value="air">Air</SelectItem>
+                  </SelectContent>
+                  </Select>
                   <ErrorMessage
-                    name="modeOfShipment"
-                    component="p"
-                    className="text-sm text-red-500"
+                  name="modeOfShipment"
+                  component="p"
+                  className="text-sm text-red-500"
                   />
                 </div>
                 {/* Total Price */}

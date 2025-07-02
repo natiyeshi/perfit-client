@@ -9,6 +9,7 @@ import { useQuery } from "react-query";
 import TopSuppliers from "./_components/TopSuppliers";
 import TopCompetitorByQuantity from "./_components/TopCompetitorByQuantity";
 import TopCompetitorByTotalPrice from "./_components/TopCompetitorsByTotalPrice";
+import AverageUnitPrice from "./_components/AverageUnitprice";
 
 const Page = () => {
   const [importsData, setImportsData] = useState<IDBPopulatedImport[]>([]);
@@ -32,7 +33,7 @@ const Page = () => {
         <div className="p-4">Loading...</div>
       ) : (
         <>
-          {/* {JSON.stringify(importsData)} */}
+          {/* {JSON.stringify(importsData, null, 2)} */}
           <div className="px-2 flex-1 pt-6 overflow-auto grid grid-cols-2 gap-5 gap-y-[10rem]">
             <div className="col-span-full ">
               <div className="text-lg font-semibold ms-12">#Competitors</div>
@@ -50,6 +51,7 @@ const Page = () => {
             <LeastImportedProduct importsData={importsData} query={query} />
             <TopImported importsData={importsData} query={query} />
             <TopSuppliers importsData={importsData} query={query} />
+            <AverageUnitPrice importsData={importsData} query={query} />
           </div>
         </>
       )}
