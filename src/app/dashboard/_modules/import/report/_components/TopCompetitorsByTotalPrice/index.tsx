@@ -92,8 +92,21 @@ const TopCompetitorsByTotalPrice = ({
       </div>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={chartData}>
-          <XAxis dataKey="name" />
-          <YAxis />
+          <XAxis
+            dataKey="name"
+            tickFormatter={(name) =>
+              name.length > 10 ? name.slice(0, 10) + "..." : name
+            }
+          />
+          <YAxis
+            tickFormatter={(value) => {
+              if (value >= 1_000_000)
+                return (value / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
+              if (value >= 1_000)
+                return (value / 1_000).toFixed(1).replace(/\.0$/, "") + "K";
+              return value;
+            }}
+          />
           <Tooltip />
           <Bar dataKey="value" fill="#8884d8" />
         </BarChart>

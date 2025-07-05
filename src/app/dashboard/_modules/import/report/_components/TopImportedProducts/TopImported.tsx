@@ -91,6 +91,7 @@ const TopImportedProducts = ({
       </div>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
+          
           <Pie
             data={chartData}
             dataKey="value"
@@ -100,6 +101,7 @@ const TopImportedProducts = ({
             outerRadius={150}
             fill="#8884d8"
             label
+            
           >
             {chartData.map((entry, index) => (
               <Cell

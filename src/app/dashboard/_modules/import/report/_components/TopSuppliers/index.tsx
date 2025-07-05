@@ -90,7 +90,13 @@ const TopSuppliers = ({
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={chartData}>
           <XAxis dataKey="name" />
-          <YAxis />
+          <YAxis
+              tickFormatter={(value) => {
+                if (value >= 1_000_000) return (value / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
+                if (value >= 1_000) return (value / 1_000).toFixed(1).replace(/\.0$/, '') + 'K';
+                return value;
+              }}
+            />
           <Tooltip />
           <Bar dataKey="value" fill="#8884d8" />
         </BarChart>
