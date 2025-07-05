@@ -38,7 +38,7 @@ const Page = () => {
     },
     {
       title: "Inventory",
-      divs: [<InventoryLevelChart key={3} />,<T key={33} />],
+      divs: [<InventoryLevelChart key={3} />],
     },
     {
       title: "Competitors",
