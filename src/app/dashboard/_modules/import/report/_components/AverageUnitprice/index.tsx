@@ -59,10 +59,12 @@ const AverageUnitPrice = ({
         productMap[name].count += 1;
       }
     });
-    const data = Object.entries(productMap).map(([name, { total, count }]) => ({
+    const data = Object.entries(productMap)
+      .map(([name, { total, count }]) => ({
       name,
       avgUnitPrice: count > 0 ? total / count : 0,
-    }));
+      }))
+      .sort((a, b) => b.avgUnitPrice - a.avgUnitPrice);
     setTableData(data);
   }, [importsData, filter]);
 
