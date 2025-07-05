@@ -116,14 +116,14 @@ const Page = () => {
 
   const isLoading = !mounted || productQuery.isLoading || competitorQuery.isLoading || supplierQuery.isLoading;
 
-  if (!mounted) {
-    return null;
-  }
+  // if (!mounted) {
+  //   return null;
+  // }
 
   return (
     <div className="px-12 overflow-y-auto pb-20">
       <div className="big-topic py-8">Register Import Data</div>
-      {isLoading ? (
+      {isLoading && false ? (
         <div className="flex items-center justify-center py-8">Loading...</div>
       ) : (
         <Formik
