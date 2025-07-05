@@ -104,7 +104,7 @@ function AddProduct() {
                         as={Input}
                         id="unit"
                         type="string"
-                        placeholder="Enter Unit Price"
+                        placeholder="Enter Unit"
                         className="w-full"
                       />
                       <ErrorMessage
