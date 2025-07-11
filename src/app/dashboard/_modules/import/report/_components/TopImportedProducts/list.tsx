@@ -44,14 +44,16 @@ const TopImportedProductsList = ({
 
     importsData.forEach((d) => {
       const createdAt = new Date(d.createdAt);
-      if (!datas[d.product.name]) {
-        datas[d.product.name] = 0;
-      }
-      if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
-        datas[d.product.name] += d.quantity;
-      }
+      d.products.forEach((p) => {
+        if (!datas[p.product.genericName]) {
+          datas[p.product.genericName] = 0;
+        }
+        if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
+          datas[p.product.genericName] += p.quantity;
+        }
+      });
     });
-
+     
     const sortedData = Object.entries(datas)
       .sort(([, a], [, b]) => b - a)
       .map(([key, value]) => ({ name: key, value }));

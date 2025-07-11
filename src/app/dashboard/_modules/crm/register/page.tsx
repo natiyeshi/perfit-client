@@ -152,7 +152,7 @@ const Page = () => {
                     {products.map((pr, ind) => {
                       return (
                         <SelectItem className="capitalize flex gap-2" key={ind} value={pr.product.id}>
-                          <span className="">{pr.product.name}</span>
+                          <span className="">{pr.product.genericName}</span>
                           <span className="text-xs text-gray-500">({pr.quantity})</span>
                         </SelectItem>
                       );

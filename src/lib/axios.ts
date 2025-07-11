@@ -7,7 +7,7 @@ const mainApi = "https://backend.perfitpharma.com/api/v1/"
 
 
 const instance = axios.create({
-  baseURL: mainApi,
+  baseURL: localApi,
 });
 
 

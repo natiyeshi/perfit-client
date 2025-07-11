@@ -53,12 +53,18 @@ const TopImportedProducts = ({
 
     importsData.forEach((d) => {
       const createdAt = new Date(d.createdAt);
-      if (!datas[d.product.name]) {
-        datas[d.product.name] = 0;
-      }
-      if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
-        datas[d.product.name] += d.quantity;
-      }
+
+       importsData.forEach((d) => {
+            const createdAt = new Date(d.date);
+            d.products.forEach((p) => {
+              if (!datas[p.product.brandName]) {
+                datas[p.product.brandName] = 0;
+              }
+              if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
+                datas[p.product.brandName] += p.quantity;
+              }
+            });
+          });
     });
 
     const sortedData = Object.entries(datas)

@@ -97,7 +97,7 @@ const Page = () => {
                   </SelectTrigger>
                   <SelectContent>
                     {products.map((pr,ind) => {
-                      return <SelectItem key={ind} value={pr.id}>{pr.name}</SelectItem>;
+                      return <SelectItem key={ind} value={pr.id}>{pr.brandName}</SelectItem>;
                     })}
                   </SelectContent>
                 </Select>

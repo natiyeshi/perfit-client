@@ -4,37 +4,39 @@ import React from "react";
 import { IoCloseSharp } from "react-icons/io5";
 // import Addimport from "@/components/custom/import/AddImport";
 import { Button } from "@/components/ui/button";
-import { useImportTable } from "../hook/useImportTable";
-import FilterCard from "./Filter";
+import { useCostTable } from "../hook/useCostTable";
 import { IoMdRefresh } from "react-icons/io";
 import DeleteImport from "@/components/custom/import/DeleteImport";
 import UpdateImport from "@/components/custom/import/UpdateImport";
-import { IDBClientImport } from "@/types/IImport";
 import CustomeTable from "@/components/custom/table/CustomeTable";
-const ImportTable: React.FC = () => {
+import { IDBClientCostBuildUp } from "@/types/ICostbuildup";
+
+const CostTable: React.FC = () => {
   const { filters, imports, setFilters, filter, reload, query } =
-    useImportTable();
+    useCostTable();
   const headers: {
     name: string;
-    key: keyof IDBClientImport;
-    showDetail?: keyof IDBClientImport;
+    key: keyof IDBClientCostBuildUp;
+    showDetail?: keyof IDBClientCostBuildUp;
+    isLink?: boolean;
+    link?: string;
   }[] = [
-    {
-      name: "Product Name",
-      key: "productName",
-      showDetail: "products",
-    },
-
-    { name: "Supplier Name", key: "supplierName", showDetail: "supplier" },
-    {
-      name: "Competitor Name",
-      key: "competitorName",
-      showDetail: "competitor",
-    },
-    { name: "Amount", key: "amount" },
-    { name: "Import ID", key: "importId" },
-    { name: "Mode Of Shipment", key: "modeOfShipment" },
-    { name: "Date", key: "date" },
+    { name: "Number of Products", key: "numberOfProducts" },
+    { name: "FOB Price (USD)", key: "fobPriceUSD" },
+    { name: "Exchange Rate", key: "exchangeRate" },
+    { name: "Total FOB Cost (Birr)", key: "totalFobCostBirr" },
+    { name: "FC Purchase", key: "fcPurchase" },
+    { name: "Bank Service Charges", key: "bankServiceCharges" },
+    { name: "Insurance Charge", key: "insuranceCharge" },
+    { name: "Freight Charge", key: "freightCharge" },
+    { name: "Customs Duty", key: "customsDuty" },
+    { name: "Storage Charges", key: "storageCharges" },
+    { name: "Inland Transport", key: "inlandTransport" },
+    { name: "Transit Agent Charge", key: "transitAgentCharge" },
+    { name: "Loading/Unloading Expenses", key: "loadingUnloadingExpenses" },
+    { name: "Total Cost", key: "totalCost" },
+    { name: "USD Purchase Price", key: "usdPurchasePrice" },
+    { name: "Mislaneous Cost", key: "mislaneousCost" },
   ];
 
   return (
@@ -60,7 +62,7 @@ const ImportTable: React.FC = () => {
             <IoMdRefresh className="text-xl" />
           </Button>
           {/* <Addimport /> */}
-          <FilterCard setFilters={setFilters} filter={filters} />
+          {/* <FilterCard setFilters={setFilters} filter={filters} /> */}
         </div>
       </div>
       <div className="py-2 px-2 flex flex-wrap gap-3">
@@ -81,17 +83,20 @@ const ImportTable: React.FC = () => {
         )}
       </div>
       <div className="overflow-scroll flex-1">
-        <CustomeTable
+        <CustomeTable<IDBClientCostBuildUp & { id: string }>
           query={query}
           headers={headers}
-          result={imports}
+          result={imports.map((item, idx) => ({
+            ...item,
+            id: (item as any).id || (item as any)._id || String(idx) // fallback to index if nothing else
+          }))}
           DeleteItem={DeleteImport}
           UpdateItem={UpdateImport}
-          link="/dashboard/admin/import/"
+          link="/dashboard/admin/costbuildup/"
         />
       </div>
     </>
   );
 };
 
-export default ImportTable;
+export default CostTable;

@@ -31,7 +31,7 @@ export type TopCompetitorFilterState = {
 
 interface ChartData {
   name: string;
-  value: number;
+  quantity: number;
 }
 
 const timeChoices: Record<TimeChoice, number> = {
@@ -64,13 +64,15 @@ const TopCompetitorsByQuantity = ({
         datas[d.competitor.name ?? "unkown"] = 0;
       }
       if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
-        datas[d.competitor.name ?? "unkown"] += d.quantity;
+        datas[d.competitor.name ?? "unkown"] += d.products.reduce(
+          (acc, product) => acc + (product.quantity ?? 0), 0
+        );
       }
     });
 
     const sortedData = Object.entries(datas)
       .sort(([, a], [, b]) => b - a)
-      .map(([key, value]) => ({ name: key, value }));
+      .map(([key, value]) => ({ name: key, quantity : value }));
 
     const topFour = sortedData.slice(0, 4);
 
@@ -108,7 +110,7 @@ const TopCompetitorsByQuantity = ({
             }}
           />
           <Tooltip />
-          <Bar dataKey="value" fill="#8884d8" />
+          <Bar dataKey="quantity" fill="#8884d8" />
         </BarChart>
       </ResponsiveContainer>
     </div>

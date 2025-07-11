@@ -195,7 +195,7 @@ const Page = () => {
                       <SelectContent>
                         {products.map((product: IDBProduct) => (
                           <SelectItem key={product.id} value={product.id}>
-                            {product.name}
+                            {product.genericName}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -285,7 +285,7 @@ const Page = () => {
                       className="grid grid-cols-6 gap-2  py-2 px-4 items-center place-content-center place-items-center"
                     >
                       <div>{ind + 1}</div>
-                      <div>{value.product?.name}</div>
+                      <div>{value.product?.genericName}</div>
                       <div>{value.expiryDate}</div>
                       <div>{value.manufactureDate}</div>
                       <div>{value.purchasePriceUsd}</div>

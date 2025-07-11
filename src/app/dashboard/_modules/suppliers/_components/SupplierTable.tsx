@@ -17,6 +17,7 @@ const SupplierTable: React.FC = () => {
     { name: "Email", key: "email" },
     { name: "Country", key: "country" },
     { name: "Phone Number", key: "phoneNumber" },
+    { name: "Description", key: "description" },
     {
       name: "Product Imports",
       key: "productName",

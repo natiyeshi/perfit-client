@@ -1,16 +1,19 @@
 import { IDBCompetitor } from "./ICompetitor";
 import { IDBProduct } from "./IProduct";
 import { IDBSupplier } from "./ISupplier";
-
+import { IProductWithPrice } from "./IProductWithPrice"
+import { IDBProductWithPrice} from "./IProductWithPrice"
 export interface IImport {
-  unitPrice: number;
-  quantity: number;
-  manufacturerDate: string;
-  expiryDate: string;
+  importId: string;
+  amount: number;
+  paymentMode?: string;
   modeOfShipment?: string;
-  productId: string;
+  currency?: string;
   supplierId: string;
   competitorId: string;
+  date: string | Date;
+  products: IDBProductWithPrice[]; 
+
 }
 
 export interface IDBImport extends IImport {
@@ -19,9 +22,9 @@ export interface IDBImport extends IImport {
 }
 
 export interface IDBPopulatedImport extends IDBImport {
-  product : IDBProduct;
   competitor : IDBCompetitor;
   supplier : IDBSupplier;
+  products: IDBProductWithPrice[]; 
 }
 
 

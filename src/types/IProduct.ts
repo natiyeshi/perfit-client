@@ -1,13 +1,12 @@
 export interface IProduct {
-    name: string;
-    brand: string;
-    unit: string;
+    productId?: string;
+    brandName: string;
+    genericName: string;
+    unit?: string;
+    description?: string;
+    intendedUse?: string;
 }
-  
+
 export interface IDBProduct extends IProduct {
     id: string;
 }
-  
-  
-  
-  

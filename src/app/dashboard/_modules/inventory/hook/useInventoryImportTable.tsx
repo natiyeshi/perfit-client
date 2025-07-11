@@ -44,7 +44,7 @@ export const useInventoryImportTable = () => {
         k.map((d) => {
           let r: IDBClientInventoryImport = {
             ...d,
-            productName: d.product.name,
+            productName: d.product.brandName,
             supplierName: d.supplier.manufacturerName,
             unit: d.product.unit,
             // shelfLife: d.product.name,

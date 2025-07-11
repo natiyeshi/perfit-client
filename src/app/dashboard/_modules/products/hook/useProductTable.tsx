@@ -20,16 +20,16 @@ export const useProductTable = () => {
   const nameFilter = (data: IDBProduct) => {
     return (
       filters.name.length === 0 ||
-      (data.brand && data.brand.toLowerCase().includes(filters.name)) ||
+      (data.genericName && data.genericName.toLowerCase().includes(filters.name)) ||
       (data.unit && data.unit.toLowerCase().includes(filters.name)) ||
-      data.name.toLowerCase().includes(filters.name)
+      data.brandName.toLowerCase().includes(filters.name)
     );
   };
 
   const statusFilter = (data: IDBProduct) => {
     return (
       filters.status == null ||
-      data.name.toLowerCase() === filters.status.toLowerCase()
+      data.brandName.toLowerCase() === filters.status.toLowerCase()
     );
   };
 

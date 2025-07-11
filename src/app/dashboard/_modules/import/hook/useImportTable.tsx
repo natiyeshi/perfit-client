@@ -21,8 +21,8 @@ export const useImportTable = () => {
   const nameFilter = (data: IDBClientImport) => {
     return (
       filters.name.length === 0 ||
-      (data.productName &&
-        data.productName.toLowerCase().includes(filters.name)) ||
+      // (data.productName &&
+      //   data.productName.toLowerCase().includes(filters.name)) ||
       (data.competitorName &&
         data.competitorName.toLowerCase().includes(filters.name)) ||
       (data.supplierName &&
@@ -53,14 +53,15 @@ export const useImportTable = () => {
         let k: IDBPopulatedImport[] = data.data.result || [];
         const res: IDBClientImport[] = [];
         k.map((d) => {
-          const ex = new Date(d.expiryDate!);
+          const newDate = new Date(d.date!);
+          const da = `${newDate.toLocaleString('en-US', { month: 'short' }).toLowerCase()}-${newDate.getDate()}, ${newDate.getFullYear()}`
           let r: IDBClientImport = {
             ...d,
-            productName: d.product.name,
+            productName: `${d.products.length} Products`,
             supplierName: d.supplier.manufacturerName,
             competitorName: d.competitor.name,
-            unit: d.product.unit,
-            totalPrice: d.unitPrice * d.quantity,
+            totalPrice: d.amount,
+            date : da
           };
           res.push(r);
         });

@@ -51,7 +51,6 @@ function AddCompetitor() {
     name: "",
     email: "",
     phoneNumber: "",
-    country: "",
   };
 
   return (
@@ -134,22 +133,7 @@ function AddCompetitor() {
                       />
                     </div>
 
-                    {/* Country */}
-                    <div className="flex flex-col space-y-2 w-full">
-                      <Label htmlFor="country">Country</Label>
-                      <Field
-                        name="country"
-                        as={Input}
-                        id="country"
-                        placeholder="Enter Country"
-                        className="w-full"
-                      />
-                      <ErrorMessage
-                        name="country"
-                        component="p"
-                        className="text-sm text-red-500"
-                      />
-                    </div>
+                   
                   </div>
 
                   <Button

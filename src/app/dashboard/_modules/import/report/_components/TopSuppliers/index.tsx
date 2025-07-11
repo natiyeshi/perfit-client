@@ -61,7 +61,10 @@ const TopSuppliers = ({
         datas[d.supplier.manufacturerName] = 0;
       }
       if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
-        datas[d.supplier.manufacturerName] += d.quantity;
+        datas[d.supplier.manufacturerName] += d.products.reduce(
+          (acc, product) => acc + product.quantity * product.unitPrice,
+          0
+        );
       }
     });
 
@@ -76,7 +79,7 @@ const TopSuppliers = ({
 
   useEffect(() => {
     getChartData();
-  }, [filter, query.isSuccess,importsData]);
+  }, [filter, query.isSuccess, importsData]);
 
   return (
     <div className="w-full h-[70vh]">
@@ -89,14 +92,21 @@ const TopSuppliers = ({
       </div>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={chartData}>
-          <XAxis dataKey="name" />
+          <XAxis
+            dataKey="name"
+            tickFormatter={(name) =>
+              name.length > 8 ? name.slice(0, 8) + "..." : name
+            }
+          />
           <YAxis
-              tickFormatter={(value) => {
-                if (value >= 1_000_000) return (value / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
-                if (value >= 1_000) return (value / 1_000).toFixed(1).replace(/\.0$/, '') + 'K';
-                return value;
-              }}
-            />
+            tickFormatter={(value) => {
+              if (value >= 1_000_000)
+                return (value / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
+              if (value >= 1_000)
+                return (value / 1_000).toFixed(1).replace(/\.0$/, "") + "K";
+              return value;
+            }}
+          />
           <Tooltip />
           <Bar dataKey="value" fill="#8884d8" />
         </BarChart>

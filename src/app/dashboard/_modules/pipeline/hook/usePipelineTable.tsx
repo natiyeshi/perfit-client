@@ -46,7 +46,7 @@ export const usePipelineTable = () => {
         k.map((d) => {
           const r: IDBClientPipeline = {
             ...d,
-            productName: d.product.name,
+            productName: d.product.genericName,
             isArrivedString: d.isArrived ? "Arrived" : "On the way",
           };
           res.push(r);

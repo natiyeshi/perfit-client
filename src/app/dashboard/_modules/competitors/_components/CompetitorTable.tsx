@@ -16,7 +16,9 @@ const CompetitorTable: React.FC = () => {
     { name: "Name", key: "name" },
     { name: "Email", key: "email" },
     { name: "Phone Number", key: "phoneNumber" },
-    { name: "Country", key: "country" },
+    { name: "Tin", key: "tin" },
+    { name: "License Number", key: "licenseNumber" },
+    { name: "Competitor ID", key: "competitorId" },
   ];
   const { filters, competitors, setFilters, filter, reload, query } =
     useCompetitorTable();

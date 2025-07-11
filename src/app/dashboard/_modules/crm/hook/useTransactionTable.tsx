@@ -48,7 +48,7 @@ export const useTransactionTable = () => {
           let r: IDBClientTransaction = {
             ...d,
             customerName: d.customer.organizationName,
-            productName: d.product.name,
+            productName: d.product.genericName,
             unitPrice: d.unitPrice,
             quantity: d.quantity,
             salesPersonName: d.salesPerson.user.fullName,

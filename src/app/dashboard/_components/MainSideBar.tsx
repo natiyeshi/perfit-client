@@ -52,6 +52,11 @@ const adminLinks: MainLinkInf[] = [
     link: "/dashboard/admin/pipeline",
   },
   {
+    name: "Cost Build Up",
+    Icon: SiJfrogpipelines,
+    link: "/dashboard/admin/costbuildup",
+  },
+  {
     name: "Decision Matrix",
     Icon: PiMatrixLogoFill,
     link: "/dashboard/admin/iodm",

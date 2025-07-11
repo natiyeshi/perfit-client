@@ -73,7 +73,7 @@ const TopCompetitorsByQuantity = () => {
       if (!datas[competitorName]) {
         datas[competitorName] = 0;
       }
-      datas[competitorName] += d.quantity;
+      datas[competitorName] += d.amount;
     });
 
     const sortedData = Object.entries(datas)

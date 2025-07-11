@@ -165,7 +165,7 @@ const ShowTable = ({ values }: { values: IDBIodm }) => {
           {values.IODMProducts.map((value, ind) => (
             <tr key={ind} className="even:bg-gray-50">
               <td className="border border-gray-300 px-4 py-2">
-                {value.product?.name}
+                {value.product?.genericName}
               </td>
               <td className="border border-gray-300 px-4 py-2">
                 {value.quantity}

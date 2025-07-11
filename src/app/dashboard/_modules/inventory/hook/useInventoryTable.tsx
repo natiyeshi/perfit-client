@@ -44,7 +44,7 @@ export const useInventoryTable = () => {
         k.map((d) => {
           let r: IDBClientInventory = {
             ...d,
-            productName: d.product.name,
+            productName: d.product.brandName,
           };
           res.push(r);
         });

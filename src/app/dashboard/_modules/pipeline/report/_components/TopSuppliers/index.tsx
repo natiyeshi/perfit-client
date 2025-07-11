@@ -61,7 +61,7 @@ const TopSuppliers = ({
         datas[d.supplier.manufacturerName] = 0;
       }
       if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
-        datas[d.supplier.manufacturerName] += d.quantity;
+        datas[d.supplier.manufacturerName] += d.amount;
       }
     });
 

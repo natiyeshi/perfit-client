@@ -3,6 +3,8 @@ import { IDBProduct } from "./IProduct";
 export interface ISupplier {
   manufacturerName: string;
   email?: string;
+  description?: string;
+  manufacturerId?: string;
   phoneNumber?: string;
   country?: string;
   productIDs?: string[];

@@ -64,7 +64,7 @@ const TopImporters = ({
         datas[d.competitor.name ?? "unkown"] = 0;
       }
       if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
-        datas[d.competitor.name ?? "unkown"] += d.quantity;
+        datas[d.competitor.name ?? "unkown"] += d.products.reduce((acc, p) => acc +  p.quantity, 0);
       }
     });
 

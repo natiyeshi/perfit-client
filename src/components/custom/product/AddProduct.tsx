@@ -45,9 +45,11 @@ function AddProduct() {
   };
 
   const initialValues: IProduct = {
-    name: "",
     unit: "",
-    brand: "",
+    brandName: "",
+    genericName: "",
+    description: "",
+    intendedUse: "",
   };
 
   return (
@@ -79,18 +81,35 @@ function AddProduct() {
               {({ isSubmitting }) => (
                 <Form className="space-y-6">
                   <div className="grid grid-cols-1 gap-4 w-full">
-                    {/* Product Name */}
+                    {/* Brand Name */}
                     <div className="flex flex-col space-y-2 w-full">
-                      <Label htmlFor="name">Product Name</Label>
+                      <Label htmlFor="brandName">Brand Name</Label>
                       <Field
-                        name="name"
+                        name="brandName"
                         as={Input}
-                        id="name"
-                        placeholder="Enter Product Name"
+                        id="brandName"
+                        placeholder="Enter Product Brand Name"
                         className="w-full"
                       />
                       <ErrorMessage
-                        name="name"
+                        name="brandName"
+                        component="p"
+                        className="text-sm text-red-500"
+                      />
+                    </div>
+
+                     {/* generic Name */}
+                    <div className="flex flex-col space-y-2 w-full">
+                      <Label htmlFor="genericName">Generic Name</Label>
+                      <Field
+                        name="genericName"
+                        as={Input}
+                        id="genericName"
+                        placeholder="Enter Product Generic Name"
+                        className="w-full"
+                      />
+                      <ErrorMessage
+                        name="genericName"
                         component="p"
                         className="text-sm text-red-500"
                       />
@@ -114,26 +133,41 @@ function AddProduct() {
                       />
                     </div>
 
-                    
-
-                    {/* Brand */}
+                    {/* Description */}
                     <div className="flex flex-col space-y-2 w-full">
-                      <Label htmlFor="brand">Brand</Label>
+                      <Label htmlFor="Description">Description</Label>
                       <Field
-                        name="brand"
+                        name="description"
                         as={Input}
-                        id="brand"
-                        placeholder="Enter Brand"
+                        id="description"
+                        placeholder="Enter Description"
                         className="w-full"
                       />
                       <ErrorMessage
-                        name="brand"
+                        name="description"
                         component="p"
                         className="text-sm text-red-500"
                       />
                     </div>
                   </div>
 
+                  {/* Intended Use */}
+                  <div className="flex flex-col space-y-2 w-full">
+                    <Label htmlFor="intendedUse">Intended Use</Label>
+                    <Field
+                      name="intendedUse"
+                      as={Input}
+                      id="intendedUse"
+                      placeholder="Enter Intended Use"
+                      className="w-full"
+                    />
+                    <ErrorMessage
+                      name="intendedUse"
+                      component="p"
+                      className="text-sm text-red-500"
+                    />
+                  </div>
+                  {/* Submit Button */}
                   <Button
                     type="submit"
                     disabled={isLoading}

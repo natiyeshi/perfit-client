@@ -10,11 +10,6 @@ export default function Layout({ children }: { children: any }) {
       link: `/dashboard/${user.role}/import`,
       base: false,
     },
-    {
-      name: "Add Import Data",
-      link: `/dashboard/${user.role}/import/register`,
-      base: false,
-    },
   ];
   if (user.role == "admin") {
     links = [

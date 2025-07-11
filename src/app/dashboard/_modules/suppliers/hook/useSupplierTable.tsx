@@ -50,7 +50,7 @@ export const useSupplierTable = () => {
             ...d,
             productName: "Products",
             clientDeliverableProducts: d.deliverableProducts?.map(
-              (a) => a.name
+              (a) => a.genericName
             ),
           };
           res.push(r);

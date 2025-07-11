@@ -18,7 +18,7 @@ export const ShowTable = ({ values }: { values: Iintical }) => {
               key={ind}
               className="grid grid-cols-7 border gap-2  py-2 px-4 items-center place-content-center place-items-center"
             >
-              <div>{value.product?.name}</div>
+              <div>{value.product?.genericName}</div>
               <div>{value.quantity}</div>
               <div>{value.expiryDate}</div>
               <div>{value.manufactureDate}</div>

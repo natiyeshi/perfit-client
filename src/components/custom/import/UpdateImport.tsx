@@ -151,7 +151,7 @@ function UpdateImport({ initialValues }: { initialValues: IDBImport }) {
                       />
                     </div>
                     {/* Product Name */}
-                    <div className="flex flex-col space-y-2 w-full">
+                    {/* <div className="flex flex-col space-y-2 w-full">
                       <Label htmlFor="productId">Product Name</Label>
                       <Select
                         disabled={productQuery.isLoading}
@@ -178,7 +178,7 @@ function UpdateImport({ initialValues }: { initialValues: IDBImport }) {
                         component="p"
                         className="text-sm text-red-500"
                       />
-                    </div>
+                    </div> */}
                     {/* Supplier Name */}
                     <div className="flex flex-col space-y-2 w-full">
                       <Label htmlFor="supplierId">Supplier Name</Label>

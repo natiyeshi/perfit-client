@@ -54,7 +54,7 @@ const Notifications = () => {
             (threeMonthsLater.getTime() - today.getTime()) /
               (1000 * 60 * 60 * 24)
           );
-          console.log(d.product.name, "product name");
+          console.log(d.product.genericName, "product name");
           console.log(remainingDate, "remaining date");
           if (remainingDate > 45) return false;
           d["remainingDate"] = remainingDate;
@@ -127,7 +127,7 @@ const PipelineNoti = ({ data }: { data: PipelineNotification }) => {
       >
         <div className="flex justify-between items-start">
           <div className="space-y-1">
-            <div className="font-medium text-base">{data.product.name}</div>
+            <div className="font-medium text-base">{data.product.genericName}</div>
             <div className="text-sm text-gray-600">LC: {data.lcNumber}</div>
             <div className="text-sm text-gray-600">PI: {data.proformaInvoiceNumber}</div>
           </div>
@@ -156,11 +156,11 @@ const PipelineNoti = ({ data }: { data: PipelineNotification }) => {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <div className="text-sm font-medium text-gray-500">Product</div>
-                    <div className="text-sm">{data.product.name}</div>
+                    <div className="text-sm">{data.product.genericName}</div>
                   </div>
                   <div>
                     <div className="text-sm font-medium text-gray-500">Brand</div>
-                    <div className="text-sm">{data.product.brand}</div>
+                    <div className="text-sm">{data.product.brandName}</div>
                   </div>
                   <div>
                     <div className="text-sm font-medium text-gray-500">LC Number</div>

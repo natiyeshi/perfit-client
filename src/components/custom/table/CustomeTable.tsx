@@ -79,13 +79,18 @@ const CustomeTable = <T extends { id: string }>({
     <>
       <table className="min-w-full border-b ">
         <thead>
-          <tr className="text-left border-t text-black  sticky top-0 z-20">
-            <th className="px-4 py-2 whitespace-nowrap border-b sticky left-0 text-black">
+          <tr className="text-left border-t text-black bg-white shadow sticky top-0 z-20">
+            <th className="px-4 py-2  whitespace-nowrap border-b sticky left-0 text-black">
               -
             </th>
             <th className="px-4 py-2   whitespace-nowrap border-b sticky left-0 text-black">
               No
             </th>
+            {link && (
+              <th className="px-4 py-2 whitespace-nowrap border-b capitalize">
+                Detail
+              </th>
+            )}
             {headers.map((value) => (
               <th
                 key={String(value.key)}
@@ -100,11 +105,6 @@ const CustomeTable = <T extends { id: string }>({
                   : ""}
               </th>
             ))}
-            {link && (
-              <th className="px-4 py-2 whitespace-nowrap border-b capitalize">
-                Link
-              </th>
-            )}
           </tr>
         </thead>
         <tbody>
@@ -135,6 +135,16 @@ const CustomeTable = <T extends { id: string }>({
                 <td className="border-b whitespace-nowrap px-4 py-2">
                   {index + 1}
                 </td>
+                {link && (
+                  <td className="border-b whitespace-nowrap px-4 py-2">
+                    <Link
+                      href={`${link}/${item.id}`}
+                      className="text-blue-500"
+                    >
+                      🔗
+                    </Link>
+                  </td>
+                )}
                 {headers.map((header) => (
                   <td
                     className="border-b whitespace-nowrap duration-200 px-4 py-2 capitalize"
@@ -170,16 +180,6 @@ const CustomeTable = <T extends { id: string }>({
                     )}
                   </td>
                 ))}
-                {link && (
-                  <td className="border-b whitespace-nowrap px-4 py-2">
-                    <Link
-                      href={`${link}/${item.id}`}
-                      className="text-blue-500 hover:underline"
-                    >
-                      🔗
-                    </Link>
-                  </td>
-                )}
               </tr>
             ))
           ) : (

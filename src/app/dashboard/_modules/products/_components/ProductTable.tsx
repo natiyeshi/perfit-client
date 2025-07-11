@@ -13,9 +13,11 @@ import { IDBProduct } from "@/types/IProduct";
 import CustomeTable from "@/components/custom/table/CustomeTable";
 const ProductTable: React.FC = () => {
   const headers: { name: string; key: keyof IDBProduct }[] = [
-    { name: "Product Name", key: "name" },
-    { name: "Brand", key: "brand" },
+    { name: "Brand Name", key: "brandName" },
+    { name: "Generic Name", key: "genericName" },
     { name: "Unit", key: "unit" },
+    { name: "Description", key: "description" },
+    { name: "Intended Use", key: "intendedUse" },
   ];
   const { filters, products, setFilters, filter, reload, query } =
     useProductTable();

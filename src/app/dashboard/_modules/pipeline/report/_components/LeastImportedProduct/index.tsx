@@ -49,8 +49,6 @@ const LeastImportedProducts = ({
   importsData: IDBPopulatedImport[];
   query: any;
 }) => {
-  
-
   const [filter, setFilter] = useState<TopImportProductsFilterState>({
     time: "all",
   });
@@ -62,12 +60,15 @@ const LeastImportedProducts = ({
 
     importsData.forEach((d) => {
       const createdAt = new Date(d.createdAt);
-      if (!datas[d.product.name]) {
-        datas[d.product.name] = 0;
-      }
-      if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
-        datas[d.product.name] += d.quantity;
-      }
+      d.products.forEach((p) => {
+        const name = p.product.genericName;
+        if (!datas[name]) {
+          datas[name] = 0;
+        }
+        if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
+          datas[name] += p.quantity;
+        }
+      });
     });
 
     const sortedData = Object.entries(datas)
@@ -81,7 +82,7 @@ const LeastImportedProducts = ({
 
   useEffect(() => {
     getChartData();
-  }, [filter, query.isSuccess,importsData]);
+  }, [filter, query.isSuccess, importsData]);
 
   return (
     <div className="w-full h-[70vh] ">

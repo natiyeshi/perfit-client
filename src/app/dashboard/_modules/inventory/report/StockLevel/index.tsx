@@ -56,7 +56,7 @@ const StockChart: React.FC<Props> = ({ stockData, query }) => {
     stockData.forEach((item) => {
       const createdAt = new Date(item.createdAt);
       if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
-        dataMap[item.product.name] = (dataMap[item.product.name] || 0) + item.quantity;
+        dataMap[item.product.brandName] = (dataMap[item.product.brandName] || 0) + item.quantity;
       }
     });
 
