@@ -53,7 +53,7 @@ const adminLinks: MainLinkInf[] = [
   },
   {
     name: "Cost Build Up",
-    Icon: SiJfrogpipelines,
+    Icon: CiSettings,
     link: "/dashboard/admin/costbuildup",
   },
   {
