@@ -116,7 +116,7 @@ function UpdateImport({ initialValues }: { initialValues: IDBClientPipeline }) {
                         <SelectContent>
                           {products.map((item) => (
                             <SelectItem key={item.id} value={item.id}>
-                              {item.name}
+                              {item.genericName}
                             </SelectItem>
                           ))}
                         </SelectContent>

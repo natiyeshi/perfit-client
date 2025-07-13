@@ -225,7 +225,7 @@ const ProductSelectCheckBox = ({
   }) => {
     return (
       <div className="bg-gray-200 w-fit text-gray-800 flex gap-2 px-2 py-1 rounded-full">
-        <div>{pr.name}</div>
+        <div>{pr.genericName}</div>
         <div
           onClick={() => onClick()}
           role="button"
@@ -270,7 +270,7 @@ const ProductSelectCheckBox = ({
           {products.map((pr, ind) => {
             return (
               <SelectItem key={ind} value={pr.id}>
-                {pr.name}
+                {pr.genericName}
               </SelectItem>
             );
           })}
