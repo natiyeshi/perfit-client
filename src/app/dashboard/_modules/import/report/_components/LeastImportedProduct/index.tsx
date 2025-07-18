@@ -73,7 +73,7 @@ const LeastImportedProducts = ({
       .sort(([, a], [, b]) => a - b)
       .map(([key, value]) => ({ name: key, value }));
 
-    const leastFour = sortedData.slice(0, 4);
+    const leastFour = sortedData.slice(0, 10);
 
     setChartData(leastFour);
   };
@@ -96,7 +96,7 @@ const LeastImportedProducts = ({
           <XAxis
             dataKey="name"
             tickFormatter={(name) =>
-              name.length > 10 ? name.slice(0, 10) + "..." : name
+              name.length > 7 ? name.slice(0, 7) + "..." : name
             }
           />
           <YAxis

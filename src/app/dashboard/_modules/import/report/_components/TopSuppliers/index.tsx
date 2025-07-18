@@ -72,7 +72,7 @@ const TopSuppliers = ({
       .sort(([, a], [, b]) => b - a)
       .map(([key, value]) => ({ name: key, value }));
 
-    const topFour = sortedData.slice(0, 4);
+    const topFour = sortedData.slice(0, 10);
 
     setChartData(topFour);
   };
@@ -95,7 +95,7 @@ const TopSuppliers = ({
           <XAxis
             dataKey="name"
             tickFormatter={(name) =>
-              name.length > 8 ? name.slice(0, 8) + "..." : name
+              name.length > 7 ? name.slice(0, 7) + "..." : name
             }
           />
           <YAxis
@@ -107,7 +107,7 @@ const TopSuppliers = ({
               return value;
             }}
           />
-          <Tooltip />
+          <Tooltip formatter={(value) => value.toLocaleString()} />
           <Bar dataKey="value" fill="#8884d8" />
         </BarChart>
       </ResponsiveContainer>

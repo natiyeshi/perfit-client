@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../perfit-server"
+		}
+	],
+	"settings": {
+		"workbench.colorCustomizations": {
+			"activityBar.background": "#fa040400",
+			"activityBar.foreground": "#FFFFFF",
+			"activityBar.inactiveForeground": "#FBC108",
+			"activityBar.border": "#383838",
+			"activityBarBadge.background": "#ff016b",
+			"activityBarBadge.foreground": "#FFFFFF"
+		}
+	}
+}

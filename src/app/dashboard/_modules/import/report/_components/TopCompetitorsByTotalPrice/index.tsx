@@ -72,7 +72,7 @@ const TopCompetitorsByTotalPrice = ({
       .sort(([, a], [, b]) => b - a)
       .map(([key, value]) => ({ name: key, total : value }));
 
-    const topFour = sortedData.slice(0, 4);
+    const topFour = sortedData.slice(0, 10);
 
     setChartData(topFour);
   };
@@ -82,7 +82,7 @@ const TopCompetitorsByTotalPrice = ({
   }, [filter, query.isSuccess, importsData]);
 
   return (
-    <div className="w-full h-[70vh]">
+    <div className="w-full h-[70vh] mt-44">
       <h3 className="text-xl text-center mb-1">Top Competitors</h3>
       <h3 className="text-sm text-center mb-2">By Total Price</h3>
       <div className="flex justify-end w-full">
@@ -95,19 +95,13 @@ const TopCompetitorsByTotalPrice = ({
           <XAxis
             dataKey="name"
             tickFormatter={(name) =>
-              name.length > 10 ? name.slice(0, 10) + "..." : name
+              name.length > 7 ? name.slice(0, 7) + "..." : name
             }
           />
           <YAxis
-            tickFormatter={(value) => {
-              if (value >= 1_000_000)
-                return (value / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
-              if (value >= 1_000)
-                return (value / 1_000).toFixed(1).replace(/\.0$/, "") + "K";
-              return value;
-            }}
+            tickFormatter={(value) => value.toLocaleString()}
           />
-          <Tooltip />
+          <Tooltip formatter={(value) => value.toLocaleString()} />
           <Bar dataKey="total" fill="#8884d8" />
         </BarChart>
       </ResponsiveContainer>

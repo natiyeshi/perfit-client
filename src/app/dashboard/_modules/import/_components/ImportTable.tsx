@@ -22,7 +22,7 @@ const ImportTable: React.FC = () => {
     {
       name: "Product Name",
       key: "productName",
-      showDetail: "products",
+      showDetail: "showProducts",
     },
 
     { name: "Supplier Name", key: "supplierName", showDetail: "supplier" },

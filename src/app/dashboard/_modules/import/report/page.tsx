@@ -34,9 +34,9 @@ const Page = () => {
       ) : (
         <>
           {/* {JSON.stringify(importsData, null, 2)} */}
-          <div className="px-2 flex-1 pt-6 overflow-auto grid grid-cols-2 gap-5 gap-y-[10rem]">
+          <div className="px-2 flex-1 pt-6 overflow-auto flex flex-col gap-5 gap-y-[10rem]">
             <div className="col-span-full ">
-              <div className="grid grid-cols-2 mt-12">
+              <div className="grid grid-cols-1 mt-12">
                 <TopCompetitorByQuantity
                   importsData={importsData}
                   query={query}
@@ -48,8 +48,8 @@ const Page = () => {
               </div>
             </div>
             <LeastImportedProduct importsData={importsData} query={query} />
-            <TopImported importsData={importsData} query={query} />
             <TopSuppliers importsData={importsData} query={query} />
+            <TopImported importsData={importsData} query={query} />
             <AverageUnitPrice importsData={importsData} query={query} /> 
             
           </div>

@@ -34,4 +34,5 @@ export interface IDBClientImport extends IDBPopulatedImport {
   supplierName? : string;
   unit? : string,
   totalPrice? : number,
+  showProducts? : any,
 }

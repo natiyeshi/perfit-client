@@ -55,13 +55,15 @@ export const useImportTable = () => {
         k.map((d) => {
           const newDate = new Date(d.date!);
           const da = `${newDate.toLocaleString('en-US', { month: 'short' }).toLowerCase()}-${newDate.getDate()}, ${newDate.getFullYear()}`
+          const a = d.products.map((p)=>p.product.brandName)
           let r: IDBClientImport = {
             ...d,
             productName: `${d.products.length} Products`,
             supplierName: d.supplier.manufacturerName,
             competitorName: d.competitor.name,
             totalPrice: d.amount,
-            date : da
+            date : da,
+            showProducts : a
           };
           res.push(r);
         });

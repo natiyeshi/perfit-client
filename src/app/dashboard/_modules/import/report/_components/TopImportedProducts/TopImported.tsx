@@ -71,9 +71,9 @@ const TopImportedProducts = ({
       .sort(([, a], [, b]) => b - a)
       .map(([key, value]) => ({ name: key, value }));
 
-    const topFour = sortedData.slice(0, 4);
+    const topFour = sortedData.slice(0, 10);
     const othersValue = sortedData
-      .slice(4)
+      .slice(10)
       .reduce((sum, item) => sum + item.value, 0);
     if (othersValue > 0) {
       topFour.push({ name: "Others", value: othersValue });
@@ -106,8 +106,7 @@ const TopImportedProducts = ({
             cy="50%"
             outerRadius={150}
             fill="#8884d8"
-            label
-            
+            label={({ name, value }) => `${name}: ${value.toLocaleString()}`}
           >
             {chartData.map((entry, index) => (
               <Cell
@@ -116,7 +115,7 @@ const TopImportedProducts = ({
               />
             ))}
           </Pie>
-          <Tooltip />
+          <Tooltip formatter={(value) => value.toLocaleString()} />
         </PieChart>
       </ResponsiveContainer>
     </div>
