@@ -43,9 +43,10 @@ const Filter = ({
             <div>Time Period</div>
             <Select
               value={filter.time}
-              onValueChange={(value: string) =>
-                setFilter({ ...filter, time: value as TopCompetitorFilterState["time"] })
-              }
+              onValueChange={(value: string) => {
+                console.log(")))))))((((((((")
+                setFilter({ ...filter, time: value });
+              }}
             >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select Time" />

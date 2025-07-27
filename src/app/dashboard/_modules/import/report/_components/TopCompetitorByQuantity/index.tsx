@@ -59,14 +59,16 @@ const TopCompetitorsByQuantity = ({
     const datas: Record<string, number> = {};
 
     importsData.forEach((d) => {
-      const createdAt = new Date(d.createdAt);
+      const createdAt = new Date(d.date);
       if (!datas[d.competitorId]) {
         datas[d.competitor.name ?? "unkown"] = 0;
       }
       if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
+
         datas[d.competitor.name ?? "unkown"] += d.products.reduce(
           (acc, product) => acc + (product.quantity ?? 0), 0
         );
+
       }
     });
 
@@ -80,6 +82,7 @@ const TopCompetitorsByQuantity = ({
   };
 
   useEffect(() => {
+    console.log(filter,"-Filter")
     getChartData();
   }, [filter, query.isSuccess, importsData]);
 

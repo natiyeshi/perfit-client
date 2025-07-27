@@ -39,8 +39,8 @@ const InnerSideBar = ({
   data: InnerSideBarInf;
 }) => {
   return (
-    <>
-      <div className="min-w-[230px]  ml-[80px] border-r">
+    <div className="flex  max-md:flex-col w-full">
+      <div className="min-w-[230px]   ml-[80px] border-r">
         <div className="h-12 min-h-12 max-h-12 ps-4 text-foreground border-b capitalize text-lg flex">
           <div className="my-auto">{data.name}</div>
         </div>
@@ -56,14 +56,14 @@ const InnerSideBar = ({
         </div>
       </div>
       <RightNav children={children} />
-    </>
+    </div>
   );
 };
 
 export const RightNav = ({ children }: { children: any }) => {
   return (
     <div
-      className={`w-full max-h-screen flex-1 overflow-x-hidden overflow-y-auto`}
+      className={`w-full max-h-screen  max-md:ps-20 flex-1  overflow-x-hidden overflow-y-auto`}
     >
       <div className="w-full flex flex-col  h-full">
         <div className="flex w-full h-12 min-h-12 max-h-12 border-b">
@@ -73,7 +73,7 @@ export const RightNav = ({ children }: { children: any }) => {
             <SupplierMenu />
             <CompetitorMenu />
           </div>
-          <div className="pe-4 flex gap-3">
+          <div className="pe-4 flex gap-3 max-md:hidden">
             <Notifications />
             <Profile />
           </div>
@@ -88,7 +88,7 @@ const Profile = () => {
   const { user } = useUser();
   return (
     <Popover>
-      <PopoverTrigger className="my-auto flex gap-2">
+      <PopoverTrigger className="my-auto  flex gap-2">
         <div className="flex flex-col ">
           <div className="capitalize text-primary font-bold">
             {user.fullName}

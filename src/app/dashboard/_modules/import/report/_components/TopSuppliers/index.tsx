@@ -56,7 +56,7 @@ const TopSuppliers = ({
     const datas: Record<string, number> = {};
 
     importsData.forEach((d) => {
-      const createdAt = new Date(d.createdAt);
+      const createdAt = new Date(d.date);
       if (!datas[d.supplier.manufacturerName]) {
         datas[d.supplier.manufacturerName] = 0;
       }

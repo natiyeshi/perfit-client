@@ -43,7 +43,7 @@ const TopImportedProductsList = ({
     const datas: Record<string, number> = {};
 
     importsData.forEach((d) => {
-      const createdAt = new Date(d.createdAt);
+      const createdAt = new Date(d.date);
       d.products.forEach((p) => {
         if (!datas[p.product.genericName]) {
           datas[p.product.genericName] = 0;

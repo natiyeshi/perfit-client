@@ -72,13 +72,6 @@ const TopImportedProducts = ({
       .map(([key, value]) => ({ name: key, value }));
 
     const topFour = sortedData.slice(0, 10);
-    const othersValue = sortedData
-      .slice(10)
-      .reduce((sum, item) => sum + item.value, 0);
-    if (othersValue > 0) {
-      topFour.push({ name: "Others", value: othersValue });
-    }
-
     setChartData(topFour);
   };
 

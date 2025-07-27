@@ -25,7 +25,7 @@ const ProductMenu = () => {
           className={`flex gap-2 items-center px-2 rounded ${isActive && "text-primary"}`}
         >
           <FaProductHunt className="text-xl" />
-          <div>Products</div>
+          <div className="max-md:hidden">Products</div>
         </div>
       </PopoverTrigger>
       <PopoverContent className="w-80">

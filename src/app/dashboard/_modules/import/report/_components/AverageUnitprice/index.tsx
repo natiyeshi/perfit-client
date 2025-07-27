@@ -51,7 +51,6 @@ const AverageUnitPrice = ({
     const monthAgo = subMonths(new Date(), timeChoices[filter.time]);
     const productMap: Record<string, { total: number; count: number }> = {};
     importsData.forEach((d) => {
-      const createdAt = new Date(d.createdAt);
 
       importsData.forEach((d) => {
         const createdAt = new Date(d.date);

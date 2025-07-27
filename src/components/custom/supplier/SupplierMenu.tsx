@@ -23,7 +23,7 @@ const SupplierMenu = () => {
       <PopoverTrigger asChild>
         <div role="button" className={`flex gap-2 items-center px-2 rounded ${isActive && "text-primary"}`}>
           <FaTruck className="text-xl" />
-          <div>Suppliers</div>
+          <div className="max-md:hidden">Suppliers</div>
         </div>
       </PopoverTrigger>
       <PopoverContent className="w-80">

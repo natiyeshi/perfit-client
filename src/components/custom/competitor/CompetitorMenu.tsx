@@ -26,7 +26,7 @@ const CompetitorMenu = () => {
           }`}
         >
           <IoPersonSharp className="text-xl" />
-          <div>Competitors</div>
+          <div className="max-md:hidden">Competitors</div>
         </div>
       </PopoverTrigger>
       <PopoverContent className="w-80">
