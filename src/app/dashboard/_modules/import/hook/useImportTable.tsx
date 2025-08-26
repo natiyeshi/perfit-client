@@ -59,8 +59,8 @@ export const useImportTable = () => {
           let r: IDBClientImport = {
             ...d,
             productName: `${d.products.length} Products`,
-            supplierName: d.supplier.manufacturerName,
-            competitorName: d.competitor.name,
+            supplierName: d.supplier.manufacturerName && d.supplier.manufacturerName.length > 15 ? d.supplier.manufacturerName.slice(0, 15) + "..." : d.supplier.manufacturerName,
+            competitorName: d.competitor.name && d.competitor.name.length > 15 ? d.competitor.name.slice(0, 15) + "..." : d.competitor.name,
             totalPrice: d.amount,
             date : da,
             showProducts : a
