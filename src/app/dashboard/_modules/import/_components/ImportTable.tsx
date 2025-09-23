@@ -11,6 +11,7 @@ import DeleteImport from "@/components/custom/import/DeleteImport";
 import UpdateImport from "@/components/custom/import/UpdateImport";
 import { IDBClientImport } from "@/types/IImport";
 import CustomeTable from "@/components/custom/table/CustomeTable";
+import TotalShow from "./total";
 const ImportTable: React.FC = () => {
   const { filters, imports, setFilters, filter, reload, query } =
     useImportTable();
@@ -89,6 +90,10 @@ const ImportTable: React.FC = () => {
           UpdateItem={UpdateImport}
           link="/dashboard/admin/import/"
         />
+      </div>
+      <div className="h-10">
+        {/* {imports && imports.length} */}
+        <TotalShow imports={imports} />
       </div>
     </>
   );
