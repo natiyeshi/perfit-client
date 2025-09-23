@@ -36,26 +36,36 @@ const generateColors = (count: number) => {
   return Array.from({ length: count }, (_, i) => colors[i % colors.length]);
 };
 
+const formatCompact = (num: number) => {
+  const abs = Math.abs(num);
+  if (abs >= 1_000_000_000) return `${(num / 1_000_000_000).toFixed(2)}B`;
+  if (abs >= 1_000_000) return `${(num / 1_000_000).toFixed(2)}M`;
+  if (abs >= 1_000) return `${(num / 1_000).toFixed(2)}K`;
+  return `${num.toFixed(2)}`;
+};
+
 export default function TransactionPieChart() {
   const { data, isLoading } = useQuery(
-    "sales-persons",
-    () => axios.get("/sales-persons"),
+    "maraki-dashboard-pie",
+    () => axios.get("maraki/dashboard"),
     {
       onError(err) {
         console.log(err, "EEEEEEEEEEEEEEEEEE ");
-        toast.error("Something goes wrong!!");
+        toast.error("Failed to load dashboard data");
       },
     }
   );
 
   const chartData = useMemo(() => {
-    if (!data) return [];
-
-    const colors = generateColors(data?.data?.result?.salsePersonData.length);
-
-    return data?.data?.result?.salsePersonData.map((person, index) => ({
-      name: person.user.fullName,
-      value: person.transactionCount,
+    const items = data?.data?.result?.Items ?? [];
+    const pie = items.find(
+      (i: any) => i?.Title === "SALES BY CATEGORY(PIE)" && i?.ComponentTypeId === "CHART_DOUGHNUT"
+    );
+    const rows = Array.isArray(pie?.ChartValue?.Data) ? pie.ChartValue.Data : [];
+    const colors = generateColors(rows.length || 0);
+    return rows.map((row: any, index: number) => ({
+      name: row?.label ?? row?.datasetLabel ?? `Item ${index + 1}`,
+      value: Number(row?.data ?? 0),
       fill: colors[index],
     }));
   }, [data]);
@@ -77,10 +87,8 @@ export default function TransactionPieChart() {
     <Card className="flex flex-col">
       <CardHeader className="flex-row items-start space-y-0 pb-0">
         <div className="grid gap-1">
-          <CardTitle>Sales Contribution Chart</CardTitle>
-          <CardDescription>
-            Total Transactions: {data?.data?.result?.totalTransactions}
-          </CardDescription>
+          <CardTitle>SALES BY CATEGORY (PIE)</CardTitle>
+          <CardDescription>CHART_DOUGHNUT</CardDescription>
         </div>
       </CardHeader>
       <CardContent className="flex flex-1 justify-center pb-0">
@@ -123,14 +131,14 @@ export default function TransactionPieChart() {
                         dominantBaseline="middle"
                       >
                         <tspan className="fill-foreground text-3xl font-bold">
-                          {activePerson?.value ?? 0}
+                          {formatCompact(activePerson?.value ?? 0)}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Transactions
+                          Amount
                         </tspan>
                       </text>
                     );

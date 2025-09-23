@@ -29,10 +29,14 @@ const Page = () => {
     {
       title: "Sales",
       divs: [
-        <Incomes key={0} />,
-        <TransactionsPieChart key={1} />,
         <div className="col-span-2 w-fll mb-12" key={2}>
-          <TransactionsLineChart />
+           <Incomes key={0} />,
+        </div>,
+        // <div className="col-span-2 w-fll mb-12" key={2}>
+        //   <TransactionsLineChart />
+        // </div>,
+          <div className="col-span-2 w-fll mb-12" key={2}>
+          <TransactionsPieChart key={1} />,
         </div>,
       ],
     },
