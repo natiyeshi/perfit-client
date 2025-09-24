@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import InventoryLevelChart from "../../_modules/reports/InventoryLevelChart";
+import InventoryCards from "../../_modules/inventory/InventoryCards";
 import TopCompetitorsByQuantity from "../../_modules/reports/TopCompetitorsByQuantity";
 import TransactionsPieChart from "../../_modules/reports/TransactionGraph";
 import TransactionsLineChart from "../../_modules/reports/TransactionLineChart";
@@ -42,7 +42,7 @@ const Page = () => {
     },
     {
       title: "Inventory",
-      divs: [<InventoryLevelChart key={3} />],
+      divs: [<InventoryCards key={3} />],
     },
     {
       title: "Competitors",
