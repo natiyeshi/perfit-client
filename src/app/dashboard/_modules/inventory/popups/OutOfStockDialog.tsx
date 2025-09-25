@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
-const DETAIL_URL = "http://webapp.et:5201/4447673/run/RunDashBoardItemDetailQuery";
+const DETAIL_URL = "/api/proxy/RunDashBoardItemDetailQuery";
 const DASHBOARD_ID = "INV_DASHBOARD";
 const OUT_OF_STOCK_SEQ_ID = "5a3d03d6-8daa-4c19-b1f1-55038eb98692";
 
