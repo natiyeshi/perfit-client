@@ -12,8 +12,7 @@ import ExpiredIn9MonthsDialog from "./popups/ExpiredIn9MonthsDialog";
 import ExpiredIn6MonthsDialog from "./popups/ExpiredIn6MonthsDialog";
 import ExpiredIn3MonthsDialog from "./popups/ExpiredIn3MonthsDialog";
 
-const INVENTORY_DASHBOARD_URL =
-  "http://webapp.et:5201/4447673/run/ListRunDashBoardItemsQuery";
+const INVENTORY_DASHBOARD_URL = "/api/proxy/ListRunDashBoardItemsQuery";
 
 async function fetchInventoryDashboard(): Promise<DashboardItem[]> {
   const res = await axios.post<DashboardResponse>(INVENTORY_DASHBOARD_URL, {
