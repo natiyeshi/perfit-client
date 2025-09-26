@@ -91,7 +91,7 @@ const ExpiryAnalsis: React.FC<Props> = ({ inventoryData, query }) => {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Bar dataKey="value" fill="#8884d8" />
+          <Bar dataKey="value" fill="#2E7D8A" />
         </BarChart>
       </ResponsiveContainer>
     </div>

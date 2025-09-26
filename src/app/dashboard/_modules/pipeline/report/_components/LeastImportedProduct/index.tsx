@@ -16,7 +16,7 @@ import axios from "@/lib/axios";
 import { IDBPopulatedImport } from "@/types/IImport";
 import toast from "react-hot-toast";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#2E7D8A"];
 
 type TimeChoice =
   | "all"
@@ -98,7 +98,7 @@ const LeastImportedProducts = ({
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Bar dataKey="value" width={10} fill="#8884d8" />
+          <Bar dataKey="value" width={10} fill="#2E7D8A" />
         </BarChart>
       </ResponsiveContainer>
     </div>

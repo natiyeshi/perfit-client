@@ -13,7 +13,7 @@ import { subMonths, isAfter } from "date-fns";
 import Filter from "./Filter";
 import { IDBPopulatedImport } from "@/types/IImport";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#2E7D8A"];
 
 type TimeChoice =
   | "all"
@@ -108,7 +108,7 @@ const TopSuppliers = ({
             }}
           />
           <Tooltip formatter={(value) => value.toLocaleString()} />
-          <Bar dataKey="value" fill="#8884d8" />
+          <Bar dataKey="value" fill="#2E7D8A" />
         </BarChart>
       </ResponsiveContainer>
     </div>

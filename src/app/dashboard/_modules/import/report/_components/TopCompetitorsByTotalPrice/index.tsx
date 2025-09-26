@@ -16,7 +16,7 @@ import axios from "@/lib/axios";
 import { IDBPopulatedImport } from "@/types/IImport";
 import toast from "react-hot-toast";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#2E7D8A"];
 
 type TimeChoice =
   | "all"
@@ -60,17 +60,20 @@ const TopCompetitorsByTotalPrice = ({
 
     importsData.forEach((d) => {
       const createdAt = new Date(d.date!);
-      if (!datas[d.competitorId]) {
-        datas[d.competitor.name ?? "unkown"] = 0;
+      if (!datas[d.competitor.name ?? "unknown"]) {
+        datas[d.competitor.name ?? "unknown"] = 0;
       }
       if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
-        datas[d.competitor.name ?? "unkown"] += d.amount;
+        datas[d.competitor.name ?? "unknown"] += d.amount;
       }
     });
+
 
     const sortedData = Object.entries(datas)
       .sort(([, a], [, b]) => b - a)
       .map(([key, value]) => ({ name: key, total : value }));
+    
+    console.log(sortedData)
 
     const topFour = sortedData.slice(0, 10);
 
@@ -82,7 +85,7 @@ const TopCompetitorsByTotalPrice = ({
   }, [filter, query.isSuccess, importsData]);
 
   return (
-    <div className="w-full h-[70vh] mt-44">
+    <div className="w-full h-[70vh] mt-12">
       <h3 className="text-xl text-center mb-1">Top Competitors</h3>
       <h3 className="text-sm text-center mb-2">By Total Price</h3>
       <div className="flex justify-end w-full">
@@ -108,7 +111,7 @@ const TopCompetitorsByTotalPrice = ({
             }}
           />
           <Tooltip formatter={(value) => value.toLocaleString()} />
-          <Bar dataKey="total" fill="#8884d8" />
+          <Bar dataKey="total" fill="#2E7D8A" />
         </BarChart>
       </ResponsiveContainer>
     </div>

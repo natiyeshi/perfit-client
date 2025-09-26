@@ -6,7 +6,7 @@ import Filter from "./Filter";
 import { IDBPopulatedImport } from "@/types/IImport";
 
 // Time filter types and choices
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#2E7D8A"];
 type TimeChoice =
   | "all"
   | "last month"

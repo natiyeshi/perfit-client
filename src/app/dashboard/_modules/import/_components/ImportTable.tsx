@@ -81,7 +81,7 @@ const ImportTable: React.FC = () => {
             )
         )}
       </div>
-      <div className="overflow-scroll flex-1">
+      <div className="overflow-auto flex-1">
         <CustomeTable
           query={query}
           headers={headers}

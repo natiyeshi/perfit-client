@@ -36,11 +36,11 @@ const Page = () => {
           {/* {JSON.stringify(importsData, null, 2)} */}
           <div className="px-2 flex-1 pt-6 overflow-auto flex flex-col gap-5 gap-y-[10rem]">
             <div className="col-span-full ">
-              <div className="grid grid-cols-1 mt-12">
-                <TopCompetitorByQuantity
+              <div className="grid grid-cols-1 ">
+                {/* <TopCompetitorByQuantity
                   importsData={importsData}
                   query={query}
-                />
+                /> */}
                 <TopCompetitorByTotalPrice
                   importsData={importsData}
                   query={query}

@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import { IDBClientImport, IDBPopulatedImport } from "@/types/IImport";
 import toast, { Toaster } from "react-hot-toast";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#2E7D8A"];
 
 type TimeChoice =
   | "all"
@@ -101,7 +101,7 @@ const TopImportedProducts = ({
             cx="50%"
             cy="50%"
             outerRadius={150}
-            fill="#8884d8"
+            fill="#2E7D8A"
             label
           >
             {chartData.map((entry, index) => (
