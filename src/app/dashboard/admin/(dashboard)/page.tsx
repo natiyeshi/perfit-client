@@ -1,99 +1,164 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useState } from "react";
+import React from "react";
+
+// Components
 import InventoryCards from "../../_modules/inventory/InventoryCards";
 import TopCompetitorsByQuantity from "../../_modules/reports/TopCompetitorsByQuantity";
 import TransactionsPieChart from "../../_modules/reports/TransactionGraph";
-import TransactionsLineChart from "../../_modules/reports/TransactionLineChart";
-import { useState } from "react";
 import Incomes from "../../_modules/reports/Incomes";
-import { useQuery } from "react-query";
-import axios from "@/lib/axios";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import React from "react";
 import Reports from "../../_modules/reports/Reports";
-import T from "./t";
+
+// Icons
+import { BarChart2, LineChart, Box, Users, FileText } from "lucide-react";
+
+const tabData = [
+  { 
+    id: "all", 
+    label: "All",
+    icon: <BarChart2 className="w-4 h-4 mr-2" />
+  },
+  { 
+    id: "sales", 
+    label: "Sales",
+    icon: <LineChart className="w-4 h-4 mr-2" />
+  },
+  { 
+    id: "inventory", 
+    label: "Inventory",
+    icon: <Box className="w-4 h-4 mr-2" />
+  },
+  { 
+    id: "competitors", 
+    label: "Competitors",
+    icon: <Users className="w-4 h-4 mr-2" />
+  },
+  { 
+    id: "reports", 
+    label: "Reports",
+    icon: <FileText className="w-4 h-4 mr-2" />
+  },
+];
 
 const Page = () => {
-  const [currentTab, setCurrentTab] = useState("All");
+  const [currentTab, setCurrentTab] = useState("all");
 
-  const data = [
-    
-    {
-      title: "Sales",
-      divs: [
-        <div className="col-span-2 w-fll mb-12" key={2}>
-           <Incomes key={0} />,
-        </div>,
-        // <div className="col-span-2 w-fll mb-12" key={2}>
-        //   <TransactionsLineChart />
-        // </div>,
-          <div className="col-span-2 w-fll mb-12" key={2}>
-          <TransactionsPieChart key={1} />,
-        </div>,
-      ],
-    },
-    {
-      title: "Inventory",
-      divs: [<InventoryCards key={3} />],
-    },
-    {
-      title: "Competitors",
-      divs: [<TopCompetitorsByQuantity key={4} />],
-    },
-  ];
+  const renderTabContent = () => {
+    switch (currentTab) {
+      case 'reports':
+        return <Reports />;
+      case 'all':
+        return (
+          <>
+            <div className="col-span-2">
+              <Card className="h-full border-0 shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold text-foreground/90">Sales Overview</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Incomes />
+                </CardContent>
+              </Card>
+            </div>
+            
+            <div className="col-span-1">
+              <Card className="h-full border-0 shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold text-foreground/90">Transaction Distribution</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <TransactionsPieChart />
+                </CardContent>
+              </Card>
+            </div>
 
-  const titles = data.map((item) => item.title).reverse();
+            <div className="col-span-3">
+              <Card className="border-0 shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold text-foreground/90">Inventory Status</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <InventoryCards />
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="col-span-3">
+              <Card className="border-0 shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold text-foreground/90">Top Competitors</CardTitle>
+                </CardHeader>
+                <CardContent className="">
+                  <TopCompetitorsByQuantity />
+                </CardContent>
+              </Card>
+            </div>
+          </>
+        );
+      default:
+        return (
+          <div className="col-span-3">
+            {currentTab === 'sales' && (
+              <Card className="border-0 shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold text-foreground/90">Sales Analytics</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="md:col-span-2">
+                      <Incomes />
+                    </div>
+                    <div>
+                      <TransactionsPieChart />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+            {currentTab === 'inventory' && <InventoryCards />}
+            {currentTab === 'competitors' && <TopCompetitorsByQuantity />}
+          </div>
+        );
+    }
+  };
 
   return (
-    <div className="ps-[100px] pe-12   mt-4">
-      <div className="col-span-3 mt-4 mb-10">
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-      </div>
-      <div className="flex gap-5 mb-5">
-        <Button
-          variant={`${"All" == currentTab ? "default" : "outline"}`}
-          onClick={() => setCurrentTab("All")}
+    <div className="min-h-screen bg-gradient-to-br from-background to-muted/20 p-6 md:p-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            Dashboard Overview
+          </h1>
+          <p className="text-muted-foreground mt-2">
+            Track and analyze your business performance
+          </p>
+        </div>
+
+        <Tabs 
+          value={currentTab} 
+          onValueChange={setCurrentTab}
+          className="mb-8"
         >
-          All
-        </Button>
-        {titles.map((item, index) => (
-          <Button
-            variant={`${item == currentTab ? "default" : "outline"}`}
-            onClick={() => setCurrentTab(item)}
-            key={index}
-          >
-            {item}
-          </Button>
-        ))}
-        <Button
-          variant={`${"Reports" == currentTab ? "default" : "outline"}`}
-          onClick={() => setCurrentTab("Reports")}
-        >
-          Reports
-        </Button>
-      </div>
-      <div className="grid grid-cols-3 gap-x-6 gap-y-6">
-        {currentTab == "Reports" ? (
-          <Reports />
-        ) : (
-          data.map(
-            (item, index) =>
-              (currentTab == "All" || item.title == currentTab) &&
-              item.divs.map((div: any, divIndex) => (
-                <React.Fragment key={`${index}-${divIndex}`}>
-                  {div}
-                </React.Fragment>
-              ))
-          )
-        )}
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 p-1.5 bg-muted/20 rounded-xl">
+            {tabData.map((tab) => (
+              <TabsTrigger 
+                key={tab.id}
+                value={tab.id}
+                className="flex items-center justify-center py-2 px-3 text-sm font-medium rounded-lg transition-all data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-foreground data-[state=active]:border"
+              >
+                {tab.icon}
+                {tab.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {renderTabContent()}
+        </div>
       </div>
     </div>
   );

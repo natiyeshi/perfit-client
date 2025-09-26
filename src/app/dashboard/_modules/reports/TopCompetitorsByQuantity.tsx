@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { BarChart, Bar, XAxis, CartesianGrid, LabelList } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList } from "recharts";
 import { subMonths, isAfter } from "date-fns";
 import { useQuery } from "react-query";
 import axios from "@/lib/axios";
@@ -84,14 +84,14 @@ const TopCompetitorsByQuantity = () => {
   };
 
   return (
-    <Card className="w-full h-[70vh]">
+    <Card className="w-full p-2">
       <CardHeader>
         <CardTitle className="text-center">Top Competitors</CardTitle>
         <CardDescription className="text-center">By Quantity</CardDescription>
         <div className="flex justify-end"></div>
       </CardHeader>
 
-      <CardContent className="h-[50vh]">
+      <CardContent className="">
         {isLoading ? (
           <div className="text-center text-muted-foreground">Loading...</div>
         ) : isError ? (
@@ -105,10 +105,34 @@ const TopCompetitorsByQuantity = () => {
                 tickLine={false}
                 tickMargin={10}
                 axisLine={false}
+                tickFormatter={(name) => name.length > 10 ? `${name.substring(0, 10)}...` : name}
+              />
+              <YAxis
+                tickFormatter={(value) => {
+                  if (value >= 1_000_000) {
+                    return (value / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
+                  }
+                  if (value >= 1_000) {
+                    return (value / 1_000).toFixed(1).replace(/\.0$/, '') + 'K';
+                  }
+                  return value.toString();
+                }}
+                tickLine={false}
+                axisLine={false}
               />
               <ChartTooltip
                 cursor={false}
-                content={<ChartTooltipContent hideLabel />}
+                content={({ active, payload, label }) => {
+                  if (active && payload && payload.length) {
+                    return (
+                      <div className="bg-background p-2 border rounded">
+                        <p className="font-medium">{label}</p>
+                        <p>{Number(payload[0].value).toLocaleString()}</p>
+                      </div>
+                    );
+                  }
+                  return null;
+                }}
               />
               <Bar dataKey="value" fill="#2B8890" radius={8}>
                 <LabelList
@@ -116,6 +140,15 @@ const TopCompetitorsByQuantity = () => {
                   offset={12}
                   className="fill-foreground"
                   fontSize={12}
+                  formatter={(value) => {
+                    if (value >= 1_000_000) {
+                      return (value / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
+                    }
+                    if (value >= 1_000) {
+                      return (value / 1_000).toFixed(1).replace(/\.0$/, '') + 'K';
+                    }
+                    return value;
+                  }}
                 />
               </Bar>
             </BarChart>

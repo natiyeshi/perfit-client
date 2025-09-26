@@ -15,7 +15,7 @@ import ShowSchema from "./ShowSchema";
 import Link from "next/link";
 
 // Format date helper function
-const formatDate = (dateString: string): string => {
+export const formatDate = (dateString: string): string => {
   try {
     const date = new Date(dateString);
     if (isNaN(date.getTime())) return dateString;
