@@ -3,6 +3,8 @@ import { Metadata } from 'next';
 import "./globals.css";
 import Providers from "@/providers/Providers";
 import dynamic from "next/dynamic";
+import PullRefresh from "./refresh";
+
 export const metadata: Metadata = {
   title: "Perfit",
   description: "Perfit Application",
@@ -23,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
       <body className="bg-background text-foreground  max-h-screen overflow-hidden ">
+        <PullRefresh />
         <Providers>{children}</Providers>
       </body>
     </html>

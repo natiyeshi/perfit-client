@@ -103,7 +103,7 @@ const MainSideBar = () => {
   const roles = new Set(["admin", "sales", "feeder"]);
   const role: any = roles.has(user.role) ? user.role : "any";
   return (
-    <div className="w-20  absolute  group pb-6 hover:w-[240px]  duration-300 border-r bg-[#f8f8f8] min-h-screen flex flex-col overflow-y-auto overflow-x-hidden z-50">
+    <div className="w-20 max-md:hidden absolute  group pb-6 hover:w-[240px]  duration-300 border-r bg-[#f8f8f8] min-h-screen flex flex-col overflow-y-auto overflow-x-hidden z-50">
       <div className="w-full h-12 min-h-12 max-h-12  flex">
         <div className="m-auto text-center  capitalize font-semibold  rounded-full p-1">
           <Image className="w-[25px]" src={logo} alt="Logo" />
