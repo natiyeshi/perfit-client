@@ -1,10 +1,16 @@
 import { Inter } from "next/font/google";
+import { Metadata } from 'next';
 import "./globals.css";
 import Providers from "@/providers/Providers";
 import dynamic from "next/dynamic";
-export const metadata = {
-  metadataBase: "Perfit Pharma",
-  title: "Saas",
+export const metadata: Metadata = {
+  title: "Perfit",
+  description: "Perfit Application",
+  manifest: "/manifest.json",
+  themeColor: "#000000",
+  icons: {
+    apple: "/icon-192x192.png",
+  },
 };
 
 const inter = Inter({ subsets: ["latin"] });

@@ -1,4 +1,441 @@
-todo 
- - add data
- - add 2 anlysis
- - 
+GET /.env 404 3.371 ms - 70
+0|main-ser | GET /api/.env 404 1.399 ms - 74
+0|main-ser | GET /backend/.env 404 0.658 ms - 78
+0|main-ser | GET /admin/.env 404 0.812 ms - 76
+0|main-ser | GET /.env.example 404 0.727 ms - 78
+0|main-ser | GET /app_dev.php/_profiler/phpinfo 404 1.582 ms - 95
+0|main-ser | GET /?phpinfo=-1 404 1.009 ms - 77
+0|main-ser | GET /laravel/.env 404 0.906 ms - 78
+0|main-ser | GET /.config.yaml 404 1.234 ms - 78
+0|main-ser | GET /info 404 0.851 ms - 70
+0|main-ser | GET /secrets.env 404 1.388 ms - 77
+0|main-ser | GET /core/.env 404 1.394 ms - 75
+0|main-ser | GET /server/.env 404 0.900 ms - 77
+0|main-ser | GET /test/.env 404 1.117 ms - 75
+0|main-ser | GET /web/.env 404 1.190 ms - 74
+0|main-ser | GET /test 404 0.833 ms - 70
+0|main-ser | GET /.env.bak 404 1.195 ms - 74
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 2.672 ms - 92
+0|main-ser | GET / 404 3.606 ms - 66
+0|main-ser | [IMPORT SYNC] Started at 2025-09-27T18:00:00.031Z
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 20373.117 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-27T18:00:00.031Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET /ab2g 404 3.078 ms - 70
+0|main-ser | GET /ab2h 404 1.214 ms - 70
+0|main-ser | GET /alive.php 404 1.246 ms - 75
+0|main-ser | GET / 404 1.431 ms - 66
+0|main-ser | GET / 404 1.546 ms - 66
+0|main-ser | GET /teorema505?t=1 404 0.678 ms - 80
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 3.562 ms - 92
+0|main-ser | GET / 404 3.636 ms - 66
+0|main-ser | GET / 404 3.220 ms - 66
+0|main-ser | GET /.env 404 2.505 ms - 70
+0|main-ser | POST / 404 2.128 ms - 67
+0|main-ser | GET / 404 1.408 ms - 66
+0|main-ser | [IMPORT SYNC] Started at 2025-09-27T19:00:00.028Z
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 25318.402 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-27T19:00:00.028Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 2.068 ms - 92
+0|main-ser | GET / 404 2.891 ms - 66
+0|main-ser | GET / 404 0.901 ms - 66
+0|main-ser | GET / 404 0.702 ms - 66
+0|main-ser | GET / 404 0.613 ms - 66
+0|main-ser | GET / 404 0.662 ms - 66
+0|main-ser | GET /webui 404 0.618 ms - 71
+0|main-ser | GET /webui 404 0.583 ms - 71
+0|main-ser | GET / 404 0.574 ms - 66
+0|main-ser | GET / 404 1.106 ms - 66
+0|main-ser | GET / 404 1.396 ms - 66
+0|main-ser | GET /webui 404 1.163 ms - 71
+0|main-ser | GET /favicon.ico 404 0.895 ms - 77
+0|main-ser | GET /favicon.ico 404 0.753 ms - 77
+0|main-ser | GET / 404 0.694 ms - 66
+0|main-ser | GET /owa/ 404 1.506 ms - 70
+0|main-ser | GET /owa/ 404 0.752 ms - 70
+0|main-ser | GET / 404 1.030 ms - 66
+0|main-ser | GET /owa/ 404 0.828 ms - 70
+0|main-ser | GET /owa/ 404 1.636 ms - 70
+0|main-ser | GET /owa/ 404 1.385 ms - 70
+0|main-ser | GET /owa/ 404 0.593 ms - 70
+0|main-ser | GET / 404 1.636 ms - 66
+0|main-ser | GET / 404 0.985 ms - 66
+0|main-ser | GET / 404 1.252 ms - 66
+0|main-ser | GET / 404 0.820 ms - 66
+0|main-ser | GET /.env 404 4.527 ms - 70
+0|main-ser | POST / 404 1.377 ms - 67
+0|main-ser | GET / 404 1.843 ms - 66
+0|main-ser | GET /cdn-cgi/trace 404 3.673 ms - 79
+0|main-ser | [IMPORT SYNC] Started at 2025-09-27T20:00:00.027Z
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 20220.552 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-27T20:00:00.027Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET / 404 2.397 ms - 66
+0|main-ser | [IMPORT SYNC] Started at 2025-09-27T21:00:00.022Z
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 24259.690 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-27T21:00:00.022Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET / 404 4.662 ms - 66
+0|main-ser | GET /.env 404 1.966 ms - 70
+0|main-ser | GET /.git/config 404 1.219 ms - 77
+0|main-ser | GET /.git/config 404 3.872 ms - 77
+0|main-ser | GET / 404 3.357 ms - 66
+0|main-ser | [IMPORT SYNC] Started at 2025-09-27T22:00:00.031Z
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 20569.627 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-27T22:00:00.031Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET /?XDEBUG_SESSION_START=phpstorm 404 2.429 ms - 96
+0|main-ser | GET / 404 0.900 ms - 66
+0|main-ser | GET /.env 404 2.507 ms - 70
+0|main-ser | POST / 404 2.614 ms - 67
+0|main-ser | GET / 404 4.446 ms - 66
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 4.698 ms - 92
+0|main-ser | GET /proxies.txt 404 0.961 ms - 77
+0|main-ser | [IMPORT SYNC] Started at 2025-09-27T23:00:00.031Z
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 22793.493 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-27T23:00:00.031Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET / 404 4.473 ms - 66
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 5.093 ms - 92
+0|main-ser | GET / 404 4.553 ms - 66
+0|main-ser | GET / 404 3.005 ms - 66
+0|main-ser | GET //wp-includes/wlwmanifest.xml 404 1.244 ms - 94
+0|main-ser | GET //xmlrpc.php?rsd 404 0.889 ms - 81
+0|main-ser | GET / 404 0.925 ms - 66
+0|main-ser | GET //blog/wp-includes/wlwmanifest.xml 404 0.471 ms - 99
+0|main-ser | GET //web/wp-includes/wlwmanifest.xml 404 0.567 ms - 98
+0|main-ser | GET //wordpress/wp-includes/wlwmanifest.xml 404 1.422 ms - 104
+0|main-ser | GET //website/wp-includes/wlwmanifest.xml 404 1.288 ms - 102
+0|main-ser | GET //wp/wp-includes/wlwmanifest.xml 404 1.796 ms - 97
+0|main-ser | GET //news/wp-includes/wlwmanifest.xml 404 0.760 ms - 99
+0|main-ser | GET //2018/wp-includes/wlwmanifest.xml 404 0.507 ms - 99
+0|main-ser | GET //2019/wp-includes/wlwmanifest.xml 404 0.689 ms - 99
+0|main-ser | GET //shop/wp-includes/wlwmanifest.xml 404 0.554 ms - 99
+0|main-ser | GET //wp1/wp-includes/wlwmanifest.xml 404 0.784 ms - 98
+0|main-ser | GET //test/wp-includes/wlwmanifest.xml 404 0.863 ms - 99
+0|main-ser | GET //media/wp-includes/wlwmanifest.xml 404 1.186 ms - 100
+0|main-ser | GET //wp2/wp-includes/wlwmanifest.xml 404 0.741 ms - 98
+0|main-ser | GET //site/wp-includes/wlwmanifest.xml 404 0.780 ms - 99
+0|main-ser | GET //cms/wp-includes/wlwmanifest.xml 404 0.668 ms - 98
+0|main-ser | GET //sito/wp-includes/wlwmanifest.xml 404 0.683 ms - 99
+0|main-ser | GET / 404 2.903 ms - 66
+0|main-ser | GET / 404 1.979 ms - 66
+0|main-ser | [IMPORT SYNC] Started at 2025-09-28T00:00:00.035Z
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 18675.167 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-28T00:00:00.035Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET / 404 5.751 ms - 66
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 0.545 ms - 92
+0|main-ser | GET / 404 1.250 ms - 66
+0|main-ser | GET /webui/ 404 1.399 ms - 72
+0|main-ser | GET /favicon.ico 404 4.833 ms - 77
+0|main-ser | GET / 404 1.224 ms - 66
+0|main-ser | GET /geoserver/web/ 404 3.424 ms - 80
+0|main-ser | GET /.git/config 404 1.447 ms - 77
+0|main-ser | GET / 404 4.302 ms - 66
+0|main-ser | GET /actuator/gateway/routes 404 4.016 ms - 89
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 4.882 ms - 92
+0|main-ser | GET /.env 404 1.270 ms - 70
+0|main-ser | POST / 404 1.373 ms - 67
+0|main-ser | [IMPORT SYNC] Started at 2025-09-28T01:00:00.032Z
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 22218.309 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-28T01:00:00.032Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET / 404 2.500 ms - 66
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 15.610 ms - 92
+0|main-ser | [IMPORT SYNC] Started at 2025-09-28T02:00:00.029Z
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 24014.889 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-28T02:00:00.029Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 5.243 ms - 92
+0|main-ser | GET / 404 2.460 ms - 66
+0|main-ser | GET /RDWeb/Pages/ 404 5.077 ms - 78
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 4.373 ms - 92
+0|main-ser | [IMPORT SYNC] Started at 2025-09-28T03:00:00.032Z
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 20187.189 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-28T03:00:00.032Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET /v2/_catalog 404 1.006 ms - 77
+0|main-ser | GET /_cat/indices 404 0.580 ms - 78
+0|main-ser | GET /server-status 404 0.566 ms - 79
+0|main-ser | GET /swagger.json 404 0.617 ms - 78
+0|main-ser | GET /.env 404 0.724 ms - 70
+0|main-ser | GET /.git/config 404 0.655 ms - 77
+0|main-ser | GET /.svn/entries 404 0.475 ms - 78
+0|main-ser | GET /v1/kv/?keys 404 0.429 ms - 77
+0|main-ser | GET /api-docs.json 404 0.586 ms - 79
+0|main-ser | GET /.svn/wc.db 404 0.660 ms - 76
+0|main-ser | GET /openapi.json 404 0.640 ms - 78
+0|main-ser | GET /swagger/v1/swagger.json 404 0.525 ms - 89
+0|main-ser | GET /docs.json 404 0.452 ms - 75
+0|main-ser | GET /documentation 404 0.549 ms - 79
+0|main-ser | GET /api/swagger.json 404 0.468 ms - 82
+0|main-ser | GET /api/openapi.json 404 0.623 ms - 82
+0|main-ser | GET /api-docs 404 1.130 ms - 74
+0|main-ser | GET /v2/api-docs 404 1.083 ms - 77
+0|main-ser | GET /v3/api-docs 404 0.506 ms - 77
+0|main-ser | GET /.env 404 3.340 ms - 70
+0|main-ser | GET /backend/.env 404 1.816 ms - 78
+0|main-ser | GET /api/.env 404 1.133 ms - 74
+0|main-ser | GET /admin/.env 404 1.861 ms - 76
+0|main-ser | GET /?phpinfo=-1 404 0.631 ms - 77
+0|main-ser | GET /app_dev.php/_profiler/phpinfo 404 1.494 ms - 95
+0|main-ser | GET /.env.example 404 1.181 ms - 78
+0|main-ser | GET /phpinfo/ 404 0.817 ms - 74
+0|main-ser | GET /server/.env 404 1.009 ms - 77
+0|main-ser | GET /phpinfo.php 404 1.261 ms - 77
+0|main-ser | GET /laravel/.env 404 1.384 ms - 78
+0|main-ser | GET /core/.env 404 1.824 ms - 75
+0|main-ser | GET /info/ 404 1.282 ms - 71
+0|main-ser | GET /web/.env 404 1.229 ms - 74
+0|main-ser | GET /test/.env 404 1.352 ms - 75
+0|main-ser | GET /test 404 1.413 ms - 70
+0|main-ser | GET /app_dev.php/_profiler/open?file=app/config/parameters.yml 404 1.023 ms - 123
+0|main-ser | GET /secrets.env 404 1.392 ms - 77
+0|main-ser | GET /.env.bak 404 1.067 ms - 74
+0|main-ser | GET /info 404 1.072 ms - 70
+0|main-ser | GET /app/.env 404 2.211 ms - 74
+0|main-ser | GET /.env.local 404 1.030 ms - 76
+0|main-ser | GET /docs/.env 404 1.527 ms - 75
+0|main-ser | GET /cms/.env 404 1.259 ms - 74
+0|main-ser | GET /sendgrid/.env 404 1.335 ms - 79
+0|main-ser | GET /staging/.env 404 1.323 ms - 78
+0|main-ser | GET /download/.env 404 0.895 ms - 79
+0|main-ser | GET /new/.env 404 1.077 ms - 74
+0|main-ser | GET /old/.env 404 1.457 ms - 74
+0|main-ser | GET /.env.production 404 0.572 ms - 81
+0|main-ser | GET /v2/.env 404 0.798 ms - 73
+0|main-ser | [IMPORT SYNC] Started at 2025-09-28T04:00:00.020Z
+0|main-ser | GET / 404 1.319 ms - 66
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 22014.082 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-28T04:00:00.020Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 3.102 ms - 92
+0|main-ser | GET /.git/config 404 3.282 ms - 77
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 13.937 ms - 92
+0|main-ser | GET / 404 5.890 ms - 66
+0|main-ser | [IMPORT SYNC] Started at 2025-09-28T05:00:00.025Z
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 23386.291 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-28T05:00:00.025Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 4.273 ms - 92
+0|main-ser | GET / 404 2.399 ms - 66
+0|main-ser | GET / 404 1.590 ms - 66
+0|main-ser | GET / 404 3.392 ms - 66
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 3.451 ms - 92
+0|main-ser | [IMPORT SYNC] Started at 2025-09-28T06:00:00.022Z
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 22194.621 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-28T06:00:00.022Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET /.git/index 404 3.954 ms - 76
+0|main-ser | GET /.env 404 6.138 ms - 70
+0|main-ser | POST / 404 1.561 ms - 67
+0|main-ser | GET / 404 2.463 ms - 66
+0|main-ser | GET / 404 3.776 ms - 66
+0|main-ser | [IMPORT SYNC] Started at 2025-09-28T07:00:00.028Z
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 22151.142 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-28T07:00:00.028Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 3.260 ms - 92
+0|main-ser | GET / 404 1.934 ms - 66
+0|main-ser | GET /.well-known/security.txt 404 0.729 ms - 90
+0|main-ser | GET /.env 404 3.735 ms - 70
+0|main-ser | GET /.git/config 404 1.251 ms - 77
+0|main-ser | GET / 404 2.541 ms - 66
+0|main-ser | GET /favicon.ico 404 0.641 ms - 77
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 3.267 ms - 92
+0|main-ser | [IMPORT SYNC] Started at 2025-09-28T08:00:00.029Z
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 20204.204 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-28T08:00:00.029Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET / 404 3.543 ms - 66
+0|main-ser | GET /favicon.ico 404 0.649 ms - 77
+0|main-ser | GET / 404 4.803 ms - 66
+0|main-ser | GET /cgi-bin/luci/;stok=/locale 404 4.488 ms - 92
+0|main-ser | GET / 404 2.748 ms - 66
+0|main-ser | GET / 404 5.056 ms - 66
+0|main-ser | GET /remote/login 404 5.001 ms - 78
+0|main-ser | GET /login 404 1.226 ms - 71
+0|main-ser | [IMPORT SYNC] Started at 2025-09-28T09:00:00.027Z
+0|main-ser | ✅ EFDA API Response:
+0|main-ser | [SYNC] All imports processed. Synced: 0, Skipped: 40
+0|main-ser | GET /api/v1/import-sync 200 20039.265 ms - 70
+0|main-ser | [IMPORT SYNC] Completed at 2025-09-28T09:00:00.027Z
+0|main-ser | Status: 200 OK
+0|main-ser | { message: 'All imports processed.', syncedCount: 0, skippedCount: 40 }
+0|main-ser | GET /.env 404 2.826 ms - 70
+0|main-ser | POST / 404 1.239 ms - 67
+0|main-ser | GET / 404 2.154 ms - 66
+0|main-ser | GET / 404 0.615 ms - 66
+0|main-ser | GET / 404 1.061 ms - 66
+0|main-ser | GET / 404 3.410 ms - 66
+0|main-ser | GET /?=PHPE9568F36-D428-11d2-A769-00AA001ACF42 404 0.681 ms - 107
+0|main-ser | GET / 404 0.835 ms - 66
+0|main-ser | HEAD / 404 0.971 ms - 67
+0|main-ser | GET / 404 0.497 ms - 66
+0|main-ser | POST /scripts/WPnBr.dll 404 0.557 ms - 84
+0|main-ser | GET / 404 0.528 ms - 66
+0|main-ser | HEAD / 404 0.368 ms - 67
+0|main-ser | GET /index.jhtml 404 0.421 ms - 77
+0|main-ser | GET /CSS/Miniweb.css 404 0.406 ms - 81
+0|main-ser | GET /SNIr 404 0.340 ms - 70
+0|main-ser | POST /sdk 404 0.361 ms - 70
+0|main-ser | GET /?=PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000 404 1.172 ms - 107
+0|main-ser | GET /default.jhtml 404 1.138 ms - 79
+0|main-ser | HEAD / 404 2.482 ms - 67
+0|main-ser | GET /nmaplowercheck1759050876 404 1.322 ms - 90
+0|main-ser | GET /index.jhtml 404 0.935 ms - 77
+0|main-ser | GET /nmaplowercheck1759050876 404 0.779 ms - 90
+0|main-ser | POST /sdk 404 0.770 ms - 70
+0|main-ser | GET /CSS/Miniweb.css 404 0.682 ms - 81
+0|main-ser | GET / 404 0.886 ms - 66
+0|main-ser | GET / 404 1.088 ms - 66
+0|main-ser | GET /qXb1 404 1.103 ms - 70
+0|main-ser | GET /start.jsp 404 0.656 ms - 75
+0|main-ser | GET /HNAP1 404 1.115 ms - 71
+0|main-ser | GET / 404 0.949 ms - 66
+0|main-ser | GET /pools/default/buckets 404 6.035 ms - 87
+0|main-ser | GET /default.jhtml 404 0.828 ms - 79
+0|main-ser | GET /nmaplowercheck1759050876 404 0.911 ms - 90
+0|main-ser | GET /rest/applinks/1.0/manifest 404 0.572 ms - 92
+0|main-ser | GET / 404 1.439 ms - 66
+0|main-ser | GET / 404 1.112 ms - 66
+0|main-ser | GET / 404 0.927 ms - 66
+0|main-ser | GET /localstart.jhtml 404 0.592 ms - 82
+0|main-ser | GET /start.jsp 404 1.141 ms - 75
+0|main-ser | GET /pools 404 1.113 ms - 71
+0|main-ser | GET /pools/default/buckets 404 0.889 ms - 87
+0|main-ser | GET /confluence/rest/applinks/1.0/manifest 404 0.954 ms - 103
+0|main-ser | GET /HNAP1 404 1.023 ms - 71
+0|main-ser | GET /Portal/Portal.mwsl 404 0.909 ms - 84
+0|main-ser | GET /Portal0000.htm 404 3.883 ms - 80
+0|main-ser | GET /Portal/Portal.mwsl 404 0.702 ms - 84
+0|main-ser | GET /index.pl 404 1.183 ms - 74
+0|main-ser | GET /HNAP1 404 0.974 ms - 71
+0|main-ser | GET /favicon.ico 404 1.282 ms - 77
+0|main-ser | GET /localstart.jhtml 404 1.144 ms - 82
+0|main-ser | GET /favicon.ico 404 0.869 ms - 77
+0|main-ser | GET /?=PHPE9568F36-D428-11d2-A769-00AA001ACF42 404 0.639 ms - 107
+0|main-ser | GET /pools 404 0.878 ms - 71
+0|main-ser | GET /docs/cplugError.html/ 404 1.020 ms - 87
+0|main-ser | GET /docs/cplugError.html/ 404 1.043 ms - 87
+0|main-ser | GET /__Additional 404 0.992 ms - 78
+0|main-ser | GET /4Ndv 404 0.718 ms - 70
+0|main-ser | GET /default.pl 404 1.168 ms - 76
+0|main-ser | GET /index.pl 404 1.194 ms - 74
+0|main-ser | GET /?=PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000 404 1.447 ms - 107
+0|main-ser | GET /default.php 404 1.734 ms - 77
+0|main-ser | GET /favicon.ico 404 1.035 ms - 77
+0|main-ser | GET /default.pl 404 0.762 ms - 76
+0|main-ser | GET /rest/applinks/1.0/manifest 404 0.767 ms - 92
+0|main-ser | GET /Portal0000.htm 404 1.465 ms - 80
+0|main-ser | GET /.git/HEAD 404 0.912 ms - 75
+0|main-ser | GET /indice.jsp 404 0.592 ms - 76
+0|main-ser | GET /default.php 404 0.994 ms - 77
+0|main-ser | GET /confluence/rest/applinks/1.0/manifest 404 0.987 ms - 103
+0|main-ser | GET /Portal0000.htm 404 0.515 ms - 80
+0|main-ser | GET /pools/default/buckets 404 0.478 ms - 87
+0|main-ser | GET /default.aspx 404 0.420 ms - 78
+0|main-ser | GET /__Additional 404 0.369 ms - 78
+0|main-ser | GET /CSS/Miniweb.css 404 1.074 ms - 81
+0|main-ser | GET /indice.jsp 404 0.854 ms - 76
+0|main-ser | GET /.git/HEAD 404 0.957 ms - 75
+0|main-ser | GET /?=PHPE9568F36-D428-11d2-A769-00AA001ACF42 404 0.959 ms - 107
+0|main-ser | GET /__Additional 404 1.029 ms - 78
+0|main-ser | HEAD / 404 1.033 ms - 67
+0|main-ser | GET /pools 404 0.538 ms - 71
+0|main-ser | GET /localstart.jsa 404 0.383 ms - 80
+0|main-ser | GET /default.aspx 404 0.726 ms - 78
+0|main-ser | GET /?=PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000 404 0.518 ms - 107
+0|main-ser | GET /index.jhtml 404 0.936 ms - 77
+0|main-ser | GET /.git/HEAD 404 0.875 ms - 75
+0|main-ser | POST /sdk 404 0.786 ms - 70
+0|main-ser | GET /Portal/Portal.mwsl 404 0.594 ms - 84
+0|main-ser | GET /readme.txt 404 0.623 ms - 76
+0|main-ser | GET /rest/applinks/1.0/manifest 404 0.987 ms - 92
+0|main-ser | GET /localstart.jsa 404 0.730 ms - 80
+0|main-ser | GET /default.jhtml 404 1.136 ms - 79
+0|main-ser | GET / 404 0.947 ms - 66
+0|main-ser | GET /docs/cplugError.html/ 404 3.328 ms - 87
+0|main-ser | GET /base.jsp 404 0.964 ms - 74
+0|main-ser | GET /confluence/rest/applinks/1.0/manifest 404 0.811 ms - 103
+0|main-ser | GET /readme.txt 404 0.558 ms - 76
+0|main-ser | GET /start.jsp 404 1.137 ms - 75
+0|main-ser | GET /admin.cfm 404 0.572 ms - 75
+0|main-ser | GET /base.jsp 404 1.495 ms - 74
+0|main-ser | GET /localstart.jhtml 404 1.317 ms - 82
+0|main-ser | GET /indice.pl 404 1.329 ms - 75
+0|main-ser | GET /admin.cfm 404 0.797 ms - 75
+0|main-ser | GET /index.pl 404 5.744 ms - 74
+0|main-ser | GET /menu.aspx 404 0.613 ms - 75
+0|main-ser | GET /indice.pl 404 1.000 ms - 75
+0|main-ser | GET /default.pl 404 0.968 ms - 76
+0|main-ser | GET /base.aspx 404 0.987 ms - 75
+0|main-ser | GET /menu.aspx 404 0.623 ms - 75
+0|main-ser | GET /default.php 404 1.252 ms - 77
+0|main-ser | GET /admin.pl 404 1.100 ms - 74
+0|main-ser | GET /base.aspx 404 0.825 ms - 75
+0|main-ser | GET /indice.jsp 404 0.802 ms - 76
+0|main-ser | GET /inicio.html 404 0.641 ms - 77
+0|main-ser | GET /admin.pl 404 1.110 ms - 74
+0|main-ser | GET /default.aspx 404 1.173 ms - 78
+0|main-ser | GET /admin.php 404 1.076 ms - 75
+0|main-ser | GET /inicio.html 404 0.624 ms - 77
+0|main-ser | GET /localstart.jsa 404 1.324 ms - 80
+0|main-ser | GET /index.cgi 404 0.687 ms - 75
+0|main-ser | GET /admin.php 404 0.526 ms - 75
+0|main-ser | GET /readme.txt 404 0.688 ms - 76
+0|main-ser | GET /menu.html 404 0.654 ms - 75
+0|main-ser | GET /index.cgi 404 0.973 ms - 75
+0|main-ser | GET /base.jsp 404 0.912 ms - 74
+0|main-ser | GET /indice.shtml 404 0.811 ms - 78
+0|main-ser | GET /menu.html 404 0.760 ms - 75
+0|main-ser | GET /admin.cfm 404 1.358 ms - 75
+0|main-ser | GET /default.jsp 404 1.364 ms - 77
+0|main-ser | GET /indice.shtml 404 1.168 ms - 78
