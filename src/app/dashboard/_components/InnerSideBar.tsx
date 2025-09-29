@@ -63,10 +63,12 @@ const InnerSideBar = ({
 export const RightNav = ({ children }: { children: any }) => {
   return (
     <div
+      id={"nav-s"}
       className={`w-full  max-h-screen  max-md:ps-20 flex-1  overflow-x-hidden overflow-y-auto`}
     >
       <div className="w-full flex flex-col  h-full">
         <div className="flex w-full h-12 min-h-12 max-h-12 border-b">
+          
           <div className="mx-auto flex gap-4 my-auto pe-4">
             <ProductMenu />
             <CustomerMenu />
