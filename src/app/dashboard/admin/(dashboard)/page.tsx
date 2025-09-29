@@ -127,7 +127,7 @@ const Page = () => {
           </p>
         </div>
 
-        <Tabs value={currentTab} onValueChange={setCurrentTab} className="mb-6 sm:mb-8 h-fit bg-ed-900 py-12">
+        <Tabs value={currentTab} onValueChange={setCurrentTab} className="mb-6 sm:mb-8 h-fit bg-ed-900 py-12 max-md:py-20">
           <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 p-1.5 bg-muted/20 rounded-xl">
             {tabData.map((tab) => (
               <TabsTrigger
