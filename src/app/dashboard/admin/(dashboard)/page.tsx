@@ -116,7 +116,7 @@ const Page = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-muted/20 p-4 sm:p-6 md:p-8">
+    <div className="min-h-screen flex-1  from-background to-muted/20  p-4 sm:p-6 md:p-8 md:ps-32">
       <div className="max-w-7xl mx-auto">
         <div className="mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
@@ -127,7 +127,7 @@ const Page = () => {
           </p>
         </div>
 
-        <Tabs value={currentTab} onValueChange={setCurrentTab} className="mb-6 sm:mb-8">
+        <Tabs value={currentTab} onValueChange={setCurrentTab} className="mb-6 sm:mb-8 h-fit bg-ed-900 py-12">
           <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 p-1.5 bg-muted/20 rounded-xl">
             {tabData.map((tab) => (
               <TabsTrigger
