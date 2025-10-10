@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: any }) {
   const { user } = useUser();
   return (
     <>
-      <RightNav children={children} />
+      <RightNav children={children} setIsOpen={() => {}} />
     </>
   );
 }

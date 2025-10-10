@@ -5,7 +5,7 @@ import CustomLink from "@/components/custom/CustomLink";
 import ProductMenu from "@/components/custom/product/ProductMenu";
 import SupplierMenu from "@/components/custom/supplier/SupplierMenu";
 import Cookies from "js-cookie";
-import { IoNotifications, IoSettingsOutline } from "react-icons/io5";
+import { IoNotifications, IoSettingsOutline, IoMenu, IoClose } from "react-icons/io5";
 import {
   Popover,
   PopoverContent,
@@ -19,6 +19,7 @@ import Notifications from "./Notifications";
 import { FaUserCheck } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa";
 import { IoMdLogOut } from "react-icons/io";
+import { useState } from "react";
 interface LinkInf {
   name: string;
   link: string;
@@ -38,33 +39,41 @@ const InnerSideBar = ({
   children: any;
   data: InnerSideBarInf;
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="flex   max-md:flex-col w-full">
-      <div className="min-w-[230px]   ml-[80px] border-r">
-        <div className="h-12 min-h-12 max-h-12 ps-4 text-foreground border-b capitalize text-lg flex">
+    <div className="flex  max-md:flex-col w-full">
+      <div className={`${isOpen ? "" : "max-md:hidden"} min-w-[230px] z-100  max-md:absolute max-md:top-0 max-md:left-0 max-md:right-0 max-md:bottom-0 bg-white z-[1000]  md:ml-[80px] border-r`}>
+        <div className="h-12 min-h-12 max-h-12 ps-4 text-foreground border-b capitalize text-lg flex justify-between">
           <div className="my-auto">{data.name}</div>
+          <button
+            aria-label="Close menu"
+            className="p-2 hover:bg-muted rounded-md my-auto md:hidden"
+            onClick={() => setIsOpen(false)}
+          >
+            <IoClose className="text-xl" />
+          </button>
         </div>
-        <div className="flex flex-col gap-2 mt-5 ps-4">
+        <div className="flex flex-col gap-2 mt-5 ps-4 ">
           {data.links.map((singleLink, ind) => (
             <CustomLink
               base={singleLink.base}
               key={ind}
               link={singleLink.link}
               name={singleLink.name}
-            />
+              />
           ))}
         </div>
       </div>
-      <RightNav children={children} />
+      <RightNav children={children} setIsOpen={setIsOpen} />
     </div>
   );
 };
 
-export const RightNav = ({ children }: { children: any }) => {
+export const RightNav = ({ children , setIsOpen}: { children: any, setIsOpen : Function }) => {
   return (
     <div
       id={"nav-s"}
-      className={`w-full  max-h-screen  max-md:ps-20 flex-1  overflow-x-hidden overflow-y-auto`}
+      className={`w-full  max-h-screen max-md:absolute max-md:top-0 max-md:left-0 max-md:right-0 max-md:bottom-0   flex-1  overflow-x-hidden overflow-y-auto`}
     >
       <div className="w-full flex flex-col  h-full">
         <div className="flex w-full h-12 min-h-12 max-h-12 border-b">
@@ -75,9 +84,16 @@ export const RightNav = ({ children }: { children: any }) => {
             <SupplierMenu />
             <CompetitorMenu />
           </div>
-          <div className="pe-4 flex gap-3 max-md:hidden">
+          <div className="pe-4 flex gap-3 ">
             <Notifications />
             <Profile />
+            <button
+              aria-label="Open menu"
+              onClick={() => setIsOpen(d => !d)}
+              className="my-auto p-2 rounded-md hover:bg-muted md:hidden"
+            >
+              <IoMenu className="text-xl" />
+            </button>
           </div>
         </div>
         {children}
@@ -91,7 +107,7 @@ const Profile = () => {
   return (
     <Popover>
       <PopoverTrigger className="my-auto  flex gap-2">
-        <div className="flex flex-col ">
+        <div className="flex flex-col max-md:hidden ">
           <div className="capitalize text-primary font-bold">
             {user.fullName}
           </div>

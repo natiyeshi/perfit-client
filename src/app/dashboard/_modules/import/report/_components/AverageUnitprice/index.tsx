@@ -76,8 +76,8 @@ const AverageUnitPrice = ({
   }, [importsData, filter]);
 
   return (
-    <div className="w-full  mx-auto mt-6 col-span-2 mb-12">
-      <div className="flex justify-between mb-2 items-center">
+    <div className="w-full max-md:text-sm  mx-auto mt-6 col-span-2 mb-12">
+      <div className="flex justify-between mb-2 items-center ">
         <Filter filter={filter} setFilter={setFilter} />
         <Input
           type="text"
@@ -90,38 +90,40 @@ const AverageUnitPrice = ({
       <h3 className="text-xl text-center mb-2">
         Average Unit Price Per Product
       </h3>
-      <table className="min-w-full border border-gray-200 rounded">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="py-2 px-4 border-b">Product</th>
-            <th className="py-2 px-4 border-b">Average Unit Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tableData.filter((row) =>
-            row.name.toLowerCase().includes(search.toLowerCase())
-          ).length === 0 ? (
-            <tr>
-              <td colSpan={2} className="text-center py-4">
-                No data available
-              </td>
+      <div className="w-full overflow-x-auto ">
+        <table className="w-full border border-gray-200 rounded ">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="py-2 px-4 border-b">Product</th>
+              <th className="py-2 px-4 border-b">Average Unit Price</th>
             </tr>
-          ) : (
-            tableData
-              .filter((row) =>
-                row.name.toLowerCase().includes(search.toLowerCase())
-              )
-              .map((row) => (
-                <tr key={row.name}>
-                  <td className="py-2 px-4 border-b">{row.name}</td>
-                  <td className="py-2 px-4 border-b">
-                    {row.avgUnitPrice.toFixed(2)}
-                  </td>
-                </tr>
-              ))
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {tableData.filter((row) =>
+              row.name.toLowerCase().includes(search.toLowerCase())
+            ).length === 0 ? (
+              <tr>
+                <td colSpan={2} className="text-center py-4">
+                  No data available
+                </td>
+              </tr>
+            ) : (
+              tableData
+                .filter((row) =>
+                  row.name.toLowerCase().includes(search.toLowerCase())
+                )
+                .map((row) => (
+                  <tr key={row.name}>
+                    <td className="py-2 px-4 border-b">{row.name}</td>
+                    <td className="py-2 px-4 border-b">
+                      {row.avgUnitPrice.toFixed(2)}
+                    </td>
+                  </tr>
+                ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

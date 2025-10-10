@@ -128,7 +128,7 @@ const Page = () => {
         </div>
 
         <Tabs value={currentTab} onValueChange={setCurrentTab} className="mb-6 sm:mb-8 h-fit bg-ed-900 py-12 max-md:py-20">
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 p-1.5 bg-muted/20 rounded-xl">
+          <TabsList className=" w-full flex  overflow-auto no-scrollbar gap-2 p-1.5 max-md:justify-start bg-muted/20 rounded-xl">
             {tabData.map((tab) => (
               <TabsTrigger
                 key={tab.id}
@@ -136,7 +136,7 @@ const Page = () => {
                 className="flex items-center justify-center py-2 px-2 sm:px-3 text-xs sm:text-sm font-medium rounded-lg transition-all data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-foreground data-[state=active]:border"
               >
                 {tab.icon}
-                <span className="hidden sm:inline">{tab.label}</span>
+                <span className="">{tab.label}</span>
               </TabsTrigger>
             ))}
           </TabsList>
