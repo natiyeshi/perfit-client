@@ -105,7 +105,7 @@ const MainSideBar = () => {
   return (
     <>
       {/* Desktop / Tablet sidebar */}
-      <div className="hidden md:flex w-20 absolute group pb-6 hover:w-[240px] duration-300 border-r bg-[#f8f8f8] min-h-screen flex-col overflow-y-auto overflow-x-hidden z-50">
+      <div className="hidden md:flex w-20 absolute left-0 top-0 group pb-6 hover:w-[240px] duration-300 border-r bg-[#f8f8f8] min-h-screen flex-col overflow-y-auto overflow-x-hidden z-[1001]">
         <div className="w-full h-12 min-h-12 max-h-12  flex">
           <div className="m-auto text-center  capitalize font-semibold  rounded-full p-1">
             <Image className="w-[25px]" src={logo} alt="Logo" />
@@ -120,7 +120,7 @@ const MainSideBar = () => {
       </div>
 
       {/* Mobile bottom navigation */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 border-t bg-[#f8f8f8] z-50">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 border-t bg-[#f8f8f8] z-[1001]">
         <div className="flex items-stretch gap-1 overflow-x-auto no-scrollbar px-1 py-1">
           {sideLinks[role].map((link: MainLinkInf, key: number) => (
             <MobileNavLink key={key} link={link} />
