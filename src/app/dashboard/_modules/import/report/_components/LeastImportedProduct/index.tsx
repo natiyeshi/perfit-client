@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -9,14 +9,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { subMonths, isAfter } from "date-fns";
 import Filter from "./Filter";
-import { useQuery } from "react-query";
-import axios from "@/lib/axios";
-import { IDBPopulatedImport } from "@/types/IImport";
-import toast from "react-hot-toast";
-
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#2E7D8A"];
+import { useTopAnalytics } from "../../hook/useTopAnalytics";
 
 type TimeChoice =
   | "all"
@@ -29,58 +23,18 @@ export type TopImportProductsFilterState = {
   time: TimeChoice;
 };
 
-interface ChartData {
-  name: string;
-  value: number;
-}
-
-const timeChoices: Record<TimeChoice, number> = {
-  all: 10,
-  "last month": 1,
-  "last 3 months": 3,
-  "last 6 months": 6,
-  "this 12 months": 12,
-};
-
-const LeastImportedProducts = ({
-  importsData,
-  query,
-}: {
-  importsData: IDBPopulatedImport[];
-  query: any;
+const LeastImportedProducts = (_props?: {
+  importsData?: unknown;
+  query?: unknown;
 }) => {
   const [filter, setFilter] = useState<TopImportProductsFilterState>({
     time: "all",
   });
-  const [chartData, setChartData] = useState<ChartData[]>([]);
-
-  const getChartData = () => {
-    const monthAgo = subMonths(new Date(), timeChoices[filter.time]);
-    const datas: Record<string, number> = {};
-    importsData.forEach((d) => {
-      const createdAt = new Date(d.date);
-      d.products.forEach((p) => {
-        if (!datas[p.product.brandName]) {
-          datas[p.product.brandName] = 0;
-        }
-        if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
-          datas[p.product.brandName] += p.quantity;
-        }
-      });
-    });
-
-    const sortedData = Object.entries(datas)
-      .sort(([, a], [, b]) => a - b)
-      .map(([key, value]) => ({ name: key, value }));
-
-    const leastFour = sortedData.slice(0, 10);
-
-    setChartData(leastFour);
-  };
-
-  useEffect(() => {
-    getChartData();
-  }, [filter, query.isSuccess, importsData]);
+  const { data: chartData = [] } = useTopAnalytics(
+    "product_quantity",
+    filter.time,
+    "asc"
+  );
 
   return (
     <div className="w-full h-[70vh] ">

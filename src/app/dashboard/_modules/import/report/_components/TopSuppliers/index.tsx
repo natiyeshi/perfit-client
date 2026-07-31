@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -9,11 +9,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { subMonths, isAfter } from "date-fns";
 import Filter from "./Filter";
-import { IDBPopulatedImport } from "@/types/IImport";
-
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#2E7D8A"];
+import { useTopAnalytics } from "../../hook/useTopAnalytics";
 
 type TimeChoice =
   | "all"
@@ -26,60 +23,15 @@ export type TopSuppliersFilterState = {
   time: TimeChoice;
 };
 
-interface ChartData {
-  name: string;
-  value: number;
-}
-
-const timeChoices: Record<TimeChoice, number> = {
-  all: 10,
-  "last month": 1,
-  "last 3 months": 3,
-  "last 6 months": 6,
-  "this 12 months": 12,
-};
-
-const TopSuppliers = ({
-  importsData,
-  query,
-}: {
-  importsData: IDBPopulatedImport[];
-  query: any;
-}) => {
+const TopSuppliers = (_props?: { importsData?: unknown; query?: unknown }) => {
   const [filter, setFilter] = useState<TopSuppliersFilterState>({
     time: "all",
   });
-  const [chartData, setChartData] = useState<ChartData[]>([]);
-
-  const getChartData = () => {
-    const monthAgo = subMonths(new Date(), timeChoices[filter.time]);
-    const datas: Record<string, number> = {};
-
-    importsData.forEach((d) => {
-      const createdAt = new Date(d.date);
-      if (!datas[d.supplier.manufacturerName]) {
-        datas[d.supplier.manufacturerName] = 0;
-      }
-      if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
-        datas[d.supplier.manufacturerName] += d.products.reduce(
-          (acc, product) => acc + product.quantity * product.unitPrice,
-          0
-        );
-      }
-    });
-
-    const sortedData = Object.entries(datas)
-      .sort(([, a], [, b]) => b - a)
-      .map(([key, value]) => ({ name: key, value }));
-
-    const topFour = sortedData.slice(0, 10);
-
-    setChartData(topFour);
-  };
-
-  useEffect(() => {
-    getChartData();
-  }, [filter, query.isSuccess, importsData]);
+  const { data: chartData = [] } = useTopAnalytics(
+    "supplier_total_value",
+    filter.time,
+    "desc"
+  );
 
   return (
     <div className="w-full h-[70vh]">
