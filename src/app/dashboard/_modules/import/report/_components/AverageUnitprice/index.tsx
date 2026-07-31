@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { IDBPopulatedImport } from "@/types/IImport";
+import React, { useEffect, useMemo, useState } from "react";
+import { useQuery } from "react-query";
+import axios from "@/lib/axios";
 import toast from "react-hot-toast";
 import Filter from "./Filter";
-import { subMonths, isAfter } from "date-fns";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight, ArrowUpDown } from "lucide-react";
 
 type TimeChoice =
   | "all"
@@ -18,111 +20,193 @@ export type TopImportProductsFilterState = {
   time: TimeChoice;
 };
 
-interface ChartData {
-  name: string;
-  value: number;
-}
-
-const timeChoices: Record<TimeChoice, number> = {
-  all: 10,
-  "last month": 1,
-  "last 3 months": 3,
-  "last 6 months": 6,
-  "this 12 months": 12,
+// Map the human time choice to a concrete number of days for the API.
+const timeToDays: Record<TimeChoice, number | undefined> = {
+  all: undefined,
+  "last month": 30,
+  "last 3 months": 90,
+  "last 6 months": 180,
+  "this 12 months": 365,
 };
 
-const AverageUnitPrice = ({
-  importsData,
-  query,
-}: {
-  importsData: IDBPopulatedImport[];
-  query: any;
-}) => {
+interface AvgRow {
+  name: string;
+  avgUnitPrice: number;
+  count: number;
+}
+
+const LIMIT = 20;
+
+// Props are kept optional for backwards-compat with the report page, but this
+// component now fetches its own paginated, server-aggregated data.
+const AverageUnitPrice = (_props?: { importsData?: unknown; query?: unknown }) => {
   const [filter, setFilter] = useState<TopImportProductsFilterState>({
     time: "all",
   });
-  const [tableData, setTableData] = useState<
-    { name: string; avgUnitPrice: number }[]
-  >([]);
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [order, setOrder] = useState<"asc" | "desc">("desc");
 
+  const days = timeToDays[filter.time];
+
+  // Debounce the search box.
   useEffect(() => {
-    // Filter importsData by selected time period
-    const monthAgo = subMonths(new Date(), timeChoices[filter.time]);
-    const productMap: Record<string, { total: number; count: number }> = {};
-    importsData.forEach((d) => {
+    const t = setTimeout(() => {
+      setDebouncedSearch(search.trim());
+      setPage(1);
+    }, 400);
+    return () => clearTimeout(t);
+  }, [search]);
 
-      importsData.forEach((d) => {
-        const createdAt = new Date(d.date);
-        d.products.forEach((p) => {
-          if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
-            const name = p.product.genericName;
-            if (!productMap[name]) {
-              productMap[name] = { total: 0, count: 0 };
-            }
-            productMap[name].total += p.unitPrice;
-            productMap[name].count += 1;
-          }
-        });
-      });
-    });
-    const data = Object.entries(productMap)
-      .map(([name, { total, count }]) => ({
-        name,
-        avgUnitPrice: count > 0 ? total / count : 0,
-      }))
-      .sort((a, b) => b.avgUnitPrice - a.avgUnitPrice);
-    setTableData(data);
-  }, [importsData, filter]);
+  // Reset to page 1 when filters change.
+  useEffect(() => {
+    setPage(1);
+  }, [filter.time, order]);
+
+  const query = useQuery(
+    ["average-unit-price", page, debouncedSearch, days, order],
+    () => {
+      const params = new URLSearchParams();
+      params.set("page", String(page));
+      params.set("limit", String(LIMIT));
+      params.set("order", order);
+      if (debouncedSearch) params.set("search", debouncedSearch);
+      if (days) params.set("days", String(days));
+      return axios.get(
+        `/competitor-imports/analytics/average-unit-price?${params.toString()}`
+      );
+    },
+    {
+      keepPreviousData: true,
+      onError() {
+        toast.error("Failed to load average unit price.");
+      },
+    }
+  );
+
+  const rows: AvgRow[] = useMemo(
+    () => query.data?.data?.result || [],
+    [query.data]
+  );
+  const meta = query.data?.data?.meta as
+    | { total: number; page: number; limit: number; totalPages: number }
+    | undefined;
+
+  const totalPages = meta?.totalPages ?? 1;
+  const total = meta?.total ?? 0;
+  const startIndex = (page - 1) * LIMIT;
 
   return (
-    <div className="w-full max-md:text-sm  mx-auto mt-6 col-span-2 mb-12">
-      <div className="flex justify-between mb-2 items-center ">
-        <Filter filter={filter} setFilter={setFilter} />
-        <Input
-          type="text"
-          placeholder="Search product..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-64"
-        />
+    <div className="w-full max-md:text-sm mx-auto mt-6 col-span-2 mb-12">
+      <div className="flex flex-wrap gap-3 justify-between mb-4 items-center">
+        <h3 className="text-lg font-semibold">Average Unit Price Per Product</h3>
+        <div className="flex items-center gap-2">
+          <Filter filter={filter} setFilter={setFilter} />
+          <Input
+            type="text"
+            placeholder="Search product..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-64 max-md:w-40"
+          />
+        </div>
       </div>
-      <h3 className="text-xl text-center mb-2">
-        Average Unit Price Per Product
-      </h3>
-      <div className="w-full overflow-x-auto ">
-        <table className="w-full border border-gray-200 rounded ">
+
+      <div className="w-full overflow-x-auto rounded-lg border border-border">
+        <table className="w-full text-left">
           <thead>
-            <tr className="bg-gray-100">
-              <th className="py-2 px-4 border-b">Product</th>
-              <th className="py-2 px-4 border-b">Average Unit Price</th>
+            <tr className="bg-muted/50 text-muted-foreground">
+              <th className="py-2.5 px-4 font-medium w-16">No</th>
+              <th className="py-2.5 px-4 font-medium">Product</th>
+              <th className="py-2.5 px-4 font-medium">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setOrder((o) => (o === "asc" ? "desc" : "asc"))
+                  }
+                  className="inline-flex items-center gap-1 hover:text-foreground"
+                >
+                  Average Unit Price
+                  <ArrowUpDown className="h-3.5 w-3.5" />
+                </button>
+              </th>
+              <th className="py-2.5 px-4 font-medium text-right">Samples</th>
             </tr>
           </thead>
           <tbody>
-            {tableData.filter((row) =>
-              row.name.toLowerCase().includes(search.toLowerCase())
-            ).length === 0 ? (
+            {query.isLoading ? (
+              Array.from({ length: 6 }).map((_, i) => (
+                <tr key={i} className="border-t border-border">
+                  <td colSpan={4} className="py-3 px-4">
+                    <div className="h-4 w-full animate-pulse rounded bg-muted" />
+                  </td>
+                </tr>
+              ))
+            ) : rows.length === 0 ? (
               <tr>
-                <td colSpan={2} className="text-center py-4">
+                <td
+                  colSpan={4}
+                  className="text-center py-8 text-muted-foreground"
+                >
                   No data available
                 </td>
               </tr>
             ) : (
-              tableData
-                .filter((row) =>
-                  row.name.toLowerCase().includes(search.toLowerCase())
-                )
-                .map((row) => (
-                  <tr key={row.name}>
-                    <td className="py-2 px-4 border-b">{row.name}</td>
-                    <td className="py-2 px-4 border-b">
-                      {row.avgUnitPrice.toFixed(2)}
-                    </td>
-                  </tr>
-                ))
+              rows.map((row, i) => (
+                <tr
+                  key={row.name}
+                  className="border-t border-border hover:bg-muted/40 transition-colors"
+                >
+                  <td className="py-2.5 px-4 text-muted-foreground">
+                    {startIndex + i + 1}
+                  </td>
+                  <td className="py-2.5 px-4 capitalize">{row.name}</td>
+                  <td className="py-2.5 px-4 font-medium tabular-nums">
+                    {row.avgUnitPrice.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </td>
+                  <td className="py-2.5 px-4 text-right tabular-nums text-muted-foreground">
+                    {row.count}
+                  </td>
+                </tr>
+              ))
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* Pagination */}
+      <div className="flex items-center justify-between gap-4 mt-3 text-sm text-muted-foreground">
+        <span>
+          {total === 0 ? 0 : startIndex + 1}-
+          {Math.min(startIndex + rows.length, total)} of {total} products
+        </span>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-8"
+            disabled={page <= 1 || query.isFetching}
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+          >
+            <ChevronLeft className="h-4 w-4" /> Prev
+          </Button>
+          <span className="min-w-[80px] text-center">
+            Page {page} / {totalPages || 1}
+          </span>
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-8"
+            disabled={page >= totalPages || query.isFetching}
+            onClick={() => setPage((p) => p + 1)}
+          >
+            Next <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
       </div>
     </div>
   );
