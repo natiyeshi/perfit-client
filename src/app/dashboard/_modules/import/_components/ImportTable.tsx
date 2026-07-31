@@ -13,8 +13,22 @@ import { IDBClientImport } from "@/types/IImport";
 import CustomeTable from "@/components/custom/table/CustomeTable";
 import TotalShow from "./total";
 const ImportTable: React.FC = () => {
-  const { filters, imports, setFilters, filter, reload, query } =
-    useImportTable();
+  const {
+    filters,
+    imports,
+    setFilters,
+    filter,
+    reload,
+    query,
+    page,
+    setPage,
+    limit,
+    setLimit,
+    meta,
+    sortBy,
+    order,
+    handleSortChange,
+  } = useImportTable();
   const headers: {
     name: string;
     key: keyof IDBClientImport;
@@ -89,11 +103,25 @@ const ImportTable: React.FC = () => {
           DeleteItem={DeleteImport}
           UpdateItem={UpdateImport}
           link="/dashboard/admin/import/"
+          serverPagination={{
+            page: meta?.page ?? page,
+            totalPages: meta?.totalPages ?? 1,
+            totalItems: meta?.total ?? 0,
+            itemsPerPage: limit,
+            onPageChange: setPage,
+            onItemsPerPageChange: (n: number) => {
+              setLimit(n);
+              setPage(1);
+            },
+            sortColumn: sortBy as keyof IDBClientImport,
+            sortOrder: order,
+            onSortChange: handleSortChange,
+          }}
         />
       </div>
       <div className="h-10">
         {/* {imports && imports.length} */}
-        <TotalShow imports={imports} />
+        <TotalShow imports={imports} total={meta?.sumAmount} />
       </div>
     </>
   );

@@ -40,6 +40,24 @@ export interface Header<T> {
   link?: string;
 }
 
+/**
+ * When `serverPagination` is provided, the table stops slicing/sorting the data
+ * itself and instead reflects a page that the server already prepared. `result`
+ * is treated as the current page, and paging/sorting are delegated upward.
+ * When omitted, the table behaves exactly as before (client-side pagination).
+ */
+export interface ServerPagination<T> {
+  page: number;
+  totalPages: number;
+  totalItems: number;
+  itemsPerPage: number;
+  onPageChange: (page: number) => void;
+  onItemsPerPageChange: (value: number) => void;
+  sortColumn?: keyof T | null;
+  sortOrder?: "asc" | "desc";
+  onSortChange?: (key: keyof T) => void;
+}
+
 interface CustomeTableProps<T extends { id: string }> {
   query: {
     data: any;
@@ -52,6 +70,7 @@ interface CustomeTableProps<T extends { id: string }> {
   DeleteItem?: JSXElementConstructor<{ id?: string }> | any;
   UpdateItem?: JSXElementConstructor<{ initialValues?: T }> | any;
   link?: string;
+  serverPagination?: ServerPagination<T>;
 }
 
 const CustomeTable = <T extends { id: string }>({
@@ -61,7 +80,9 @@ const CustomeTable = <T extends { id: string }>({
   DeleteItem,
   UpdateItem,
   link,
+  serverPagination,
 }: CustomeTableProps<T>) => {
+  const isServer = !!serverPagination;
   const [sortColumn, setSortColumn] = useState<keyof T | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [currentPage, setCurrentPage] = useState(1);
@@ -69,6 +90,10 @@ const CustomeTable = <T extends { id: string }>({
 
   // Function to handle sorting logic
   const handleSort = (key: keyof T) => {
+    if (isServer) {
+      serverPagination!.onSortChange?.(key);
+      return;
+    }
     if (sortColumn === key) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
@@ -77,8 +102,9 @@ const CustomeTable = <T extends { id: string }>({
     }
   };
 
-  // Sort the result based on selected column and order
+  // Sort the result based on selected column and order (client mode only)
   const sortedResult = useMemo(() => {
+    if (isServer) return result;
     return [...result].sort((a, b) => {
       if (!sortColumn) return 0;
 
@@ -97,31 +123,48 @@ const CustomeTable = <T extends { id: string }>({
 
       return 0;
     });
-  }, [result, sortColumn, sortOrder]);
+  }, [result, sortColumn, sortOrder, isServer]);
 
-  // Pagination logic
-  const totalItems = sortedResult.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const paginatedData = sortedResult.slice(startIndex, endIndex);
+  // Effective pagination values — sourced from the server in server mode.
+  const effItemsPerPage = isServer ? serverPagination!.itemsPerPage : itemsPerPage;
+  const effCurrentPage = isServer ? serverPagination!.page : currentPage;
+  const totalItems = isServer ? serverPagination!.totalItems : sortedResult.length;
+  const totalPages = isServer
+    ? serverPagination!.totalPages
+    : Math.ceil(totalItems / itemsPerPage);
+  const startIndex = (effCurrentPage - 1) * effItemsPerPage;
+  const endIndex = startIndex + effItemsPerPage;
+  const paginatedData = isServer
+    ? result
+    : sortedResult.slice(startIndex, endIndex);
+  const activeSortColumn = isServer ? serverPagination!.sortColumn ?? null : sortColumn;
+  const activeSortOrder = isServer ? serverPagination!.sortOrder ?? "asc" : sortOrder;
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(Math.max(1, Math.min(page, totalPages)));
+    const clamped = Math.max(1, Math.min(page, totalPages || 1));
+    if (isServer) {
+      serverPagination!.onPageChange(clamped);
+    } else {
+      setCurrentPage(clamped);
+    }
   };
 
   const handleItemsPerPageChange = (value: number) => {
-    setItemsPerPage(value);
-    setCurrentPage(1);
+    if (isServer) {
+      serverPagination!.onItemsPerPageChange(value);
+    } else {
+      setItemsPerPage(value);
+      setCurrentPage(1);
+    }
   };
 
-  // Render loading state
-  if (query.isLoading ) {
+  // Render loading state (first load only; server mode keeps prior page visible)
+  if (query.isLoading) {
     return <Loading className={"m-auto mt-12"} />;
   }
 
   // Render empty state
-  if (!query.data || paginatedData.length === 0) {
+  if ((!isServer && !query.data) || paginatedData.length === 0) {
     return (
       <div className="flex flex-col gap-5 items-center justify-center m-auto mt-12 px-6">
         <NothingFound />
@@ -154,8 +197,8 @@ const CustomeTable = <T extends { id: string }>({
                   onClick={() => handleSort(value.key)}
                 >
                   {value.name}{" "}
-                  {sortColumn === value.key
-                    ? sortOrder === "asc"
+                  {activeSortColumn === value.key
+                    ? activeSortOrder === "asc"
                       ? "▲"
                       : "▼"
                     : ""}
@@ -249,7 +292,7 @@ const CustomeTable = <T extends { id: string }>({
               <span>Items per page:</span>
               <select
                 className="border rounded px-2 py-1 text-sm"
-                value={itemsPerPage}
+                value={effItemsPerPage}
                 onChange={(e) => handleItemsPerPageChange(Number(e.target.value))}
               >
                 {[5, 10, 20, 50, 100].map((size) => (
@@ -259,16 +302,16 @@ const CustomeTable = <T extends { id: string }>({
                 ))}
               </select>
               <span>
-                {startIndex + 1}-{Math.min(endIndex, totalItems)} of {totalItems} items
+                {totalItems === 0 ? 0 : startIndex + 1}-{Math.min(endIndex, totalItems)} of {totalItems} items
               </span>
             </div>
-            
+
             <div className="flex items-center gap-1">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => handlePageChange(1)}
-                disabled={currentPage === 1}
+                disabled={effCurrentPage === 1}
                 className="h-8 w-8 p-0"
               >
                 <ChevronsLeft className="h-4 w-4" />
@@ -276,43 +319,43 @@ const CustomeTable = <T extends { id: string }>({
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
+                onClick={() => handlePageChange(effCurrentPage - 1)}
+                disabled={effCurrentPage === 1}
                 className="h-8 w-8 p-0"
               >
                 <ChevronLeft className="h-4 w-4" />
               </Button>
-              
+
               {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                 let pageNum;
                 if (totalPages <= 5) {
                   pageNum = i + 1;
-                } else if (currentPage <= 3) {
+                } else if (effCurrentPage <= 3) {
                   pageNum = i + 1;
-                } else if (currentPage >= totalPages - 2) {
+                } else if (effCurrentPage >= totalPages - 2) {
                   pageNum = totalPages - 4 + i;
                 } else {
-                  pageNum = currentPage - 2 + i;
+                  pageNum = effCurrentPage - 2 + i;
                 }
-                
+
                 return (
                   <Button
                     key={pageNum}
-                    variant={currentPage === pageNum ? "default" : "outline"}
+                    variant={effCurrentPage === pageNum ? "default" : "outline"}
                     size="sm"
-                    className={`h-8 w-8 p-0 ${currentPage === pageNum ? 'font-bold' : ''}`}
+                    className={`h-8 w-8 p-0 ${effCurrentPage === pageNum ? 'font-bold' : ''}`}
                     onClick={() => handlePageChange(pageNum)}
                   >
                     {pageNum}
                   </Button>
                 );
               })}
-              
+
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
+                onClick={() => handlePageChange(effCurrentPage + 1)}
+                disabled={effCurrentPage === totalPages || totalPages === 0}
                 className="h-8 w-8 p-0"
               >
                 <ChevronRight className="h-4 w-4" />
@@ -321,7 +364,7 @@ const CustomeTable = <T extends { id: string }>({
                 variant="outline"
                 size="sm"
                 onClick={() => handlePageChange(totalPages)}
-                disabled={currentPage === totalPages}
+                disabled={effCurrentPage === totalPages || totalPages === 0}
                 className="h-8 w-8 p-0"
               >
                 <ChevronsRight className="h-4 w-4" />
