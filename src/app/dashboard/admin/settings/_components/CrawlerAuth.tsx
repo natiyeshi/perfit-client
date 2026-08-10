@@ -37,6 +37,18 @@ const formatDate = (value: string | null) => {
   return new Date(value).toLocaleString();
 };
 
+const getErrorMessage = (error: any, fallback: string) => {
+  const status = error?.response?.status;
+  const data = error?.response?.data;
+  const serverMessage =
+    data?.error || data?.message || (typeof data === "string" ? data : "");
+
+  if (status && serverMessage) return `${fallback}: ${status} ${serverMessage}`;
+  if (status) return `${fallback}: ${status}`;
+  if (error?.message) return `${fallback}: ${error.message}`;
+  return fallback;
+};
+
 const CrawlerAuth = () => {
   const [status, setStatus] = useState<CrawlerStatus | null>(null);
   const [token, setToken] = useState("");
@@ -55,7 +67,9 @@ const CrawlerAuth = () => {
   };
 
   useEffect(() => {
-    loadStatus().catch(() => toast.error("Could not load crawler auth status"));
+    loadStatus().catch((error) =>
+      toast.error(getErrorMessage(error, "Could not load crawler auth status"))
+    );
   }, []);
 
   useEffect(() => {
@@ -93,7 +107,7 @@ const CrawlerAuth = () => {
       setToken("");
       toast.success("Crawler token saved");
     } catch (error: any) {
-      toast.error(error?.response?.data?.error || "Could not save token");
+      toast.error(getErrorMessage(error, "Could not save token"));
     } finally {
       setLoading(false);
     }
@@ -105,8 +119,8 @@ const CrawlerAuth = () => {
       const res = await axios.delete<CrawlerStatus>("/import-sync/auth/token");
       setStatus(res.data);
       toast.success("Crawler token cleared");
-    } catch {
-      toast.error("Could not clear token");
+    } catch (error: any) {
+      toast.error(getErrorMessage(error, "Could not clear token"));
     } finally {
       setLoading(false);
     }
@@ -121,7 +135,7 @@ const CrawlerAuth = () => {
       );
       await loadStatus();
     } catch (error: any) {
-      toast.error(error?.response?.data?.error || "Import sync failed");
+      toast.error(getErrorMessage(error, "Import sync failed"));
     } finally {
       setSyncing(false);
     }
