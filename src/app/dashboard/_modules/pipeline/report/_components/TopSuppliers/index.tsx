@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -9,9 +9,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { subMonths, isAfter } from "date-fns";
 import Filter from "./Filter";
-import { IDBPopulatedImport } from "@/types/IImport";
+import { usePipelineReport } from "../../hook/usePipelineReport";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#2E7D8A"];
 
@@ -26,57 +25,13 @@ export type TopSuppliersFilterState = {
   time: TimeChoice;
 };
 
-interface ChartData {
-  name: string;
-  value: number;
-}
-
-const timeChoices: Record<TimeChoice, number> = {
-  all: 10,
-  "last month": 1,
-  "last 3 months": 3,
-  "last 6 months": 6,
-  "this 12 months": 12,
-};
-
-const TopSuppliers = ({
-  importsData,
-  query,
-}: {
-  importsData: IDBPopulatedImport[];
-  query: any;
-}) => {
+const TopSuppliers = () => {
   const [filter, setFilter] = useState<TopSuppliersFilterState>({
     time: "all",
   });
-  const [chartData, setChartData] = useState<ChartData[]>([]);
-
-  const getChartData = () => {
-    const monthAgo = subMonths(new Date(), timeChoices[filter.time]);
-    let datas: Record<string, number> = {};
-
-    importsData.forEach((d) => {
-      const createdAt = new Date(d.createdAt);
-      if (!datas[d.supplier.manufacturerName]) {
-        datas[d.supplier.manufacturerName] = 0;
-      }
-      if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
-        datas[d.supplier.manufacturerName] += d.amount;
-      }
-    });
-
-    const sortedData = Object.entries(datas)
-      .sort(([, a], [, b]) => b - a)
-      .map(([key, value]) => ({ name: key, value }));
-
-    let topFour = sortedData.slice(0, 4);
-
-    setChartData(topFour);
-  };
-
-  useEffect(() => {
-    getChartData();
-  }, [filter, query.isSuccess,importsData]);
+  // Aggregated server-side with the same rules this chart used to apply to
+  // the full import list (createdAt within the last N months).
+  const { data: chartData = [] } = usePipelineReport("top_suppliers", filter.time);
 
   return (
     <div className="w-full h-[70vh]">

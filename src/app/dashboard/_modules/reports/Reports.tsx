@@ -8,11 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
-import { IDBPopulatedImport } from "@/types/IImport";
-import { IDBProductWithPrice } from "@/types/IProductWithPrice";
 
 interface ProductSalesData {
   id: string;
@@ -94,76 +92,6 @@ const TransactionByProduct = ({ products }: TransactionByProductProps) => {
   );
 };
 
-const extractReportData = (imports: IDBPopulatedImport[]) => {
-  if (!imports || imports.length === 0) return { customerSales: [], productSales: [] };
-
-  const customerSalesMap = new Map<string, { sales: number; transactions: number }>();
-  const productSalesMap = new Map<string, ProductSalesData>();
-
-  imports.forEach((importItem) => {
-    // Process customer sales
-    const customerName = importItem.competitor?.name || 'Unknown';
-    const saleAmount = importItem.amount || 0;
-    
-    // Update customer sales
-    if (customerSalesMap.has(customerName)) {
-      const existing = customerSalesMap.get(customerName)!;
-      customerSalesMap.set(customerName, {
-        sales: existing.sales + saleAmount,
-        transactions: existing.transactions + 1
-      });
-    } else {
-      customerSalesMap.set(customerName, {
-        sales: saleAmount,
-        transactions: 1
-      });
-    }
-
-    // Process product sales
-    if (importItem.products && importItem.products.length > 0) {
-      importItem.products.forEach((productItem: IDBProductWithPrice) => {
-        const productId = productItem.product?.id || 'unknown';
-        const productName = productItem.product?.genericName || 'Unknown Product';
-        const unit = productItem.product?.unit || 'pcs';
-        const quantity = productItem.quantity || 0;
-        const amount = (productItem.unitPrice || 0) * quantity;
-
-        if (productSalesMap.has(productId)) {
-          const existing = productSalesMap.get(productId)!;
-          productSalesMap.set(productId, {
-            ...existing,
-            soldQuantity: existing.soldQuantity + quantity,
-            soldAmount: existing.soldAmount + amount
-          });
-        } else {
-          productSalesMap.set(productId, {
-            id: productId,
-            name: productName,
-            unit,
-            soldQuantity: quantity,
-            soldAmount: amount
-          });
-        }
-      });
-    }
-  });
-
-  // Convert maps to sorted arrays
-  const customerSales: CustomerSalesData[] = Array.from(customerSalesMap.entries())
-    .map(([name, info]) => ({
-      name,
-      sales: info.sales,
-      transactions: info.transactions,
-      averageSale: info.sales / info.transactions
-    }))
-    .sort((a, b) => b.sales - a.sales);
-
-  const productSales = Array.from(productSalesMap.values())
-    .sort((a, b) => b.soldAmount - a.soldAmount);
-
-  return { customerSales, productSales };
-};
-
 const CustomerSales = ({ customerData }: CustomerSalesProps) => {
   if (customerData.length === 0) {
     return <div className="text-center text-muted-foreground py-4">No customer sales data available</div>;
@@ -204,15 +132,12 @@ const Reports = () => {
   const tabs = ["Customer Sales", "Product Sales"];
   const [currentTab, setCurrentTab] = useState(tabs[0]);
 
-  const [reportData, setReportData] = useState<IDBPopulatedImport[]>([]);
+  // Customer/product totals are aggregated in Postgres; previously every
+  // import (~7 MB) was downloaded and summed here.
   const query = useQuery(
-    "competitor-imports",
-    () => axios.get("/competitor-imports?populate=true"),
+    "dashboard-report",
+    () => axios.get("/competitor-imports/analytics/dashboard-report"),
     {
-      onSuccess(data) {
-        const result: IDBPopulatedImport[] = data.data.result || [];
-        setReportData(result);
-      },
       onError(err) {
         console.error("Error fetching dashboard data:", err);
         toast.error("Failed to load report data");
@@ -220,9 +145,8 @@ const Reports = () => {
     }
   );
 
-  const { customerSales, productSales } = useMemo(() => {
-    return extractReportData(reportData);
-  }, [reportData]);
+  const customerSales: CustomerSalesData[] = query.data?.data.result?.customerSales || [];
+  const productSales: ProductSalesData[] = query.data?.data.result?.productSales || [];
 
   if (query.isLoading) return <div className="mt-6 text-center">Loading...</div>;
   if (query.isError) return <div className="mt-6 text-center text-red-500">Failed to load report data</div>;

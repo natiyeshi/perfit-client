@@ -1,13 +1,9 @@
 "use client";
 
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
-import { subMonths, isAfter } from "date-fns";
 import Filter from "./Filter";
-import { useQuery } from "react-query";
-import axios from "@/lib/axios";
-import React, { useEffect, useState } from "react";
-import { IDBClientImport, IDBPopulatedImport } from "@/types/IImport";
-import toast, { Toaster } from "react-hot-toast";
+import { usePipelineReport } from "../../hook/usePipelineReport";
+import React, { useState } from "react";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#2E7D8A"];
 
@@ -22,66 +18,13 @@ export type TopImportProductsFilterState = {
   time: TimeChoice;
 };
 
-interface ChartData {
-  name: string;
-  value: number;
-}
-
-const timeChoices: Record<TimeChoice, number> = {
-  all: 10,
-  "last month": 1,
-  "last 3 months": 3,
-  "last 6 months": 6,
-  "this 12 months": 12,
-};
-
-const TopImportedProducts = ({
-  importsData,
-  query,
-}: {
-  importsData: IDBPopulatedImport[];
-  query: any;
-}) => {
+const TopImportedProducts = () => {
   const [filter, setFilter] = useState<TopImportProductsFilterState>({
     time: "all",
   });
-  const [chartData, setChartData] = useState<ChartData[]>([]);
-
-  const getChartData = () => {
-    const monthAgo = subMonths(new Date(), timeChoices[filter.time]);
-    const datas: Record<string, number> = {};
-
-    importsData.forEach((d) => {
-      const createdAt = new Date(d.createdAt);
-      d.products.forEach((p) => {
-        const name = p.product.genericName;
-        if (!datas[name]) {
-          datas[name] = 0;
-        }
-        if (filter.time === "all" || isAfter(createdAt, monthAgo)) {
-          datas[name] += p.quantity;
-        }
-      });
-    });
-
-    const sortedData = Object.entries(datas)
-      .sort(([, a], [, b]) => b - a)
-      .map(([key, value]) => ({ name: key, value }));
-
-    const topFour = sortedData.slice(0, 4);
-    const othersValue = sortedData
-      .slice(4)
-      .reduce((sum, item) => sum + item.value, 0);
-    if (othersValue > 0) {
-      topFour.push({ name: "Others", value: othersValue });
-    }
-
-    setChartData(topFour);
-  };
-
-  useEffect(() => {
-    getChartData();
-  }, [filter, query.isSuccess,importsData]);
+  // Aggregated server-side with the same rules this chart used to apply to
+  // the full import list (createdAt within the last N months).
+  const { data: chartData = [] } = usePipelineReport("top_products", filter.time);
 
   return (
     <div className="w-full h-[70vh]">

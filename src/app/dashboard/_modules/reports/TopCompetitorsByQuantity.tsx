@@ -21,7 +21,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { IDBPopulatedImport } from "@/types/IImport";
 
 type TimeChoice =
   | "all"
@@ -49,9 +48,13 @@ const chartConfig = {
 const TopCompetitorsByQuantity = () => {
   const [chartData, setChartData] = useState<ChartData[]>([]);
 
+  // Summed per competitor in Postgres instead of downloading every import.
   const { data, isLoading, isError } = useQuery(
-    ["competitor-imports"],
-    () => axios.get("/competitor-imports?populate=true").then((res) => res.data),
+    ["import-analytics", "competitor_total_price", "top4"],
+    () =>
+      axios
+        .get("/competitor-imports/analytics/top?metric=competitor_total_price&order=desc&limit=4")
+        .then((res) => res.data),
     {
       onError(err) {
         console.log(err, "EEEEEEEEEEEEEEEEEE");
@@ -62,26 +65,9 @@ const TopCompetitorsByQuantity = () => {
 
   useEffect(() => {
     if (data?.result) {
-      processChartData(data.result);
+      setChartData(data.result as ChartData[]);
     }
   }, [data]);
-
-  const processChartData = (importsData: IDBPopulatedImport[]) => {
-    const datas: Record<string, number> = {};
-    importsData.forEach((d) => {
-      const competitorName = d.competitor?.name ?? "Unknown";
-      if (!datas[competitorName]) {
-        datas[competitorName] = 0;
-      }
-      datas[competitorName] += d.amount;
-    });
-
-    const sortedData = Object.entries(datas)
-      .sort(([, a], [, b]) => b - a)
-      .map(([key, value]) => ({ name: key, value }));
-
-    setChartData(sortedData.slice(0, 4)); // Top 4 competitors
-  };
 
   return (
     <Card className="w-full p-2">
