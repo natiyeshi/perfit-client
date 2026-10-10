@@ -19,8 +19,22 @@ const ProductTable: React.FC = () => {
     { name: "Description", key: "description" },
     { name: "Intended Use", key: "intendedUse" },
   ];
-  const { filters, products, setFilters, filter, reload, query } =
-    useProductTable();
+  const {
+    filters,
+    products,
+    setFilters,
+    filter,
+    reload,
+    query,
+    page,
+    setPage,
+    limit,
+    setLimit,
+    meta,
+    sortBy,
+    order,
+    handleSortChange,
+  } = useProductTable();
   return (
     <>
       <div className="w-full py-4 px-2 flex justify-between">
@@ -71,6 +85,20 @@ const ProductTable: React.FC = () => {
           result={products}
           DeleteItem={DeleteProduct}
           UpdateItem={UpdateProduct}
+          serverPagination={{
+            page: meta?.page ?? page,
+            totalPages: meta?.totalPages ?? 1,
+            totalItems: meta?.total ?? 0,
+            itemsPerPage: limit,
+            onPageChange: setPage,
+            onItemsPerPageChange: (n: number) => {
+              setLimit(n);
+              setPage(1);
+            },
+            sortColumn: sortBy,
+            sortOrder: order,
+            onSortChange: handleSortChange,
+          }}
         />
       </div>
     </>
